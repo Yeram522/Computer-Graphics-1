@@ -19,18 +19,18 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Tutorial Framework Setup-20220311\CGP-Tutorial-D3DInit-Src\d3dclass.cpp" />
-    <ClCompile Include="..\..\Tutorial Framework Setup-20220311\CGP-Tutorial-D3DInit-Src\graphicsclass.cpp" />
-    <ClCompile Include="..\..\Tutorial Framework Setup-20220311\CGP-Tutorial-D3DInit-Src\inputclass.cpp" />
-    <ClCompile Include="..\..\Tutorial Framework Setup-20220311\CGP-Tutorial-D3DInit-Src\main.cpp" />
-    <ClCompile Include="..\..\Tutorial Framework Setup-20220311\CGP-Tutorial-D3DInit-Src\systemclass.cpp" />
+    <ClInclude Include="..\class-source\Tutorial Framework Setup-20220325\CGP-Tutorial-D3DInit-Src\AlignedAllocationPolicy.h" />
+    <ClInclude Include="..\class-source\Tutorial Framework Setup-20220325\CGP-Tutorial-D3DInit-Src\d3dclass.h" />
+    <ClInclude Include="..\class-source\Tutorial Framework Setup-20220325\CGP-Tutorial-D3DInit-Src\graphicsclass.h" />
+    <ClInclude Include="..\class-source\Tutorial Framework Setup-20220325\CGP-Tutorial-D3DInit-Src\inputclass.h" />
+    <ClInclude Include="..\class-source\Tutorial Framework Setup-20220325\CGP-Tutorial-D3DInit-Src\systemclass.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\Tutorial Framework Setup-20220311\CGP-Tutorial-D3DInit-Src\AlignedAllocationPolicy.h" />
-    <ClInclude Include="..\..\Tutorial Framework Setup-20220311\CGP-Tutorial-D3DInit-Src\d3dclass.h" />
-    <ClInclude Include="..\..\Tutorial Framework Setup-20220311\CGP-Tutorial-D3DInit-Src\graphicsclass.h" />
-    <ClInclude Include="..\..\Tutorial Framework Setup-20220311\CGP-Tutorial-D3DInit-Src\inputclass.h" />
-    <ClInclude Include="..\..\Tutorial Framework Setup-20220311\CGP-Tutorial-D3DInit-Src\systemclass.h" />
+    <ClCompile Include="..\class-source\Tutorial Framework Setup-20220325\CGP-Tutorial-D3DInit-Src\d3dclass.cpp" />
+    <ClCompile Include="..\class-source\Tutorial Framework Setup-20220325\CGP-Tutorial-D3DInit-Src\graphicsclass.cpp" />
+    <ClCompile Include="..\class-source\Tutorial Framework Setup-20220325\CGP-Tutorial-D3DInit-Src\inputclass.cpp" />
+    <ClCompile Include="..\class-source\Tutorial Framework Setup-20220325\CGP-Tutorial-D3DInit-Src\main.cpp" />
+    <ClCompile Include="..\class-source\Tutorial Framework Setup-20220325\CGP-Tutorial-D3DInit-Src\systemclass.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

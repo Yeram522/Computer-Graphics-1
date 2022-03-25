@@ -15,37 +15,37 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Tutorial Framework Setup-20220311\CGP-Tutorial-D3DInit-Src\d3dclass.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Tutorial Framework Setup-20220311\CGP-Tutorial-D3DInit-Src\graphicsclass.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Tutorial Framework Setup-20220311\CGP-Tutorial-D3DInit-Src\inputclass.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Tutorial Framework Setup-20220311\CGP-Tutorial-D3DInit-Src\main.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Tutorial Framework Setup-20220311\CGP-Tutorial-D3DInit-Src\systemclass.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
+    <ClInclude Include="..\class-source\Tutorial Framework Setup-20220325\CGP-Tutorial-D3DInit-Src\AlignedAllocationPolicy.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="..\class-source\Tutorial Framework Setup-20220325\CGP-Tutorial-D3DInit-Src\d3dclass.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="..\class-source\Tutorial Framework Setup-20220325\CGP-Tutorial-D3DInit-Src\graphicsclass.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="..\class-source\Tutorial Framework Setup-20220325\CGP-Tutorial-D3DInit-Src\inputclass.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="..\class-source\Tutorial Framework Setup-20220325\CGP-Tutorial-D3DInit-Src\systemclass.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\Tutorial Framework Setup-20220311\CGP-Tutorial-D3DInit-Src\systemclass.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Tutorial Framework Setup-20220311\CGP-Tutorial-D3DInit-Src\inputclass.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Tutorial Framework Setup-20220311\CGP-Tutorial-D3DInit-Src\AlignedAllocationPolicy.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Tutorial Framework Setup-20220311\CGP-Tutorial-D3DInit-Src\d3dclass.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Tutorial Framework Setup-20220311\CGP-Tutorial-D3DInit-Src\graphicsclass.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
+    <ClCompile Include="..\class-source\Tutorial Framework Setup-20220325\CGP-Tutorial-D3DInit-Src\d3dclass.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="..\class-source\Tutorial Framework Setup-20220325\CGP-Tutorial-D3DInit-Src\graphicsclass.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="..\class-source\Tutorial Framework Setup-20220325\CGP-Tutorial-D3DInit-Src\inputclass.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="..\class-source\Tutorial Framework Setup-20220325\CGP-Tutorial-D3DInit-Src\main.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="..\class-source\Tutorial Framework Setup-20220325\CGP-Tutorial-D3DInit-Src\systemclass.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
