@@ -4,7 +4,7 @@
 // 위 경고는 __declspec(align(byte))로 정렬되어야 하는 데이터를 member로 가지거나, 
 // 할당할 때 생기는 경고임. For example, using XMMATRIX as a class member. 
 template<size_t T>
-class AlignedAllocationPolicy //동적생성 메모리를 잡을 떄 지정
+class AlignedAllocationPolicy
 {
 public:
 	static void* operator new(size_t size)
