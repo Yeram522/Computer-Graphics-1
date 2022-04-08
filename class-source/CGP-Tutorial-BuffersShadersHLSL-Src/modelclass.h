@@ -19,7 +19,7 @@ using namespace DirectX;
 class ModelClass
 {
 private:
-	struct VertexType
+	struct VertexType ///vertex 정보
 	{
 		XMFLOAT3 position;
 	    XMFLOAT4 color;
@@ -43,6 +43,7 @@ private:
 
 private:
 	ID3D11Buffer *m_vertexBuffer, *m_indexBuffer;
+	//vertex buffer =  position    indexBuffer  = 정점의 순서
 	int m_vertexCount, m_indexCount;
 };
 

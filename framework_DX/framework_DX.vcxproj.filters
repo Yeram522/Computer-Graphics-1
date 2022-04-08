@@ -15,37 +15,63 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\class-source\Tutorial Framework Setup-20220325\CGP-Tutorial-D3DInit-Src\AlignedAllocationPolicy.h">
+    <ClInclude Include="..\class-source\CGP-Tutorial-BuffersShadersHLSL-Src\AlignedAllocationPolicy.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="..\class-source\Tutorial Framework Setup-20220325\CGP-Tutorial-D3DInit-Src\d3dclass.h">
+    <ClInclude Include="..\class-source\CGP-Tutorial-BuffersShadersHLSL-Src\cameraclass.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="..\class-source\Tutorial Framework Setup-20220325\CGP-Tutorial-D3DInit-Src\graphicsclass.h">
+    <ClInclude Include="..\class-source\CGP-Tutorial-BuffersShadersHLSL-Src\colorshaderclass.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="..\class-source\Tutorial Framework Setup-20220325\CGP-Tutorial-D3DInit-Src\inputclass.h">
+    <ClInclude Include="..\class-source\CGP-Tutorial-BuffersShadersHLSL-Src\d3dclass.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="..\class-source\Tutorial Framework Setup-20220325\CGP-Tutorial-D3DInit-Src\systemclass.h">
+    <ClInclude Include="..\class-source\CGP-Tutorial-BuffersShadersHLSL-Src\graphicsclass.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="..\class-source\CGP-Tutorial-BuffersShadersHLSL-Src\inputclass.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="..\class-source\CGP-Tutorial-BuffersShadersHLSL-Src\modelclass.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="..\class-source\CGP-Tutorial-BuffersShadersHLSL-Src\systemclass.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\class-source\Tutorial Framework Setup-20220325\CGP-Tutorial-D3DInit-Src\d3dclass.cpp">
+    <ClCompile Include="..\class-source\CGP-Tutorial-BuffersShadersHLSL-Src\cameraclass.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="..\class-source\Tutorial Framework Setup-20220325\CGP-Tutorial-D3DInit-Src\graphicsclass.cpp">
+    <ClCompile Include="..\class-source\CGP-Tutorial-BuffersShadersHLSL-Src\colorshaderclass.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="..\class-source\Tutorial Framework Setup-20220325\CGP-Tutorial-D3DInit-Src\inputclass.cpp">
+    <ClCompile Include="..\class-source\CGP-Tutorial-BuffersShadersHLSL-Src\d3dclass.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="..\class-source\Tutorial Framework Setup-20220325\CGP-Tutorial-D3DInit-Src\main.cpp">
+    <ClCompile Include="..\class-source\CGP-Tutorial-BuffersShadersHLSL-Src\graphicsclass.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="..\class-source\Tutorial Framework Setup-20220325\CGP-Tutorial-D3DInit-Src\systemclass.cpp">
+    <ClCompile Include="..\class-source\CGP-Tutorial-BuffersShadersHLSL-Src\inputclass.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="..\class-source\CGP-Tutorial-BuffersShadersHLSL-Src\main.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="..\class-source\CGP-Tutorial-BuffersShadersHLSL-Src\modelclass.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="..\class-source\CGP-Tutorial-BuffersShadersHLSL-Src\systemclass.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\class-source\CGP-Tutorial-BuffersShadersHLSL-Src\data\color.ps">
+      <Filter>리소스 파일</Filter>
+    </None>
+    <None Include="..\class-source\CGP-Tutorial-BuffersShadersHLSL-Src\data\color.vs">
+      <Filter>리소스 파일</Filter>
+    </None>
   </ItemGroup>
 </Project>

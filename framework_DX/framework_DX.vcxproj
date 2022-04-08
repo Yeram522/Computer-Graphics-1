@@ -19,18 +19,28 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\class-source\Tutorial Framework Setup-20220325\CGP-Tutorial-D3DInit-Src\AlignedAllocationPolicy.h" />
-    <ClInclude Include="..\class-source\Tutorial Framework Setup-20220325\CGP-Tutorial-D3DInit-Src\d3dclass.h" />
-    <ClInclude Include="..\class-source\Tutorial Framework Setup-20220325\CGP-Tutorial-D3DInit-Src\graphicsclass.h" />
-    <ClInclude Include="..\class-source\Tutorial Framework Setup-20220325\CGP-Tutorial-D3DInit-Src\inputclass.h" />
-    <ClInclude Include="..\class-source\Tutorial Framework Setup-20220325\CGP-Tutorial-D3DInit-Src\systemclass.h" />
+    <ClInclude Include="..\class-source\CGP-Tutorial-BuffersShadersHLSL-Src\AlignedAllocationPolicy.h" />
+    <ClInclude Include="..\class-source\CGP-Tutorial-BuffersShadersHLSL-Src\cameraclass.h" />
+    <ClInclude Include="..\class-source\CGP-Tutorial-BuffersShadersHLSL-Src\colorshaderclass.h" />
+    <ClInclude Include="..\class-source\CGP-Tutorial-BuffersShadersHLSL-Src\d3dclass.h" />
+    <ClInclude Include="..\class-source\CGP-Tutorial-BuffersShadersHLSL-Src\graphicsclass.h" />
+    <ClInclude Include="..\class-source\CGP-Tutorial-BuffersShadersHLSL-Src\inputclass.h" />
+    <ClInclude Include="..\class-source\CGP-Tutorial-BuffersShadersHLSL-Src\modelclass.h" />
+    <ClInclude Include="..\class-source\CGP-Tutorial-BuffersShadersHLSL-Src\systemclass.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\class-source\Tutorial Framework Setup-20220325\CGP-Tutorial-D3DInit-Src\d3dclass.cpp" />
-    <ClCompile Include="..\class-source\Tutorial Framework Setup-20220325\CGP-Tutorial-D3DInit-Src\graphicsclass.cpp" />
-    <ClCompile Include="..\class-source\Tutorial Framework Setup-20220325\CGP-Tutorial-D3DInit-Src\inputclass.cpp" />
-    <ClCompile Include="..\class-source\Tutorial Framework Setup-20220325\CGP-Tutorial-D3DInit-Src\main.cpp" />
-    <ClCompile Include="..\class-source\Tutorial Framework Setup-20220325\CGP-Tutorial-D3DInit-Src\systemclass.cpp" />
+    <ClCompile Include="..\class-source\CGP-Tutorial-BuffersShadersHLSL-Src\cameraclass.cpp" />
+    <ClCompile Include="..\class-source\CGP-Tutorial-BuffersShadersHLSL-Src\colorshaderclass.cpp" />
+    <ClCompile Include="..\class-source\CGP-Tutorial-BuffersShadersHLSL-Src\d3dclass.cpp" />
+    <ClCompile Include="..\class-source\CGP-Tutorial-BuffersShadersHLSL-Src\graphicsclass.cpp" />
+    <ClCompile Include="..\class-source\CGP-Tutorial-BuffersShadersHLSL-Src\inputclass.cpp" />
+    <ClCompile Include="..\class-source\CGP-Tutorial-BuffersShadersHLSL-Src\main.cpp" />
+    <ClCompile Include="..\class-source\CGP-Tutorial-BuffersShadersHLSL-Src\modelclass.cpp" />
+    <ClCompile Include="..\class-source\CGP-Tutorial-BuffersShadersHLSL-Src\systemclass.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\class-source\CGP-Tutorial-BuffersShadersHLSL-Src\data\color.ps" />
+    <None Include="..\class-source\CGP-Tutorial-BuffersShadersHLSL-Src\data\color.vs" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

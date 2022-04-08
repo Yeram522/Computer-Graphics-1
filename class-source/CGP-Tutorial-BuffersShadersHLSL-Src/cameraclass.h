@@ -27,7 +27,7 @@ public:
 	void SetPosition(float, float, float);
 	void SetRotation(float, float, float);
 
-	XMFLOAT3 GetPosition();
+	XMFLOAT3 GetPosition();//설정자, 접속자를 두고 사용해야한다!!!
 	XMFLOAT3 GetRotation();
 
 	void Render();
@@ -36,7 +36,8 @@ public:
 private:
 	XMFLOAT3 m_position;
 	XMFLOAT3 m_rotation;
-	XMMATRIX m_viewMatrix;
+	XMMATRIX m_viewMatrix;//XM = directX math    XMFloat3 = position     XMVector = vector   XMMatrix = 행렬
+	//view matrix 중요~
 };
 
 #endif
