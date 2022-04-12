@@ -213,6 +213,8 @@ bool ColorShaderClass::InitializeShader(ID3D11Device* device, HWND hwnd,
 
     // Setup the description of the dynamic matrix constant buffer that is in the vertex shader.
 	matrixBufferDesc.Usage = D3D11_USAGE_DYNAMIC;				// The buffer is updated each frame.
+	//메모리는 읽어들이는 속도와 쓰는 속도가 매우 다르다. 읽는 속도가 훨씬 빠르다.
+	//동적인 경우에는 계속 메모리를 사용하기 떄문에, 동적을 쓰지 않는고 정적을 쓴다.
 	matrixBufferDesc.ByteWidth = sizeof(MatrixBufferType);
     matrixBufferDesc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
     matrixBufferDesc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;	// Writing data by CPU
@@ -331,7 +333,7 @@ bool ColorShaderClass::SetShaderParameters(ID3D11DeviceContext* deviceContext,
 	dataPtr->projection = projectionMatrix;
 
 	// Unlock the constant buffer.
-    deviceContext->Unmap(m_matrixBuffer, 0);
+    deviceContext->Unmap(m_matrixBuffer, 0);//map-upmap을 꼭! 해줘야 한다.
 
 	// Set the position of the constant buffer in the vertex shader.
 	bufferNumber = 0;
