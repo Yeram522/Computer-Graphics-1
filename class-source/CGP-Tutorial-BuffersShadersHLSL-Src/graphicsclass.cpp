@@ -10,6 +10,8 @@ GraphicsClass::GraphicsClass()
 	m_Camera = 0;
 	m_Model = 0;
 	m_ColorShader = 0;
+
+	bckColor = { 0.0f,0.0f,0.0f,1.0f };
 }
 
 
@@ -139,6 +141,10 @@ bool GraphicsClass::Frame()
 	return true;
 }
 
+void GraphicsClass::chageBckColor(Color color)
+{
+	bckColor = color;
+}
 
 bool GraphicsClass::Render()
 {
@@ -147,7 +153,7 @@ bool GraphicsClass::Render()
 
 
 	// Clear the buffers to begin the scene.
-	m_D3D->BeginScene(0.0f, 0.0f, 0.0f, 1.0f);
+	m_D3D->BeginScene(bckColor.red, bckColor.green, bckColor.blue, bckColor.alpha);
 
 	// Generate the view matrix based on the camera's position.
 	m_Camera->Render();

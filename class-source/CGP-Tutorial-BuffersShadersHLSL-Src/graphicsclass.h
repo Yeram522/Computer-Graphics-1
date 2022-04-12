@@ -26,6 +26,14 @@ const float SCREEN_NEAR = 0.1f;
 ////////////////////////////////////////////////////////////////////////////////
 // Class name: GraphicsClass
 ////////////////////////////////////////////////////////////////////////////////
+struct Color
+{
+	float red;
+	float green;
+	float blue;
+	float alpha = 1.0f;
+};
+
 class GraphicsClass
 {
 public:
@@ -37,9 +45,11 @@ public:
 	void Shutdown();
 	bool Frame();
 
+	void chageBckColor(Color color);
+
 private:
 	bool Render();
-
+	Color bckColor;
 private:
 	D3DClass* m_D3D;
 	CameraClass* m_Camera;

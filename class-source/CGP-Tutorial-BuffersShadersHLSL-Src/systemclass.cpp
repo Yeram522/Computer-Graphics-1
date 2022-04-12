@@ -138,6 +138,24 @@ bool SystemClass::Frame()
 		return false;
 	}
 
+	//R
+	if (m_Input->IsKeyDown(0x52))
+	{
+		m_Graphics->chageBckColor({ 1.0f,0.0f,0.0f,1.0f });
+	}
+
+	//G
+	if (m_Input->IsKeyDown(0x47))
+	{
+		m_Graphics->chageBckColor({ 0.0f,1.0f,0.0f,1.0f });
+	}
+
+	//B
+	if (m_Input->IsKeyDown(0x42))
+	{
+		m_Graphics->chageBckColor({ 0.0f,0.0f,1.0f,1.0f });
+	}
+
 	// Do the frame processing for the graphics object.
 	result = m_Graphics->Frame();
 	if(!result)
