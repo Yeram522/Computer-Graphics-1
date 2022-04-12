@@ -12,7 +12,7 @@
 /////////////
 cbuffer MatrixBuffer
 {
-	matrix worldMatrix;
+	matrix worldMatrix;//밖에 매칭되는 변수가 선언되어있어야한다.
 	matrix viewMatrix;
 	matrix projectionMatrix;
 };

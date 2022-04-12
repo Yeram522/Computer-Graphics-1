@@ -10,7 +10,7 @@
 //////////////
 #include <d3d11.h>
 #include <directxmath.h>
-#include <d3dcompiler.h>
+#include <d3dcompiler.h>//color.vs color.ps ->HLSL: visual studio가 compile할 수 없기 때문에, d3d가 compile한다.
 
 #include <fstream>
 
