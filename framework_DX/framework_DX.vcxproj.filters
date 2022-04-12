@@ -39,6 +39,9 @@
     <ClInclude Include="..\class-source\CGP-Tutorial-BuffersShadersHLSL-Src\systemclass.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="Square.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\class-source\CGP-Tutorial-BuffersShadersHLSL-Src\cameraclass.cpp">

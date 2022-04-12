@@ -156,18 +156,6 @@ bool SystemClass::Frame()
 		m_Graphics->chageBckColor({ 0.0f,0.0f,1.0f,1.0f });
 	}
 
-	//w : wire
-	if (m_Input->IsKeyDown(0x57))
-	{
-		m_Graphics->chageBckColor({ 0.0f,0.0f,1.0f,1.0f });
-	}
-
-	//s : solid
-	if (m_Input->IsKeyDown(0x53))
-	{
-		
-	}
-
 	// Do the frame processing for the graphics object.
 	result = m_Graphics->Frame();
 	if(!result)

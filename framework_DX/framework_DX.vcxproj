@@ -27,6 +27,7 @@
     <ClInclude Include="..\class-source\CGP-Tutorial-BuffersShadersHLSL-Src\inputclass.h" />
     <ClInclude Include="..\class-source\CGP-Tutorial-BuffersShadersHLSL-Src\modelclass.h" />
     <ClInclude Include="..\class-source\CGP-Tutorial-BuffersShadersHLSL-Src\systemclass.h" />
+    <ClInclude Include="Square.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\class-source\CGP-Tutorial-BuffersShadersHLSL-Src\cameraclass.cpp" />
