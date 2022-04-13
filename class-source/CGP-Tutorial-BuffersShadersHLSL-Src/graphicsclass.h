@@ -46,7 +46,7 @@ public:
 	bool Frame();
 
 	void chageBckColor(Color color);
-
+	void changeFillMode(D3D11_FILL_MODE mode);
 private:
 	bool Render();
 	Color bckColor;

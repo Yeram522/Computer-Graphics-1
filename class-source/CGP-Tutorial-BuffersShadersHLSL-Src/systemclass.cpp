@@ -23,7 +23,7 @@ SystemClass::~SystemClass()
 
 bool SystemClass::Initialize()
 {
-	int screenWidth, screenHeight;
+	
 	bool result;
 
 
@@ -159,13 +159,13 @@ bool SystemClass::Frame()
 	//w : wire
 	if (m_Input->IsKeyDown(0x57))
 	{
-		m_Graphics->chageBckColor({ 0.0f,0.0f,1.0f,1.0f });
+		m_Graphics->changeFillMode(D3D11_FILL_WIREFRAME);
 	}
 
 	//s : solid
 	if (m_Input->IsKeyDown(0x53))
 	{
-		
+		m_Graphics->changeFillMode(D3D11_FILL_SOLID);
 	}
 
 	// Do the frame processing for the graphics object.

@@ -52,6 +52,8 @@ private:
 
 	InputClass* m_Input;
 	GraphicsClass* m_Graphics;
+
+	int screenWidth, screenHeight;
 };
 
 

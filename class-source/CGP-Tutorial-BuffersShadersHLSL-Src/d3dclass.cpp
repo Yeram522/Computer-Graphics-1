@@ -14,6 +14,7 @@ D3DClass::D3DClass()
 	m_depthStencilState = 0;
 	m_depthStencilView = 0;
 	m_rasterState = 0;
+
 }
 
 
@@ -26,6 +27,13 @@ D3DClass::~D3DClass()
 {
 }
 
+void D3DClass::changeFillMode(D3D11_FILL_MODE mode)
+{
+	rasterDesc.FillMode = mode;
+	m_device->CreateRasterizerState(&rasterDesc, &m_rasterState);
+	m_rasterState->GetDesc(&rasterDesc);
+	m_deviceContext->RSSetState(m_rasterState);
+}
 
 bool D3DClass::Initialize(int screenWidth, int screenHeight, bool vsync, HWND hwnd, bool fullscreen, 
 						  float screenDepth, float screenNear)
@@ -44,7 +52,7 @@ bool D3DClass::Initialize(int screenWidth, int screenHeight, bool vsync, HWND hw
 	D3D11_TEXTURE2D_DESC depthBufferDesc;
 	D3D11_DEPTH_STENCIL_DESC depthStencilDesc;
 	D3D11_DEPTH_STENCIL_VIEW_DESC depthStencilViewDesc;
-	D3D11_RASTERIZER_DESC rasterDesc;
+	
 	D3D11_VIEWPORT viewport;
 	float fieldOfView, screenAspect;
 
@@ -306,7 +314,7 @@ bool D3DClass::Initialize(int screenWidth, int screenHeight, bool vsync, HWND hw
 	rasterDesc.DepthBias = 0;
 	rasterDesc.DepthBiasClamp = 0.0f;
 	rasterDesc.DepthClipEnable = true;
-	rasterDesc.FillMode = D3D11_FILL_WIREFRAME;
+	rasterDesc.FillMode = D3D11_FILL_SOLID;//D3D11_FILL_WIREFRAME
 	rasterDesc.FrontCounterClockwise = false;
 	rasterDesc.MultisampleEnable = false;
 	rasterDesc.ScissorEnable = false;

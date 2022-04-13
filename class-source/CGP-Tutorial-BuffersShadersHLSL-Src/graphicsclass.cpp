@@ -157,6 +157,12 @@ void GraphicsClass::chageBckColor(Color color)
 	bckColor = color;
 }
 
+void GraphicsClass::changeFillMode(D3D11_FILL_MODE mode)
+{
+	
+	m_D3D->changeFillMode(mode);
+}
+
 bool GraphicsClass::Render()
 {
 	XMMATRIX worldMatrix, viewMatrix, projectionMatrix;
