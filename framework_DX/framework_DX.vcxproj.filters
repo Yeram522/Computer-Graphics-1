@@ -67,10 +67,10 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\class-source\CGP-Tutorial-BuffersShadersHLSL-Src\data\color.ps">
+    <None Include="data\color.ps">
       <Filter>리소스 파일</Filter>
     </None>
-    <None Include="..\class-source\CGP-Tutorial-BuffersShadersHLSL-Src\data\color.vs">
+    <None Include="data\color.vs">
       <Filter>리소스 파일</Filter>
     </None>
   </ItemGroup>
