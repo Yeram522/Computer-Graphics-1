@@ -40,8 +40,8 @@
     <ClCompile Include="..\class-source\CGP-Tutorial-BuffersShadersHLSL-Src\systemclass.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="data\color.ps" />
-    <None Include="data\color.vs" />
+    <None Include="..\class-source\CGP-Tutorial-BuffersShadersHLSL-Src\data\color.ps" />
+    <None Include="..\class-source\CGP-Tutorial-BuffersShadersHLSL-Src\data\color.vs" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
