@@ -35,7 +35,7 @@ struct VertexInputType
 
 struct PixelInputType
 {
-    float4 position : SV_POSITION;
+    float4 position : SV_POSITION; // SV_POSITION-> sementic
     float4 color : COLOR;
 };
 
@@ -56,10 +56,10 @@ PixelInputType ColorVertexShader(VertexInputType input)
     
 
 	// Change the position vector to be 4 units for proper matrix calculations.
-    input.position.w = 1.0f;
+    input.position.w = 1.0f; //w가 1이면 position으로 쓰겠다는 의미.
 
 	// Calculate the position of the vertex against the world, view, and projection matrices.
-    output.position = mul(input.position, worldMatrix);
+    output.position = mul(input.position, worldMatrix);//mul : mul() 쉐이더에서 벡터와 행렬을 곱해주는 수학 함수
     output.position = mul(output.position, viewMatrix);
     output.position = mul(output.position, projectionMatrix);
     

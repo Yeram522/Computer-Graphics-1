@@ -81,7 +81,7 @@ bool ColorShaderClass::Render(ID3D11DeviceContext* deviceContext, int indexCount
 // 이 정보를 알려주는 수단이 바로 ID3D11InputLayout 형식의 입력 배치(input layout)객체임. 
 // 이 입력 배치는 D3D11_INPUT_ELEMENT_DESC 구조체들로 이루어진 배열을 통해서 구축함.
 // D3D11_INPUT_ELEMENT_DESC 배열의 각 원소는 정점 구조체의 각 성분을 서술하는 역할을 함.
-// (예를 들어 정점 구조체의 성분이 두 개라고 하면, D3D11_INPUT_EKEMENT_DESC 배열의 원소도 두개이어야 함.)
+// (예를 들어 정점 구조체의 성분이 두 개라고 하면, D3D11_INPUT_EKEMENT_DESC 배열의 원소도 두개이어야 함.)******
 // 이 배열을 입력배치 서술(input layout description) 배열이라고 부름.
 bool ColorShaderClass::InitializeShader(ID3D11Device* device, HWND hwnd, 
 	const WCHAR *vsFilename, const WCHAR *psFilename)
@@ -90,7 +90,7 @@ bool ColorShaderClass::InitializeShader(ID3D11Device* device, HWND hwnd,
 	ID3D10Blob* errorMessage;
 	ID3D10Blob* vertexShaderBuffer;
 	ID3D10Blob* pixelShaderBuffer;
-	D3D11_INPUT_ELEMENT_DESC polygonLayout[2];
+	D3D11_INPUT_ELEMENT_DESC polygonLayout[2];//vertex 구조체에 두개의 멤버변수가 있기에 2
 	unsigned int numElements;
 	D3D11_BUFFER_DESC matrixBufferDesc;
 
