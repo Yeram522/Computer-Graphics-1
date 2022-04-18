@@ -33,10 +33,9 @@ private:
 		XMMATRIX projection;
 	};
 
-	struct LightBufferType
+	struct FadeBufferType
 	{
-		XMMATRIX diffuseColor;
-		XMMATRIX lightDirection;
+		float fadeAmount;
 		float padding;
 
 	};
@@ -48,13 +47,16 @@ public:
 
 	bool Initialize(ID3D11Device*, HWND);
 	void Shutdown();
-	bool Render(ID3D11DeviceContext*, int, XMMATRIX, XMMATRIX, XMMATRIX);
+	bool Render(ID3D11DeviceContext*, int, XMMATRIX, XMMATRIX, XMMATRIX, float);
+
+
+	ID3D11Buffer* m_fadeBuffer;//내가한거
 private:
 	bool InitializeShader(ID3D11Device*, HWND, const WCHAR*, const WCHAR*);
 	void ShutdownShader();
 	void OutputShaderErrorMessage(ID3D10Blob*, HWND, const WCHAR*);
 
-	bool SetShaderParameters(ID3D11DeviceContext*, XMMATRIX, XMMATRIX, XMMATRIX);
+	bool SetShaderParameters(ID3D11DeviceContext*, XMMATRIX, XMMATRIX, XMMATRIX, float);
 	void RenderShader(ID3D11DeviceContext*, int);
 
 private:

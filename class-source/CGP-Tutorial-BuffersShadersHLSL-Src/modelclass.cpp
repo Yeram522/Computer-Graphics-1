@@ -310,7 +310,7 @@ bool ModelClass::InitializeBuffers(ID3D11Device* device)
 	}
 
 	drawVertex(vertices, indices);
-
+	
 	// Set up the description of the static vertex buffer.
     vertexBufferDesc.Usage = D3D11_USAGE_DEFAULT;
     vertexBufferDesc.ByteWidth = sizeof(VertexType) * m_vertexCount;

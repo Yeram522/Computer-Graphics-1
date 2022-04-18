@@ -206,7 +206,7 @@ bool GraphicsClass::Render()
 
 		// Render the model using the color shader.
 		result = m_ColorShader->Render(m_D3D->GetDeviceContext(), model->GetIndexCount(),
-			model->cbuffer.worldMatrix, model->cbuffer.viewMatrix, model->cbuffer.projectionMatrix);
+			model->cbuffer.worldMatrix, model->cbuffer.viewMatrix, model->cbuffer.projectionMatrix,0.5f);
 		if (!result)
 		{
 			return false;

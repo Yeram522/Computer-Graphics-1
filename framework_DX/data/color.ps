@@ -2,6 +2,12 @@
 // Filename: color.ps
 ////////////////////////////////////////////////////////////////////////////////
 
+cbuffer FadeBuffer 
+{ 
+   float fadeAmount; 
+   float3 padding; 
+};
+
 
 //////////////
 // TYPEDEFS //
@@ -20,6 +26,6 @@ struct PixelInputType
 ////////////////////////////////////////////////////////////////////////////////
 float4 ColorPixelShader(PixelInputType input) : SV_TARGET
 {
-    return input.color;
+    return input.color*fadeAmount;
 }
 

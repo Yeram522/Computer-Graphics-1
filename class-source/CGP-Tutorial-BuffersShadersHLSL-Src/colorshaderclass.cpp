@@ -50,13 +50,13 @@ void ColorShaderClass::Shutdown()
 // This first sets the parameters inside the shader, and then draws the triangle 
 // using the HLSL shader.
 bool ColorShaderClass::Render(ID3D11DeviceContext* deviceContext, int indexCount, 
-	XMMATRIX worldMatrix, XMMATRIX viewMatrix, XMMATRIX projectionMatrix)
+	XMMATRIX worldMatrix, XMMATRIX viewMatrix, XMMATRIX projectionMatrix, float amount)
 {
 	bool result;
 
 
 	// Set the shader parameters that it will use for rendering.
-	result = SetShaderParameters(deviceContext, worldMatrix, viewMatrix, projectionMatrix);
+	result = SetShaderParameters(deviceContext, worldMatrix, viewMatrix, projectionMatrix, amount);
 	if(!result)
 	{
 		return false;
@@ -93,6 +93,7 @@ bool ColorShaderClass::InitializeShader(ID3D11Device* device, HWND hwnd,
 	D3D11_INPUT_ELEMENT_DESC polygonLayout[2];
 	unsigned int numElements;
 	D3D11_BUFFER_DESC matrixBufferDesc;
+
 
 
 	// Initialize the pointers this function will use to null.
@@ -193,6 +194,7 @@ bool ColorShaderClass::InitializeShader(ID3D11Device* device, HWND hwnd,
 	polygonLayout[1].AlignedByteOffset = D3D11_APPEND_ALIGNED_ELEMENT;
 	polygonLayout[1].InputSlotClass = D3D11_INPUT_PER_VERTEX_DATA;
 	polygonLayout[1].InstanceDataStepRate = 0;
+	
 
 	// Get a count of the elements in the layout.
     numElements = sizeof(polygonLayout) / sizeof(polygonLayout[0]);
@@ -228,6 +230,7 @@ bool ColorShaderClass::InitializeShader(ID3D11Device* device, HWND hwnd,
 	{
 		return false;
 	}
+
 
 	return true;
 }
@@ -305,14 +308,14 @@ void ColorShaderClass::OutputShaderErrorMessage(ID3D10Blob* errorMessage, HWND h
 // The sets up the global variables in the shader. The transfom matrices are sent into the 
 // vertex shader during the Render function call.
 bool ColorShaderClass::SetShaderParameters(ID3D11DeviceContext* deviceContext, 
-	XMMATRIX worldMatrix, XMMATRIX viewMatrix, XMMATRIX projectionMatrix)
+	XMMATRIX worldMatrix, XMMATRIX viewMatrix, XMMATRIX projectionMatrix, float amount)
 {
 	HRESULT result;
     D3D11_MAPPED_SUBRESOURCE mappedResource;
 	MatrixBufferType* dataPtr;
 	unsigned int bufferNumber;
-
-
+	FadeBufferType* dataPtr2;
+	
 	// Transpose the matrices to prepare them for the shader.
 	worldMatrix = XMMatrixTranspose(worldMatrix);
 	viewMatrix = XMMatrixTranspose(viewMatrix);
@@ -332,7 +335,7 @@ bool ColorShaderClass::SetShaderParameters(ID3D11DeviceContext* deviceContext,
 	dataPtr->world = worldMatrix;
 	dataPtr->view = viewMatrix;
 	dataPtr->projection = projectionMatrix;
-
+	
 	// Unlock the constant buffer.
     deviceContext->Unmap(m_matrixBuffer, 0);//map-upmap을 꼭! 해줘야 한다.
 
@@ -342,6 +345,23 @@ bool ColorShaderClass::SetShaderParameters(ID3D11DeviceContext* deviceContext,
 	// Finanly set the constant buffer in the vertex shader with the updated values.
     deviceContext->VSSetConstantBuffers(bufferNumber, 1, &m_matrixBuffer);
 
+
+
+	// 상수 버퍼를 잠궈 내용을 쓸 수 있도록 합니다. 
+	result = deviceContext->Map(m_fadeBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource); 
+	if(FAILED(result)) { return false; } 
+    // 페이드 상수 버퍼의 데이터를 가리키는 포인터를 얻습니다. 
+	dataPtr2 = (FadeBufferType*)mappedResource.pData; 
+	// fadeAmount의 값을 버퍼로 복사합니다. 
+	dataPtr2->fadeAmount = 0.5f; 
+	//dataPtr2->padding = XMVECTOR(0.0f, 0.0f, 0.0f); 
+	// 상수 버퍼의 잠금을 해제합니다. 
+	deviceContext->Unmap(m_fadeBuffer, 0); 
+	// 픽셀 셰이더에서의 상수 버퍼의 위치를 설정합니다. 
+	bufferNumber = 0; // 픽셀 셰이더의 페이드 상수 버퍼를 새로운 값으로 갱신합니다. 
+	deviceContext->PSSetConstantBuffers(bufferNumber, 1, &m_fadeBuffer);
+
+출처: https://blog.nullbus.net/54 [빠재의 노트]
 	return true;
 }
 
