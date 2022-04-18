@@ -154,7 +154,7 @@ bool ColorShaderClass::InitializeShader(ID3D11Device* device, HWND hwnd,
 	{
 		return false;
 	}
-
+	
 	// Create the vertex input layout description that will be processed by the shader.
 	// This setup needs to match the VertexType stucture in the ModelClass and in the shader.
 	// The AlignedByteOffset indicates how the data is spaced in the buffer: 12 bytes for 

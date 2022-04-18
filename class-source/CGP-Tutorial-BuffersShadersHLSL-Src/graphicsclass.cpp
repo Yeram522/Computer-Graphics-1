@@ -58,17 +58,28 @@ bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hwnd)
 	m_Camera->SetPosition(0.0f, 0.0f, -10.0f);
 	
 	// Create the model object.
-	ModelClass* m_Model = new ModelClass(3);
-	if(!m_Model)
-	{
-		return false;
-	}
-	m_Models.push_back(m_Model);
+	m_Models.push_back(new ModelClass(Shape::CROSS, { 0.0f,0.0f,0.0f },Direction::X));
+	m_Models.push_back(new ModelClass(Shape::PENTAGON, { 3.0f,0.0f,0.0f }, Direction::Y));
+	m_Models.push_back(new ModelClass(Shape::HOUSE, { -3.0f,0.0f,0.0f }, Direction::Z));
 
+	for (auto& model : m_Models)
+	{
+		if (!model)
+		{
+			return false;
+		}
+	}
+	
+	XMMATRIX worldMatrix, viewMatrix, projectionMatrix;
+
+	m_Camera->GetViewMatrix(viewMatrix);
+	m_D3D->GetWorldMatrix(worldMatrix);
+	m_D3D->GetProjectionMatrix(projectionMatrix);
 	// Initialize the model object.
 	for (auto& model : m_Models)
 	{
 		result = model->Initialize(m_D3D->GetDevice());
+		model->cbuffer = { worldMatrix ,viewMatrix,projectionMatrix };
 		if (!result)
 		{
 			MessageBox(hwnd, L"Could not initialize the model object.", L"Error", MB_OK);
@@ -164,31 +175,39 @@ void GraphicsClass::changeFillMode(D3D11_FILL_MODE mode)
 }
 
 bool GraphicsClass::Render()
-{
+{	
 	XMMATRIX worldMatrix, viewMatrix, projectionMatrix;
 	bool result;
-
 
 	// Clear the buffers to begin the scene.
 	m_D3D->BeginScene(bckColor.red, bckColor.green, bckColor.blue, bckColor.alpha);
 
 	// Generate the view matrix based on the camera's position.
 	m_Camera->Render();
-
+	
 	// Get the world, view, and projection matrices from the camera and d3d objects.
 	m_Camera->GetViewMatrix(viewMatrix);
 	m_D3D->GetWorldMatrix(worldMatrix);
 	m_D3D->GetProjectionMatrix(projectionMatrix);
-
+	//viewMatrix = viewMatrix * XMMatrixRotationY(Time);
+	//const XMMATRIX worldMatrix2 =  * viewMatrix * projectionMatrix;
+	
+	m_D3D->GetDeviceContext()->VSSetConstantBuffers(0, 1, &pCBuffer);
+	
+	//XMMATRIX worldMatrix2 = viewMatrix  * worldMatrix * projectionMatrix;
+	//*  XMMatrixRotationX(Time)
 	
 	for (auto& model : m_Models)
 	{
+		CBUFFER cb = model->cbuffer;
+		model->updateMatrix({ viewMatrix,worldMatrix ,projectionMatrix});
+		//m_D3D->GetDeviceContext()->UpdateSubresource(pCBuffer, 0, 0, &cb, 0, 0);
 		// Put the model vertex and index buffers on the graphics pipeline to prepare them for drawing.
 		model->Render(m_D3D->GetDeviceContext());
 
 		// Render the model using the color shader.
 		result = m_ColorShader->Render(m_D3D->GetDeviceContext(), model->GetIndexCount(),
-			worldMatrix, viewMatrix, projectionMatrix);
+			model->cbuffer.worldMatrix, model->cbuffer.viewMatrix, model->cbuffer.projectionMatrix);
 		if (!result)
 		{
 			return false;

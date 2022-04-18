@@ -34,6 +34,8 @@ struct Color
 	float alpha = 1.0f;
 };
 
+
+
 class GraphicsClass
 {
 public:
@@ -47,11 +49,13 @@ public:
 
 	void chageBckColor(Color color);
 	void changeFillMode(D3D11_FILL_MODE mode);
+	
 private:
 	bool Render();
 	Color bckColor;
 private:
 	D3DClass* m_D3D;
+	ID3D11Buffer* pCBuffer;                // the pointer to the constant buffer
 	CameraClass* m_Camera;
 	vector<ModelClass*> m_Models;
 	ColorShaderClass* m_ColorShader;

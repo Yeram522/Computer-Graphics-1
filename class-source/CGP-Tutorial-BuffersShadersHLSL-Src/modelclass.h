@@ -13,6 +13,36 @@
 
 using namespace DirectX;
 
+enum class Shape
+{
+	TRIANGLE,
+	PENTAGON,
+	HOUSE,
+	CROSS,//표창
+};
+
+enum class Direction
+{
+	X,
+	Y,
+	Z,
+};
+
+struct Position
+{
+	float x;
+	float y;
+	float z;
+};
+
+// a struct to define the constant buffer
+struct CBUFFER
+{
+	XMMATRIX worldMatrix, viewMatrix, projectionMatrix;
+	//Color LightColor;
+	//Color AmbientColor;
+};
+
 ////////////////////////////////////////////////////////////////////////////////
 // Class name: ModelClass
 ////////////////////////////////////////////////////////////////////////////////
@@ -26,7 +56,7 @@ private:
 	};
 
 public:
-	ModelClass(int n);
+	ModelClass(Shape shape,Position pos,Direction dir);
 	ModelClass(const ModelClass&);
 	~ModelClass();
 
@@ -36,14 +66,24 @@ public:
 
 	int GetIndexCount();
 
+	CBUFFER updateMatrix(CBUFFER);
+	Shape shape;
+	Position pos;
+	CBUFFER cbuffer;//내가 만든거
+	Direction dir;
 private:
 	bool InitializeBuffers(ID3D11Device*);
 	void ShutdownBuffers();
 	void RenderBuffers(ID3D11DeviceContext*);
 	
 	void drawVertex(VertexType* vertices, unsigned long* indices);
+	void drawTriangle(VertexType* vertices, unsigned long* indices);
+	void drawPentagon(VertexType* vertices, unsigned long* indices);
+	void drawHouse(VertexType* vertices, unsigned long* indices);
+	void drawCross(VertexType* vertices, unsigned long* indices);
 private:
 	ID3D11Buffer *m_vertexBuffer, *m_indexBuffer;
+	
 	//vertex buffer =  position    indexBuffer  = 정점의 순서
 	int m_vertexCount, m_indexCount;
 };

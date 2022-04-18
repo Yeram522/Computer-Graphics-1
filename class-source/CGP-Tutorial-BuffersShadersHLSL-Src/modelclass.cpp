@@ -4,16 +4,50 @@
 #include "modelclass.h"
 
 
-ModelClass::ModelClass(int vertexcnt)
+ModelClass::ModelClass(Shape _shape, Position _pos, Direction _dir)
 {
 	m_vertexBuffer = 0;
 	m_indexBuffer = 0;
+	shape = _shape;
+	pos = _pos;
+	dir = _dir;
 
-	// Set the number of vertices in the vertex array.
-	m_vertexCount = vertexcnt;
+	switch (_shape)
+	{
+	case Shape::TRIANGLE:
+		// Set the number of vertices in the vertex array.
+		m_vertexCount = 3;
 
-	// Set the number of indices in the index array.
-	m_indexCount = vertexcnt;
+		// Set the number of indices in the index array.
+		m_indexCount = 3;
+		break;
+	case Shape::PENTAGON:
+		// Set the number of vertices in the vertex array.
+		m_vertexCount = 6;
+
+		// Set the number of indices in the index array.
+		m_indexCount = 15;
+		break;
+	case Shape::HOUSE:
+		// Set the number of vertices in the vertex array.
+		m_vertexCount = 5;
+
+		// Set the number of indices in the index array.
+		m_indexCount = 9;
+		break;
+	case Shape::CROSS:
+		// Set the number of vertices in the vertex array.
+		m_vertexCount = 8;
+
+		// Set the number of indices in the index array.
+		m_indexCount = 12;
+		break;
+	default:
+		break;
+	}
+	
+
+	
 }
 
 
@@ -51,10 +85,32 @@ void ModelClass::Shutdown()
 	return;
 }
 
+CBUFFER ModelClass::updateMatrix(CBUFFER cb)
+{
+	static float Time = 0.0f; Time += 0.001f;
+	switch (dir)
+	{
+	case Direction::Y:
+		cbuffer.viewMatrix = cb.viewMatrix *XMMatrixRotationY(Time);
+		break;
+	case Direction::Z:
+		cbuffer.viewMatrix = cb.viewMatrix * XMMatrixRotationZ(Time);
+		break;
+	case Direction::X:
+		cbuffer.viewMatrix = cb.viewMatrix * XMMatrixRotationX(Time);
+		break;
+	default:
+		break;
+	}
+	cbuffer.worldMatrix = cb.worldMatrix;
+	
+	cbuffer.projectionMatrix = cb.projectionMatrix;
+
+	return cbuffer;
+}
 
 void ModelClass::Render(ID3D11DeviceContext* deviceContext)
 {
-	// Put the vertex and index buffers on the graphics pipeline to prepare them for drawing.
 	RenderBuffers(deviceContext);
 
 	return;
@@ -70,14 +126,35 @@ int ModelClass::GetIndexCount()
 //여기다가 그림그린다.
 void ModelClass::drawVertex(VertexType* vertices, unsigned long* indices)
 {
+	switch (shape)
+	{
+	case Shape::TRIANGLE:
+		drawTriangle(vertices,indices);
+		break;
+	case Shape::PENTAGON:
+		drawPentagon(vertices, indices);
+		break;
+	case Shape::HOUSE:
+		drawHouse(vertices, indices);
+		break;
+	case Shape::CROSS:
+		drawCross(vertices, indices);
+		break;
+	default:
+		break;
+	}
+}
+
+void ModelClass::drawTriangle(VertexType* vertices, unsigned long* indices)
+{
 	// Load the vertex array with data.
-	vertices[0].position = XMFLOAT3(-1.0f, -1.0f, 0.0f);  // Bottom left.
+	vertices[0].position = XMFLOAT3(-1.0f + pos.x, -1.0f + pos.y, 0.0f + pos.z);  // Bottom left.
 	vertices[0].color = XMFLOAT4(0.0f, 1.0f, 0.0f, 1.0f);
 
-	vertices[1].position = XMFLOAT3(0.0f, 1.0f, 0.0f);  // Top middle.
+	vertices[1].position = XMFLOAT3(0.0f + pos.x, 1.0f + pos.y, 0.0f + pos.z);  // Top middle.
 	vertices[1].color = XMFLOAT4(0.0f, 1.0f, 0.0f, 1.0f);
 
-	vertices[2].position = XMFLOAT3(1.0f, -1.0f, 0.0f);  // Bottom right.
+	vertices[2].position = XMFLOAT3(1.0f + pos.x, -1.0f + pos.y, 0.0f + pos.z);  // Bottom right.
 	vertices[2].color = XMFLOAT4(0.0f, 1.0f, 0.0f, 1.0f);
 
 	// Load the index array with data.
@@ -85,6 +162,129 @@ void ModelClass::drawVertex(VertexType* vertices, unsigned long* indices)
 	indices[0] = 0;  // Bottom left.
 	indices[1] = 1;  // Top middle.
 	indices[2] = 2;  // Bottom right.
+}
+
+void ModelClass::drawHouse(VertexType* vertices, unsigned long* indices)
+{
+	// Load the vertex array with data.
+	vertices[0].position = XMFLOAT3(-1.0f + pos.x, -1.0f + pos.y, 0.0f + pos.z);  // Bottom left.
+	vertices[0].color = XMFLOAT4(0.0f, 1.0f, 0.0f, 1.0f);
+
+	vertices[1].position = XMFLOAT3(-1.0f + pos.x, 1.0f + pos.y, 0.0f + pos.z);  // Top middle.
+	vertices[1].color = XMFLOAT4(0.0f, 1.0f, 0.0f, 1.0f);
+
+	vertices[2].position = XMFLOAT3(1.0f + pos.x, -1.0f + pos.y, 0.0f + pos.z);  // Bottom right.
+	vertices[2].color = XMFLOAT4(0.0f, 1.0f, 0.0f, 1.0f);
+
+	vertices[3].position = XMFLOAT3(1.0f + pos.x, 1.0f + pos.y, 0.0f + pos.z);  // Bottom right.
+	vertices[3].color = XMFLOAT4(0.0f, 1.0f, 0.0f, 1.0f);
+
+	vertices[4].position = XMFLOAT3(0.0f + pos.x, 2.5f + pos.y, 0.0f + pos.z);  // Bottom right.
+	vertices[4].color = XMFLOAT4(0.0f, 1.0f, 0.0f, 1.0f);
+
+	// Load the index array with data.
+	// Create the triangle in the clockwise order (counterclockwise: back face culling).
+	indices[0] = 0;  // Bottom left.
+	indices[1] = 1;  // Top middle.
+	indices[2] = 2;  // Bottom right.
+
+	indices[3] = 1;  // Bottom left.
+	indices[4] = 3;  // Top middle.
+	indices[5] = 2;  // Bottom right.
+
+	indices[6] = 4;  // Bottom left.
+	indices[7] = 3;  // Top middle.
+	indices[8] = 1;  // Bottom right.
+}
+
+void ModelClass::drawCross(VertexType* vertices, unsigned long* indices)
+{
+	// Load the vertex array with data.
+	vertices[0].position = XMFLOAT3(-0.1f + pos.x, 0.3f + pos.y, 0.0f + pos.z);  // Bottom left.
+	vertices[0].color = XMFLOAT4(0.0f, 1.0f, 0.0f, 1.0f);
+
+	vertices[1].position = XMFLOAT3(0.1f + pos.x, 0.3f + pos.y, 0.0f + pos.z);  // Top middle.
+	vertices[1].color = XMFLOAT4(0.0f, 1.0f, 0.0f, 1.0f);
+
+	vertices[2].position = XMFLOAT3(0.1f + pos.x, -0.3f + pos.y, 0.0f + pos.z);  // Bottom right.
+	vertices[2].color = XMFLOAT4(0.0f, 1.0f, 0.0f, 1.0f);
+
+	vertices[3].position = XMFLOAT3(-0.1f + pos.x, -0.3f + pos.y, 0.0f + pos.z);  // Bottom right.
+	vertices[3].color = XMFLOAT4(0.0f, 1.0f, 0.0f, 1.0f);
+
+	vertices[4].position = XMFLOAT3(-0.3f + pos.x, 0.1f + pos.y, 0.0f + pos.z);  // Bottom right.
+	vertices[4].color = XMFLOAT4(0.0f, 1.0f, 0.0f, 1.0f);
+
+	vertices[5].position = XMFLOAT3(0.3f + pos.x, 0.1f + pos.y, 0.0f + pos.z);  // Bottom right.
+	vertices[5].color = XMFLOAT4(0.0f, 1.0f, 0.0f, 1.0f);
+
+	vertices[6].position = XMFLOAT3(0.3f + pos.x, -0.1f + pos.y, 0.0f + pos.z);  // Bottom right.
+	vertices[6].color = XMFLOAT4(0.0f, 1.0f, 0.0f, 1.0f);
+
+	vertices[7].position = XMFLOAT3(-0.3f + pos.x, -0.1f + pos.y, 0.0f + pos.z);  // Bottom right.
+	vertices[7].color = XMFLOAT4(0.0f, 1.0f, 0.0f, 1.0f);
+
+	// Load the index array with data.
+	// Create the triangle in the clockwise order (counterclockwise: back face culling).
+	indices[0] = 0;  // Bottom left.
+	indices[1] = 1;  // Top middle.
+	indices[2] = 2;  // Bottom right.
+
+	indices[3] = 0;  // Bottom left.
+	indices[4] = 2;  // Top middle.
+	indices[5] = 3;  // Bottom right.
+
+	indices[6] = 4;  // Bottom left.
+	indices[7] = 5;  // Top middle.
+	indices[8] = 6;  // Bottom right.
+
+	indices[9] = 4;  // Bottom left.
+	indices[10] = 6;  // Top middle.
+	indices[11] = 7;  // Bottom right.
+}
+
+void ModelClass::drawPentagon(VertexType* vertices, unsigned long* indices)
+{
+	// Load the vertex array with data.
+	vertices[0].position = XMFLOAT3(0.0f + pos.x, 0.0f + pos.y, 0.0f + pos.z);  // center.
+	vertices[0].color = XMFLOAT4(0.0f, 1.0f, 0.0f, 1.0f);
+
+	vertices[1].position = XMFLOAT3(0.0f + pos.x, 1.0f + pos.y, 0.0f + pos.z);  // Top middle.
+	vertices[1].color = XMFLOAT4(0.0f, 1.0f, 0.0f, 1.0f);
+
+	vertices[2].position = XMFLOAT3(1.0f + pos.x, 0.0f + pos.y, 0.0f + pos.z);  // Bottom right.
+	vertices[2].color = XMFLOAT4(0.0f, 1.0f, 0.0f, 1.0f);
+
+	vertices[3].position = XMFLOAT3(0.5f + pos.x, -1.0f + pos.y, 0.0f + pos.z);  // Bottom right.
+	vertices[3].color = XMFLOAT4(0.0f, 1.0f, 0.0f, 1.0f);
+
+	vertices[4].position = XMFLOAT3(-0.5f + pos.x, -1.0f + pos.y, 0.0f + pos.z);  // Bottom right.
+	vertices[4].color = XMFLOAT4(0.0f, 1.0f, 0.0f, 1.0f);
+
+	vertices[5].position = XMFLOAT3(-1.0f + pos.x, 0.0f + pos.y, 0.0f + pos.z);  // Bottom right.
+	vertices[5].color = XMFLOAT4(0.0f, 1.0f, 0.0f, 1.0f);
+
+	// Load the index array with data.
+	// Create the triangle in the clockwise order (counterclockwise: back face culling).
+	indices[0] = 1;  // Bottom left.
+	indices[1] = 2;  // center
+	indices[2] = 0;  // Bottom right.
+
+	indices[3] = 0;  // center
+	indices[4] = 2;  // Bottom right.
+	indices[5] = 3;  // Bottom right.
+
+	indices[6] = 0;  // center
+	indices[7] = 3;  // Bottom right.
+	indices[8] = 4;  // Bottom right.
+
+	indices[9] = 0;  // center
+	indices[10] = 4;  // Bottom right.
+	indices[11] = 5;  // Bottom right.
+
+	indices[12] = 0;  // center
+	indices[13] = 5;  // Bottom right.
+	indices[14] = 1;  // Bottom right.
 }
 
 bool ModelClass::InitializeBuffers(ID3D11Device* device)
@@ -190,11 +390,10 @@ void ModelClass::RenderBuffers(ID3D11DeviceContext* deviceContext)
 	unsigned int stride;
 	unsigned int offset;
 
-
 	// Set vertex buffer stride and offset.
 	stride = sizeof(VertexType); 
 	offset = 0;
-    
+
 	// Set the vertex buffer to active in the input assembler so it can be rendered.
 	deviceContext->IASetVertexBuffers(0, 1, &m_vertexBuffer, &stride, &offset);
 
