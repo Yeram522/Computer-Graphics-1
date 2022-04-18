@@ -59,7 +59,7 @@ bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hwnd)
 	
 	// Create the model object.
 	m_Models.push_back(new ModelClass(Shape::CROSS, { 0.0f,0.0f,0.0f },Direction::X));
-	m_Models.push_back(new ModelClass(Shape::PENTAGON, { 3.0f,0.0f,0.0f }, Direction::Y));
+	m_Models.push_back(new ModelClass(Shape::PENTAGON, { -3.0f,0.0f,0.0f }, Direction::Y));
 	m_Models.push_back(new ModelClass(Shape::HOUSE, { -3.0f,0.0f,0.0f }, Direction::Z));
 
 	for (auto& model : m_Models)
@@ -201,8 +201,7 @@ bool GraphicsClass::Render()
 	{
 		CBUFFER cb = model->cbuffer;
 		model->updateMatrix({ viewMatrix,worldMatrix ,projectionMatrix});
-		//m_D3D->GetDeviceContext()->UpdateSubresource(pCBuffer, 0, 0, &cb, 0, 0);
-		// Put the model vertex and index buffers on the graphics pipeline to prepare them for drawing.
+
 		model->Render(m_D3D->GetDeviceContext());
 
 		// Render the model using the color shader.

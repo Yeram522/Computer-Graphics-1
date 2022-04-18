@@ -91,13 +91,13 @@ CBUFFER ModelClass::updateMatrix(CBUFFER cb)
 	switch (dir)
 	{
 	case Direction::Y:
-		cbuffer.viewMatrix = cb.viewMatrix *XMMatrixRotationY(Time);
+		cbuffer.viewMatrix = cb.viewMatrix * XMMatrixRotationY(Time) * XMMatrixTranslation(pos.x, pos.y, pos.z);
 		break;
 	case Direction::Z:
-		cbuffer.viewMatrix = cb.viewMatrix * XMMatrixRotationZ(Time);
+		cbuffer.viewMatrix = cb.viewMatrix * XMMatrixRotationZ(Time) * XMMatrixTranslation(pos.x, pos.y, pos.z);
 		break;
 	case Direction::X:
-		cbuffer.viewMatrix = cb.viewMatrix * XMMatrixRotationX(Time);
+		cbuffer.viewMatrix = cb.viewMatrix * XMMatrixRotationX(Time) * XMMatrixTranslation(pos.x, pos.y, pos.z);
 		break;
 	default:
 		break;
@@ -167,19 +167,19 @@ void ModelClass::drawTriangle(VertexType* vertices, unsigned long* indices)
 void ModelClass::drawHouse(VertexType* vertices, unsigned long* indices)
 {
 	// Load the vertex array with data.
-	vertices[0].position = XMFLOAT3(-1.0f + pos.x, -1.0f + pos.y, 0.0f + pos.z);  // Bottom left.
+	vertices[0].position = XMFLOAT3(-1.0f , -1.0f , 0.0f);  // Bottom left.
 	vertices[0].color = XMFLOAT4(0.0f, 1.0f, 0.0f, 1.0f);
 
-	vertices[1].position = XMFLOAT3(-1.0f + pos.x, 1.0f + pos.y, 0.0f + pos.z);  // Top middle.
+	vertices[1].position = XMFLOAT3(-1.0f , 1.0f , 0.0f);  // Top middle.
 	vertices[1].color = XMFLOAT4(0.0f, 1.0f, 0.0f, 1.0f);
 
-	vertices[2].position = XMFLOAT3(1.0f + pos.x, -1.0f + pos.y, 0.0f + pos.z);  // Bottom right.
+	vertices[2].position = XMFLOAT3(1.0f, -1.0f , 0.0f );  // Bottom right.
 	vertices[2].color = XMFLOAT4(0.0f, 1.0f, 0.0f, 1.0f);
 
-	vertices[3].position = XMFLOAT3(1.0f + pos.x, 1.0f + pos.y, 0.0f + pos.z);  // Bottom right.
+	vertices[3].position = XMFLOAT3(1.0f , 1.0f , 0.0f );  // Bottom right.
 	vertices[3].color = XMFLOAT4(0.0f, 1.0f, 0.0f, 1.0f);
 
-	vertices[4].position = XMFLOAT3(0.0f + pos.x, 2.5f + pos.y, 0.0f + pos.z);  // Bottom right.
+	vertices[4].position = XMFLOAT3(0.0f , 2.5f , 0.0f );  // Bottom right.
 	vertices[4].color = XMFLOAT4(0.0f, 1.0f, 0.0f, 1.0f);
 
 	// Load the index array with data.
@@ -200,28 +200,28 @@ void ModelClass::drawHouse(VertexType* vertices, unsigned long* indices)
 void ModelClass::drawCross(VertexType* vertices, unsigned long* indices)
 {
 	// Load the vertex array with data.
-	vertices[0].position = XMFLOAT3(-0.1f + pos.x, 0.3f + pos.y, 0.0f + pos.z);  // Bottom left.
+	vertices[0].position = XMFLOAT3(-0.1f, 0.3f, 0.0f );  // Bottom left.
 	vertices[0].color = XMFLOAT4(0.0f, 1.0f, 0.0f, 1.0f);
 
-	vertices[1].position = XMFLOAT3(0.1f + pos.x, 0.3f + pos.y, 0.0f + pos.z);  // Top middle.
+	vertices[1].position = XMFLOAT3(0.1f, 0.3f , 0.0f);  // Top middle.
 	vertices[1].color = XMFLOAT4(0.0f, 1.0f, 0.0f, 1.0f);
 
-	vertices[2].position = XMFLOAT3(0.1f + pos.x, -0.3f + pos.y, 0.0f + pos.z);  // Bottom right.
+	vertices[2].position = XMFLOAT3(0.1f, -0.3f , 0.0f );  // Bottom right.
 	vertices[2].color = XMFLOAT4(0.0f, 1.0f, 0.0f, 1.0f);
 
-	vertices[3].position = XMFLOAT3(-0.1f + pos.x, -0.3f + pos.y, 0.0f + pos.z);  // Bottom right.
+	vertices[3].position = XMFLOAT3(-0.1f , -0.3f, 0.0f );  // Bottom right.
 	vertices[3].color = XMFLOAT4(0.0f, 1.0f, 0.0f, 1.0f);
 
-	vertices[4].position = XMFLOAT3(-0.3f + pos.x, 0.1f + pos.y, 0.0f + pos.z);  // Bottom right.
+	vertices[4].position = XMFLOAT3(-0.3f, 0.1f , 0.0f);  // Bottom right.
 	vertices[4].color = XMFLOAT4(0.0f, 1.0f, 0.0f, 1.0f);
 
-	vertices[5].position = XMFLOAT3(0.3f + pos.x, 0.1f + pos.y, 0.0f + pos.z);  // Bottom right.
+	vertices[5].position = XMFLOAT3(0.3f , 0.1f, 0.0f);  // Bottom right.
 	vertices[5].color = XMFLOAT4(0.0f, 1.0f, 0.0f, 1.0f);
 
-	vertices[6].position = XMFLOAT3(0.3f + pos.x, -0.1f + pos.y, 0.0f + pos.z);  // Bottom right.
+	vertices[6].position = XMFLOAT3(0.3f, -0.1f, 0.0f );  // Bottom right.
 	vertices[6].color = XMFLOAT4(0.0f, 1.0f, 0.0f, 1.0f);
 
-	vertices[7].position = XMFLOAT3(-0.3f + pos.x, -0.1f + pos.y, 0.0f + pos.z);  // Bottom right.
+	vertices[7].position = XMFLOAT3(-0.3f, -0.1f , 0.0f );  // Bottom right.
 	vertices[7].color = XMFLOAT4(0.0f, 1.0f, 0.0f, 1.0f);
 
 	// Load the index array with data.
@@ -246,22 +246,22 @@ void ModelClass::drawCross(VertexType* vertices, unsigned long* indices)
 void ModelClass::drawPentagon(VertexType* vertices, unsigned long* indices)
 {
 	// Load the vertex array with data.
-	vertices[0].position = XMFLOAT3(0.0f + pos.x, 0.0f + pos.y, 0.0f + pos.z);  // center.
+	vertices[0].position = XMFLOAT3(0.0f, 0.0f , 0.0f );  // center.
 	vertices[0].color = XMFLOAT4(0.0f, 1.0f, 0.0f, 1.0f);
 
-	vertices[1].position = XMFLOAT3(0.0f + pos.x, 1.0f + pos.y, 0.0f + pos.z);  // Top middle.
+	vertices[1].position = XMFLOAT3(0.0f , 1.0f , 0.0f );  // Top middle.
 	vertices[1].color = XMFLOAT4(0.0f, 1.0f, 0.0f, 1.0f);
 
-	vertices[2].position = XMFLOAT3(1.0f + pos.x, 0.0f + pos.y, 0.0f + pos.z);  // Bottom right.
+	vertices[2].position = XMFLOAT3(1.0f, 0.0f , 0.0f );  // Bottom right.
 	vertices[2].color = XMFLOAT4(0.0f, 1.0f, 0.0f, 1.0f);
 
-	vertices[3].position = XMFLOAT3(0.5f + pos.x, -1.0f + pos.y, 0.0f + pos.z);  // Bottom right.
+	vertices[3].position = XMFLOAT3(0.5f , -1.0f, 0.0f );  // Bottom right.
 	vertices[3].color = XMFLOAT4(0.0f, 1.0f, 0.0f, 1.0f);
 
-	vertices[4].position = XMFLOAT3(-0.5f + pos.x, -1.0f + pos.y, 0.0f + pos.z);  // Bottom right.
+	vertices[4].position = XMFLOAT3(-0.5f, -1.0f , 0.0f);  // Bottom right.
 	vertices[4].color = XMFLOAT4(0.0f, 1.0f, 0.0f, 1.0f);
 
-	vertices[5].position = XMFLOAT3(-1.0f + pos.x, 0.0f + pos.y, 0.0f + pos.z);  // Bottom right.
+	vertices[5].position = XMFLOAT3(-1.0f , 0.0f , 0.0f );  // Bottom right.
 	vertices[5].color = XMFLOAT4(0.0f, 1.0f, 0.0f, 1.0f);
 
 	// Load the index array with data.

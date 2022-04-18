@@ -33,6 +33,14 @@ private:
 		XMMATRIX projection;
 	};
 
+	struct LightBufferType
+	{
+		XMMATRIX diffuseColor;
+		XMMATRIX lightDirection;
+		float padding;
+
+	};
+
 public:
 	ColorShaderClass();
 	ColorShaderClass(const ColorShaderClass&);
