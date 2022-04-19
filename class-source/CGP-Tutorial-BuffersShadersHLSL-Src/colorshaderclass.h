@@ -32,25 +32,16 @@ private:
 		XMMATRIX view;
 		XMMATRIX projection;
 	};
-
-	struct LightBufferType
-	{
-		XMMATRIX diffuseColor;
-		XMMATRIX lightDirection;
-		float padding;
-
-	};
-
 public:
 	ColorShaderClass();
 	ColorShaderClass(const ColorShaderClass&);
 	~ColorShaderClass();
 
-	bool Initialize(ID3D11Device*, HWND);
+	bool Initialize(ID3D11Device*, HWND,bool);
 	void Shutdown();
 	bool Render(ID3D11DeviceContext*, int, XMMATRIX, XMMATRIX, XMMATRIX);
 private:
-	bool InitializeShader(ID3D11Device*, HWND, const WCHAR*, const WCHAR*);
+	bool InitializeShader(ID3D11Device*, HWND, const WCHAR*, const WCHAR*,bool);
 	void ShutdownShader();
 	void OutputShaderErrorMessage(ID3D10Blob*, HWND, const WCHAR*);
 

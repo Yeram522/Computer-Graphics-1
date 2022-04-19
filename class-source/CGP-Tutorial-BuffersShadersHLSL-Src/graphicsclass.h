@@ -49,7 +49,7 @@ public:
 
 	void chageBckColor(Color color);
 	void changeFillMode(D3D11_FILL_MODE mode);
-	
+	bool changeBright(bool, HWND);
 private:
 	bool Render();
 	Color bckColor;

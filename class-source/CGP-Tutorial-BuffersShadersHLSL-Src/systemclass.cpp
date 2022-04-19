@@ -168,6 +168,18 @@ bool SystemClass::Frame()
 		m_Graphics->changeFillMode(D3D11_FILL_SOLID);
 	}
 
+	//1
+	if (m_Input->IsKeyDown(0x31))
+	{
+		m_Graphics->changeBright(true, m_hwnd);
+	}
+
+	//2
+	if (m_Input->IsKeyDown(0x32))
+	{
+		m_Graphics->changeBright(false, m_hwnd);
+	}
+
 	// Do the frame processing for the graphics object.
 	result = m_Graphics->Frame();
 	if(!result)
