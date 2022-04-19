@@ -87,22 +87,22 @@ void ModelClass::Shutdown()
 
 CBUFFER ModelClass::updateMatrix(CBUFFER cb)
 {
-	static float Time = 0.0f; Time += 0.001f;
+	static float Time = 0.0f; Time += 0.1f;
 	switch (dir)
 	{
 	case Direction::Y:
-		cbuffer.viewMatrix = cb.viewMatrix * XMMatrixRotationY(Time) * XMMatrixTranslation(pos.x, pos.y, pos.z);
+		cbuffer.worldMatrix = XMMatrixRotationY(Time)*XMMatrixTranslation(pos.x, pos.y, pos.z)*cb.worldMatrix;
 		break;
 	case Direction::Z:
-		cbuffer.viewMatrix = cb.viewMatrix * XMMatrixRotationZ(Time) * XMMatrixTranslation(pos.x, pos.y, pos.z);
+		cbuffer.worldMatrix = XMMatrixRotationZ(Time)* XMMatrixTranslation(pos.x, pos.y, pos.z)* cb.worldMatrix;
 		break;
 	case Direction::X:
-		cbuffer.viewMatrix = cb.viewMatrix * XMMatrixRotationX(Time) * XMMatrixTranslation(pos.x, pos.y, pos.z);
+		cbuffer.worldMatrix = XMMatrixRotationX(Time) * XMMatrixTranslation(pos.x, pos.y, pos.z) * cb.worldMatrix ;
 		break;
 	default:
 		break;
 	}
-	cbuffer.worldMatrix = cb.worldMatrix;
+	cbuffer.viewMatrix = cb.viewMatrix;
 	
 	cbuffer.projectionMatrix = cb.projectionMatrix;
 

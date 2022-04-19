@@ -58,9 +58,9 @@ bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hwnd)
 	m_Camera->SetPosition(0.0f, 0.0f, -10.0f);
 	
 	// Create the model object.
-	m_Models.push_back(new ModelClass(Shape::CROSS, { 0.0f,0.0f,0.0f },Direction::X));
-	m_Models.push_back(new ModelClass(Shape::PENTAGON, { -3.0f,0.0f,0.0f }, Direction::Y));
-	m_Models.push_back(new ModelClass(Shape::HOUSE, { -3.0f,0.0f,0.0f }, Direction::Z));
+	m_Models.push_back(new ModelClass(Shape::CROSS, { -3.0f,0.0f,0.0f },Direction::X));
+	m_Models.push_back(new ModelClass(Shape::PENTAGON, { 0.0f,0.0f,0.0f }, Direction::Y));
+	m_Models.push_back(new ModelClass(Shape::HOUSE, { 3.0f,0.0f,0.0f }, Direction::Z));
 
 	for (auto& model : m_Models)
 	{
