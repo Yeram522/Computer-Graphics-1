@@ -23,13 +23,13 @@ ColorShaderClass::~ColorShaderClass()
 }
 
 
-bool ColorShaderClass::Initialize(ID3D11Device* device, HWND hwnd)
+bool ColorShaderClass::Initialize(ID3D11Device* device, HWND hwnd,bool bright)
 {
 	bool result;
 
 
 	// Initialize the vertex and pixel shaders.
-	result = InitializeShader(device, hwnd, L"./data/color.vs", L"./data/color.ps");
+	result = InitializeShader(device, hwnd, L"./data/color.vs", L"./data/color.ps", bright);
 	if(!result)
 	{
 		return false;
@@ -84,7 +84,7 @@ bool ColorShaderClass::Render(ID3D11DeviceContext* deviceContext, int indexCount
 // (예를 들어 정점 구조체의 성분이 두 개라고 하면, D3D11_INPUT_EKEMENT_DESC 배열의 원소도 두개이어야 함.)
 // 이 배열을 입력배치 서술(input layout description) 배열이라고 부름.
 bool ColorShaderClass::InitializeShader(ID3D11Device* device, HWND hwnd, 
-	const WCHAR *vsFilename, const WCHAR *psFilename)
+	const WCHAR *vsFilename, const WCHAR *psFilename, bool ver)
 {
 	HRESULT result;
 	ID3D10Blob* errorMessage;
@@ -120,9 +120,20 @@ bool ColorShaderClass::InitializeShader(ID3D11Device* device, HWND hwnd,
 		return false;
 	}
 
-    // Compile the pixel shader code.
-	result = D3DCompileFromFile(psFilename, NULL, NULL, "ColorPixelShader", "ps_5_0",
+
+	if (ver)
+	{
+		// Compile the pixel shader code.
+		result = D3DCompileFromFile(psFilename, NULL, NULL, "ColorPixelShader", "ps_5_0",
 		D3D10_SHADER_ENABLE_STRICTNESS, 0, &pixelShaderBuffer, &errorMessage);
+	}
+	else
+	{
+		// Compile the pixel shader code.
+		result = D3DCompileFromFile(psFilename, NULL, NULL, "ColorPixelShader2", "ps_5_0",
+			D3D10_SHADER_ENABLE_STRICTNESS, 0, &pixelShaderBuffer, &errorMessage);
+	}
+    
 	if(FAILED(result))
 	{
 		// If the shader failed to compile it should have writen something to the error message.
@@ -154,7 +165,7 @@ bool ColorShaderClass::InitializeShader(ID3D11Device* device, HWND hwnd,
 	{
 		return false;
 	}
-
+	
 	// Create the vertex input layout description that will be processed by the shader.
 	// This setup needs to match the VertexType stucture in the ModelClass and in the shader.
 	// The AlignedByteOffset indicates how the data is spaced in the buffer: 12 bytes for 
@@ -354,6 +365,7 @@ void ColorShaderClass::RenderShader(ID3D11DeviceContext* deviceContext, int inde
 	deviceContext->IASetInputLayout(m_layout);
 
     // Set the vertex and pixel shaders that will be used to render this triangle.
+
     deviceContext->VSSetShader(m_vertexShader, NULL, 0);
     deviceContext->PSSetShader(m_pixelShader, NULL, 0);
 
