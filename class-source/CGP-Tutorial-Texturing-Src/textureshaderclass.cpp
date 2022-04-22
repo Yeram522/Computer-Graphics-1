@@ -342,7 +342,7 @@ bool TextureShaderClass::SetShaderParameters(ID3D11DeviceContext* deviceContext,
     deviceContext->VSSetConstantBuffers(bufferNumber, 1, &m_matrixBuffer);
 
 	// Set shader texture resource in the pixel shader.
-	deviceContext->PSSetShaderResources(0, 1, &texture);
+	deviceContext->PSSetShaderResources(0, 1, &texture);//셰이더리소스 셋
 
 	return true;
 }
@@ -358,7 +358,8 @@ void TextureShaderClass::RenderShader(ID3D11DeviceContext* deviceContext, int in
     deviceContext->PSSetShader(m_pixelShader, NULL, 0);
 
 	// Set the sampler state in the pixel shader.
-	deviceContext->PSSetSamplers(0, 1, &m_sampleState);
+	deviceContext->PSSetSamplers(0, 1, &m_sampleState);//어떤 필터를 사용 할 것인지? 추가 됨.point, bilinear, trilinear, anisotropic
+	//위의 4개 이외에도 필터는 많당.
 
 	// Render the triangle.
 	deviceContext->DrawIndexed(indexCount, 0, 0);
