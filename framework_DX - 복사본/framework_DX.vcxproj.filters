@@ -15,86 +15,103 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\class-source\CGP-Tutorial-Texturing-Src\AlignedAllocationPolicy.h">
-      <Filter>헤더 파일</Filter>
+    <ClInclude Include="..\class-source\CGP-Tutorial-3DModelRendering-Src\AlignedAllocationPolicy.h">
+      <Filter>소스 파일</Filter>
     </ClInclude>
-    <ClInclude Include="..\class-source\CGP-Tutorial-Texturing-Src\cameraclass.h">
-      <Filter>헤더 파일</Filter>
+    <ClInclude Include="..\class-source\CGP-Tutorial-3DModelRendering-Src\cameraclass.h">
+      <Filter>소스 파일</Filter>
     </ClInclude>
-    <ClInclude Include="..\class-source\CGP-Tutorial-Texturing-Src\colorshaderclass.h">
-      <Filter>헤더 파일</Filter>
+    <ClInclude Include="..\class-source\CGP-Tutorial-3DModelRendering-Src\colorshaderclass.h">
+      <Filter>소스 파일</Filter>
     </ClInclude>
-    <ClInclude Include="..\class-source\CGP-Tutorial-Texturing-Src\d3dclass.h">
-      <Filter>헤더 파일</Filter>
+    <ClInclude Include="..\class-source\CGP-Tutorial-3DModelRendering-Src\d3dclass.h">
+      <Filter>소스 파일</Filter>
     </ClInclude>
-    <ClInclude Include="..\class-source\CGP-Tutorial-Texturing-Src\DDSTextureLoader.h">
-      <Filter>헤더 파일</Filter>
+    <ClInclude Include="..\class-source\CGP-Tutorial-3DModelRendering-Src\DDSTextureLoader.h">
+      <Filter>소스 파일</Filter>
     </ClInclude>
-    <ClInclude Include="..\class-source\CGP-Tutorial-Texturing-Src\graphicsclass.h">
-      <Filter>헤더 파일</Filter>
+    <ClInclude Include="..\class-source\CGP-Tutorial-3DModelRendering-Src\graphicsclass.h">
+      <Filter>소스 파일</Filter>
     </ClInclude>
-    <ClInclude Include="..\class-source\CGP-Tutorial-Texturing-Src\inputclass.h">
-      <Filter>헤더 파일</Filter>
+    <ClInclude Include="..\class-source\CGP-Tutorial-3DModelRendering-Src\inputclass.h">
+      <Filter>소스 파일</Filter>
     </ClInclude>
-    <ClInclude Include="..\class-source\CGP-Tutorial-Texturing-Src\modelclass.h">
-      <Filter>헤더 파일</Filter>
+    <ClInclude Include="..\class-source\CGP-Tutorial-3DModelRendering-Src\modelclass.h">
+      <Filter>소스 파일</Filter>
     </ClInclude>
-    <ClInclude Include="..\class-source\CGP-Tutorial-Texturing-Src\systemclass.h">
-      <Filter>헤더 파일</Filter>
+    <ClInclude Include="..\class-source\CGP-Tutorial-3DModelRendering-Src\systemclass.h">
+      <Filter>소스 파일</Filter>
     </ClInclude>
-    <ClInclude Include="..\class-source\CGP-Tutorial-Texturing-Src\textureclass.h">
-      <Filter>헤더 파일</Filter>
+    <ClInclude Include="..\class-source\CGP-Tutorial-3DModelRendering-Src\textureclass.h">
+      <Filter>소스 파일</Filter>
     </ClInclude>
-    <ClInclude Include="..\class-source\CGP-Tutorial-Texturing-Src\textureshaderclass.h">
-      <Filter>헤더 파일</Filter>
+    <ClInclude Include="..\class-source\CGP-Tutorial-3DModelRendering-Src\textureshaderclass.h">
+      <Filter>소스 파일</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\class-source\CGP-Tutorial-Texturing-Src\cameraclass.cpp">
+    <ClCompile Include="..\class-source\CGP-Tutorial-3DModelRendering-Src\cameraclass.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="..\class-source\CGP-Tutorial-Texturing-Src\colorshaderclass.cpp">
+    <ClCompile Include="..\class-source\CGP-Tutorial-3DModelRendering-Src\colorshaderclass.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="..\class-source\CGP-Tutorial-Texturing-Src\d3dclass.cpp">
+    <ClCompile Include="..\class-source\CGP-Tutorial-3DModelRendering-Src\d3dclass.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="..\class-source\CGP-Tutorial-Texturing-Src\DDSTextureLoader.cpp">
+    <ClCompile Include="..\class-source\CGP-Tutorial-3DModelRendering-Src\DDSTextureLoader.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="..\class-source\CGP-Tutorial-Texturing-Src\graphicsclass.cpp">
+    <ClCompile Include="..\class-source\CGP-Tutorial-3DModelRendering-Src\graphicsclass.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="..\class-source\CGP-Tutorial-Texturing-Src\inputclass.cpp">
+    <ClCompile Include="..\class-source\CGP-Tutorial-3DModelRendering-Src\inputclass.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="..\class-source\CGP-Tutorial-Texturing-Src\main.cpp">
+    <ClCompile Include="..\class-source\CGP-Tutorial-3DModelRendering-Src\main.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="..\class-source\CGP-Tutorial-Texturing-Src\modelclass.cpp">
+    <ClCompile Include="..\class-source\CGP-Tutorial-3DModelRendering-Src\modelclass.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="..\class-source\CGP-Tutorial-Texturing-Src\systemclass.cpp">
+    <ClCompile Include="..\class-source\CGP-Tutorial-3DModelRendering-Src\systemclass.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="..\class-source\CGP-Tutorial-Texturing-Src\textureclass.cpp">
+    <ClCompile Include="..\class-source\CGP-Tutorial-3DModelRendering-Src\textureclass.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="..\class-source\CGP-Tutorial-Texturing-Src\textureshaderclass.cpp">
+    <ClCompile Include="..\class-source\CGP-Tutorial-3DModelRendering-Src\textureshaderclass.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="data\texture.ps">
+    <Object Include="..\framework_DX\data\cube.obj">
       <Filter>리소스 파일</Filter>
-    </None>
-    <None Include="data\texture.vs">
+    </Object>
+    <Object Include="..\framework_DX\data\chair.obj">
       <Filter>리소스 파일</Filter>
-    </None>
+    </Object>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="data\seafloor.dds">
+    <Image Include="..\framework_DX\data\seafloor.dds">
       <Filter>리소스 파일</Filter>
     </Image>
+    <Image Include="..\framework_DX\data\chair_d.dds">
+      <Filter>리소스 파일</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\framework_DX\data\color.ps">
+      <Filter>리소스 파일</Filter>
+    </None>
+    <None Include="..\framework_DX\data\color.vs">
+      <Filter>리소스 파일</Filter>
+    </None>
+    <None Include="..\framework_DX\data\texture.ps">
+      <Filter>리소스 파일</Filter>
+    </None>
+    <None Include="..\framework_DX\data\texture.vs">
+      <Filter>리소스 파일</Filter>
+    </None>
   </ItemGroup>
 </Project>
