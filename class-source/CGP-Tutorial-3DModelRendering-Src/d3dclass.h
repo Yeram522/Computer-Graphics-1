@@ -21,7 +21,7 @@
 #include <directxmath.h>
 
 #include "AlignedAllocationPolicy.h"
-
+#include <vector>
 using namespace DirectX;
 
 ////////////////////////////////////////////////////////////////////////////////

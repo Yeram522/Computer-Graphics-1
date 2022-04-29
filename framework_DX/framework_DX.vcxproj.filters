@@ -16,37 +16,37 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\class-source\CGP-Tutorial-3DModelRendering-Src\AlignedAllocationPolicy.h">
-      <Filter>소스 파일</Filter>
+      <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="..\class-source\CGP-Tutorial-3DModelRendering-Src\cameraclass.h">
-      <Filter>소스 파일</Filter>
+      <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="..\class-source\CGP-Tutorial-3DModelRendering-Src\colorshaderclass.h">
-      <Filter>소스 파일</Filter>
+      <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="..\class-source\CGP-Tutorial-3DModelRendering-Src\d3dclass.h">
-      <Filter>소스 파일</Filter>
+      <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="..\class-source\CGP-Tutorial-3DModelRendering-Src\DDSTextureLoader.h">
-      <Filter>소스 파일</Filter>
+      <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="..\class-source\CGP-Tutorial-3DModelRendering-Src\graphicsclass.h">
-      <Filter>소스 파일</Filter>
+      <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="..\class-source\CGP-Tutorial-3DModelRendering-Src\inputclass.h">
-      <Filter>소스 파일</Filter>
+      <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="..\class-source\CGP-Tutorial-3DModelRendering-Src\modelclass.h">
-      <Filter>소스 파일</Filter>
+      <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="..\class-source\CGP-Tutorial-3DModelRendering-Src\systemclass.h">
-      <Filter>소스 파일</Filter>
+      <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="..\class-source\CGP-Tutorial-3DModelRendering-Src\textureclass.h">
-      <Filter>소스 파일</Filter>
+      <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="..\class-source\CGP-Tutorial-3DModelRendering-Src\textureshaderclass.h">
-      <Filter>소스 파일</Filter>
+      <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -100,6 +100,12 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="data\seafloor.dds">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="data\UFO_color.dds">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="data\Asteroid.dds">
       <Filter>리소스 파일</Filter>
     </Image>
   </ItemGroup>

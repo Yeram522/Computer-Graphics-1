@@ -8,7 +8,12 @@ GraphicsClass::GraphicsClass()
 {
 	m_D3D = 0;
 	m_Camera = 0;
-	m_Model = 0;
+
+	for (auto& model : m_Model)
+	{
+		model = 0;
+	}
+	
 	m_TextureShader = 0;
 }
 
@@ -51,19 +56,28 @@ bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hwnd)
 	}
 
 	// Set the initial position of the camera.
-	m_Camera->SetPosition(0.0f, 0.0f, -5.0f);	// for cube model
-//	m_Camera->SetPosition(0.0f, 0.5f, -3.0f);	// for chair model
-	
-	// Create the model object.
-	m_Model = new ModelClass;
-	if(!m_Model)
-	{
-		return false;
-	}
+	m_Camera->SetPosition(0.0f, 0.0f, -15.0f);	// for cube model
 
+	// Create the model object.
 	// Initialize the model object.
-	result = m_Model->Initialize(m_D3D->GetDevice(), L"./data/cube.obj", L"./data/seafloor.dds");
-//	result = m_Model->Initialize(m_D3D->GetDevice(), L"./data/chair.obj", L"./data/chair_d.dds");
+	ModelClass* model = new ModelClass(m_D3D->GetDevice(), { 0.0f, 0.0f, 0.0f }, L"./data/UFO_Empty.obj", L"./data/UFO_color.dds");
+	ModelClass* model1 = new ModelClass(m_D3D->GetDevice(), { 0.0f, 0.0f, 0.0f }, L"./data/Asteroid.obj", L"./data/Asteroid.dds");
+	ModelClass* model2 = new ModelClass(m_D3D->GetDevice(), { 0.0f, 0.0f, 0.0f }, L"./data/AmongUs_Red.obj", L"./data/AmongUs_Purple.dds");
+	ModelClass* model3 = new ModelClass(m_D3D->GetDevice(), { 0.0f, 0.0f, 0.0f }, L"./data/plane.obj", L"./data/galaxy.dds");
+
+	for (auto& model : m_Model)
+	{
+		if (!model)
+		{
+			return false;
+		}
+	}
+	
+	m_Model.push_back(model);
+	m_Model.push_back(model1);
+	m_Model.push_back(model2);
+	m_Model.push_back(model3);
+
 	if(!result)
 	{
 		MessageBox(hwnd, L"Could not initialize the model object.", L"Error", MB_OK);
@@ -100,12 +114,17 @@ void GraphicsClass::Shutdown()
 	}
 
 	// Release the model object.
-	if(m_Model)
+
+	for (auto& model : m_Model)
 	{
-		m_Model->Shutdown();
-		delete m_Model;
-		m_Model = 0;
+		if (model)
+		{
+			model->Shutdown();
+			delete model;
+			model = 0;
+		}
 	}
+	
 
 	// Release the camera object.
 	if(m_Camera)
@@ -168,19 +187,34 @@ bool GraphicsClass::Render(float rotation)
 	m_D3D->GetWorldMatrix(worldMatrix);
 	m_D3D->GetProjectionMatrix(projectionMatrix);
 
-	// Rotate the world matrix by the rotation value so that the triangle will spin.
-	worldMatrix = XMMatrixRotationY(rotation);
 
-	// Put the model vertex and index buffers on the graphics pipeline to prepare them for drawing.
-	m_Model->Render(m_D3D->GetDeviceContext());
-
-	// Render the model using the texture shader.
-	result = m_TextureShader->Render(m_D3D->GetDeviceContext(), m_Model->GetIndexCount(), 
-		worldMatrix, viewMatrix, projectionMatrix, m_Model->GetTexture());
-	if(!result)
+	for (auto& model : m_Model)
 	{
-		return false;
+		model->cbuffer = { worldMatrix, viewMatrix, projectionMatrix };
 	}
+
+	// Rotate the world matrix by the rotation value so that the triangle will spin.
+	m_Model[0]->cbuffer.worldMatrix = XMMatrixRotationY(rotation) * worldMatrix;
+	m_Model[1]->cbuffer.worldMatrix = XMMatrixScaling(0.1f, 0.1f, 0.1f)*XMMatrixRotationY(rotation) * XMMatrixTranslation(5.0f,0.0f,0.0f) * worldMatrix;
+	m_Model[2]->cbuffer.worldMatrix = XMMatrixScaling(2.0f, 2.0f, 2.0f) * XMMatrixRotationY(rotation) * XMMatrixTranslation(-5.0f,0.0f,0.0f) * worldMatrix;
+	m_Model[3]->cbuffer.worldMatrix = XMMatrixScaling(15.0f, 15.0f, 15.0f) * XMMatrixTranslation(0.0f, -4.0f, 0.0f) * worldMatrix;
+	
+	// Put the model vertex and index buffers on the graphics pipeline to prepare them for drawing.
+	for (auto& model : m_Model)
+	{
+		model->Render(m_D3D->GetDeviceContext());
+
+		// Render the model using the texture shader.
+		result = m_TextureShader->Render(m_D3D->GetDeviceContext(), model->GetIndexCount(),
+			model->cbuffer.worldMatrix, model->cbuffer.viewMatrix, model->cbuffer.projectionMatrix, model->GetTexture());
+
+		if (!result)
+		{
+			return false;
+		}
+	}
+	
+	
 
 	// Present the rendered scene to the screen.
 	m_D3D->EndScene();

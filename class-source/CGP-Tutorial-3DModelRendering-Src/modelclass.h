@@ -21,6 +21,20 @@ using namespace DirectX;
 #include <fstream>
 using namespace std;
 
+struct CBUFFER
+{
+	XMMATRIX worldMatrix, viewMatrix, projectionMatrix;
+	//Color LightColor;
+	//Color AmbientColor;
+};
+
+struct Position
+{
+	float x;
+	float y;
+	float z;
+};
+
 ////////////////////////////////////////////////////////////////////////////////
 // Class name: ModelClass
 ////////////////////////////////////////////////////////////////////////////////
@@ -49,7 +63,7 @@ private:
 	};
 
 public:
-	ModelClass();
+	ModelClass(ID3D11Device* device, Position position,const WCHAR* modelFilename, const WCHAR* textureFilename);
 	ModelClass(const ModelClass&);
 	~ModelClass();
 
@@ -66,6 +80,7 @@ public:
 	bool ReadFileCounts(const WCHAR*);
 	bool LoadDataStructures(const WCHAR*, int, int, int, int);
 
+	CBUFFER cbuffer;
 private:
 	bool InitializeBuffers(ID3D11Device*);
 	void ShutdownBuffers();
@@ -80,6 +95,10 @@ private:
 	TextureClass* m_Texture;
 
 	ModelType* m_model;
+	
+
+	const WCHAR* modelFilename;
+	const WCHAR* textureFilename;
 };
 
 #endif
