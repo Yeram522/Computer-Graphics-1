@@ -200,7 +200,7 @@ bool TextureShaderClass::InitializeShader(ID3D11Device* device, HWND hwnd,
 	// AddressUand AddressV are set to Wrap which ensures that the coordinates stay between 0.0f and 
 	// 1.0f. Anything outside of that wraps around and is placed between 0.0f and 1.0f. All other 
 	// settings for the sampler state description are defaults.
-	samplerDesc.Filter = D3D11_FILTER_MIN_MAG_MIP_LINEAR;
+	samplerDesc.Filter =   D3D11_FILTER_ANISOTROPIC;
     samplerDesc.AddressU = D3D11_TEXTURE_ADDRESS_WRAP;
     samplerDesc.AddressV = D3D11_TEXTURE_ADDRESS_WRAP;
     samplerDesc.AddressW = D3D11_TEXTURE_ADDRESS_WRAP;
@@ -224,6 +224,16 @@ bool TextureShaderClass::InitializeShader(ID3D11Device* device, HWND hwnd,
 	return true;
 }
 
+void TextureShaderClass::changeFilter(ID3D11Device* device)
+{
+	HRESULT result;
+
+	D3D11_SAMPLER_DESC samplerDesc;
+	samplerDesc.Filter = D3D11_FILTER_ANISOTROPIC;
+
+	// Create the texture sampler state.
+	result = device->CreateSamplerState(&samplerDesc, &m_sampleState);
+}
 
 void TextureShaderClass::ShutdownShader()
 {

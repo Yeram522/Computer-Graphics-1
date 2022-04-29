@@ -135,7 +135,7 @@ bool ModelClass::InitializeBuffers(ID3D11Device* device)
     vertexBufferDesc.CPUAccessFlags = 0;
     vertexBufferDesc.MiscFlags = 0;
 	vertexBufferDesc.StructureByteStride = 0;
-
+	
 	// Give the subresource structure a pointer to the vertex data.
     vertexData.pSysMem = vertices;
 	vertexData.SysMemPitch = 0;
@@ -155,7 +155,7 @@ bool ModelClass::InitializeBuffers(ID3D11Device* device)
     indexBufferDesc.CPUAccessFlags = 0;
     indexBufferDesc.MiscFlags = 0;
 	indexBufferDesc.StructureByteStride = 0;
-
+	
 	// Give the subresource structure a pointer to the index data.
     indexData.pSysMem = indices;
 	indexData.SysMemPitch = 0;

@@ -63,7 +63,7 @@ bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hwnd)
 	ModelClass* model = new ModelClass(m_D3D->GetDevice(), { 0.0f, 0.0f, 0.0f }, L"./data/UFO_Empty.obj", L"./data/UFO_color.dds");
 	ModelClass* model1 = new ModelClass(m_D3D->GetDevice(), { 0.0f, 0.0f, 0.0f }, L"./data/Asteroid.obj", L"./data/Asteroid.dds");
 	ModelClass* model2 = new ModelClass(m_D3D->GetDevice(), { 0.0f, 0.0f, 0.0f }, L"./data/AmongUs_Red.obj", L"./data/AmongUs_Purple.dds");
-	ModelClass* model3 = new ModelClass(m_D3D->GetDevice(), { 0.0f, 0.0f, 0.0f }, L"./data/plane.obj", L"./data/galaxy.dds");
+	ModelClass* model3 = new ModelClass(m_D3D->GetDevice(), { 0.0f, 0.0f, 0.0f }, L"./data/plane.obj", L"./data/brick.dds");
 
 	for (auto& model : m_Model)
 	{
@@ -197,7 +197,7 @@ bool GraphicsClass::Render(float rotation)
 	m_Model[0]->cbuffer.worldMatrix = XMMatrixRotationY(rotation) * worldMatrix;
 	m_Model[1]->cbuffer.worldMatrix = XMMatrixScaling(0.1f, 0.1f, 0.1f)*XMMatrixRotationY(rotation) * XMMatrixTranslation(5.0f,0.0f,0.0f) * worldMatrix;
 	m_Model[2]->cbuffer.worldMatrix = XMMatrixScaling(2.0f, 2.0f, 2.0f) * XMMatrixRotationY(rotation) * XMMatrixTranslation(-5.0f,0.0f,0.0f) * worldMatrix;
-	m_Model[3]->cbuffer.worldMatrix = XMMatrixScaling(15.0f, 15.0f, 15.0f) * XMMatrixTranslation(0.0f, -4.0f, 0.0f) * worldMatrix;
+	m_Model[3]->cbuffer.worldMatrix = XMMatrixScaling(50.0f, 50.0f, 50.0f) * XMMatrixTranslation(0.0f, -4.0f, 20.0f) * worldMatrix;
 	
 	// Put the model vertex and index buffers on the graphics pipeline to prepare them for drawing.
 	for (auto& model : m_Model)
