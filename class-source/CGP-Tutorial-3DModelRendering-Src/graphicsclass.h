@@ -37,6 +37,8 @@ public:
 	void Shutdown();
 	bool Frame();
 
+	void changeFilter(D3D11_FILTER filter);
+
 private:
 	bool Render(float);
 

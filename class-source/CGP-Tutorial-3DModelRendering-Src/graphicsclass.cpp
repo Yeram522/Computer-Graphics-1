@@ -27,6 +27,10 @@ GraphicsClass::~GraphicsClass()
 {
 }
 
+void GraphicsClass::changeFilter(D3D11_FILTER filter)
+{
+	m_TextureShader->changeFilter(m_D3D->GetDevice(), filter);
+}
 
 bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hwnd)
 {
@@ -60,23 +64,11 @@ bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hwnd)
 
 	// Create the model object.
 	// Initialize the model object.
-	ModelClass* model = new ModelClass(m_D3D->GetDevice(), { 0.0f, 0.0f, 0.0f }, L"./data/UFO_Empty.obj", L"./data/UFO_color.dds");
-	ModelClass* model1 = new ModelClass(m_D3D->GetDevice(), { 0.0f, 0.0f, 0.0f }, L"./data/Asteroid.obj", L"./data/Asteroid.dds");
-	ModelClass* model2 = new ModelClass(m_D3D->GetDevice(), { 0.0f, 0.0f, 0.0f }, L"./data/AmongUs_Red.obj", L"./data/AmongUs_Purple.dds");
-	ModelClass* model3 = new ModelClass(m_D3D->GetDevice(), { 0.0f, 0.0f, 0.0f }, L"./data/plane.obj", L"./data/brick.dds");
-
-	for (auto& model : m_Model)
-	{
-		if (!model)
-		{
-			return false;
-		}
-	}
 	
-	m_Model.push_back(model);
-	m_Model.push_back(model1);
-	m_Model.push_back(model2);
-	m_Model.push_back(model3);
+	m_Model.push_back(new ModelClass(m_D3D->GetDevice(), { 0.0f, 0.0f, 0.0f }, L"./data/UFO_Empty.obj", L"./data/UFO_color.dds"));
+	m_Model.push_back(new ModelClass(m_D3D->GetDevice(), { 0.0f, 0.0f, 0.0f }, L"./data/Asteroid.obj", L"./data/Asteroid.dds"));
+	m_Model.push_back(new ModelClass(m_D3D->GetDevice(), { 0.0f, 0.0f, 0.0f }, L"./data/AmongUs_Red.obj", L"./data/AmongUs_Purple.dds"));
+	m_Model.push_back(new ModelClass(m_D3D->GetDevice(), { 0.0f, 0.0f, 0.0f }, L"./data/plane.obj", L"./data/wall.dds"));
 
 	if(!result)
 	{

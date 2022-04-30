@@ -131,11 +131,29 @@ bool SystemClass::Frame()
 {
 	bool result;
 
-
+	
 	// Check if the user pressed escape and wants to exit the application.
 	if(m_Input->IsKeyDown(VK_ESCAPE))
 	{
 		return false;
+	}
+
+	//3
+	if (m_Input->IsKeyDown(0x33))
+	{
+		m_Graphics->changeFilter(D3D11_FILTER_MIN_MAG_MIP_POINT);
+	}
+
+	//4
+	if (m_Input->IsKeyDown(0x34))
+	{
+		m_Graphics->changeFilter(D3D11_FILTER_MIN_MAG_MIP_LINEAR);
+	}
+
+	//5
+	if (m_Input->IsKeyDown(0x35))
+	{
+		m_Graphics->changeFilter(D3D11_FILTER_ANISOTROPIC);
 	}
 
 	// Do the frame processing for the graphics object.
