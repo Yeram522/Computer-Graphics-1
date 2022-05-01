@@ -24,15 +24,6 @@ using namespace std;
 struct CBUFFER
 {
 	XMMATRIX worldMatrix, viewMatrix, projectionMatrix;
-	//Color LightColor;
-	//Color AmbientColor;
-};
-
-struct Position
-{
-	float x;
-	float y;
-	float z;
 };
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -63,7 +54,7 @@ private:
 	};
 
 public:
-	ModelClass(ID3D11Device* device, Position position,const WCHAR* modelFilename, const WCHAR* textureFilename);
+	ModelClass(ID3D11Device* device,const WCHAR* modelFilename, const WCHAR* textureFilename);
 	ModelClass(const ModelClass&);
 	~ModelClass();
 

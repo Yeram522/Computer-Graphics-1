@@ -4,7 +4,7 @@
 #include "modelclass.h"
 
 
-ModelClass::ModelClass(ID3D11Device* device, Position position,const WCHAR* modelFilename, const WCHAR* textureFilename)
+ModelClass::ModelClass(ID3D11Device* device, const WCHAR* modelFilename, const WCHAR* textureFilename)
 {
 	m_vertexBuffer = 0;
 	m_indexBuffer = 0;
