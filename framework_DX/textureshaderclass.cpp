@@ -228,6 +228,7 @@ void TextureShaderClass::changeFilter(ID3D11Device* device,D3D11_FILTER filter)
 	HRESULT result;
 
 	samplerDesc.Filter = filter;
+	samplerDesc.MaxAnisotropy = 8;
 
 
 	// Create the texture sampler state.

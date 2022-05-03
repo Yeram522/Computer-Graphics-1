@@ -171,6 +171,7 @@ bool GraphicsClass::Render(float rotation)
 	m_D3D->BeginScene(0.0f, 0.0f, 0.0f, 1.0f);
 
 	// Generate the view matrix based on the camera's position.
+	m_Camera->SetRotation(28.0f, 0.0f, 0.0f);
 	m_Camera->Render();
 
 	// Get the world, view, and projection matrices from the camera and d3d objects.
@@ -185,10 +186,10 @@ bool GraphicsClass::Render(float rotation)
 	}
 
 	// Rotate the world matrix by the rotation value so that the triangle will spin.
-	m_Model[0]->cbuffer.worldMatrix = XMMatrixRotationY(rotation) * worldMatrix;
-	m_Model[1]->cbuffer.worldMatrix = XMMatrixScaling(0.1f, 0.1f, 0.1f)*XMMatrixRotationY(rotation) * XMMatrixTranslation(5.0f,0.0f,0.0f) * worldMatrix;
-	m_Model[2]->cbuffer.worldMatrix = XMMatrixScaling(2.0f, 2.0f, 2.0f) * XMMatrixRotationY(rotation) * XMMatrixTranslation(-5.0f,0.0f,0.0f) * worldMatrix;
-	m_Model[3]->cbuffer.worldMatrix = XMMatrixScaling(50.0f, 150.0f, 150.0f) * XMMatrixTranslation(0.0f, -30.0f, 120.0f) * worldMatrix;
+	m_Model[0]->cbuffer.worldMatrix = XMMatrixScaling(0.8f, 0.8f, 0.8f) * XMMatrixRotationY(rotation) * XMMatrixTranslation(0.0f, -5.0f, -5.0f) * worldMatrix;
+	m_Model[1]->cbuffer.worldMatrix = XMMatrixScaling(0.05f, 0.05f, 0.05f)*XMMatrixRotationY(rotation) * XMMatrixTranslation(4.0f, -5.0f, -5.0f) * worldMatrix;
+	m_Model[2]->cbuffer.worldMatrix = XMMatrixScaling(2.0f, 2.0f, 2.0f) * XMMatrixRotationY(rotation) * XMMatrixTranslation(-4.0f, -5.0f, -5.0f) * worldMatrix;
+	m_Model[3]->cbuffer.worldMatrix = XMMatrixScaling(150.0f, 150.0f, 150.0f) * XMMatrixTranslation(0.0f, -50.0f, 120.0f) * worldMatrix;
 	
 	// Put the model vertex and index buffers on the graphics pipeline to prepare them for drawing.
 	for (auto& model : m_Model)
