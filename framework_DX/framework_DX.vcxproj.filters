@@ -15,92 +15,92 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\class-source\CGP-Tutorial-3DModelRendering-Src\AlignedAllocationPolicy.h">
-      <Filter>소스 파일</Filter>
+    <ClInclude Include="..\class-source\Tutorial Instancing-20220502\CGP-Tutorial-Instancing-Src\AlignedAllocationPolicy.h">
+      <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="..\class-source\CGP-Tutorial-3DModelRendering-Src\cameraclass.h">
-      <Filter>소스 파일</Filter>
+    <ClInclude Include="..\class-source\Tutorial Instancing-20220502\CGP-Tutorial-Instancing-Src\CameraClass.h">
+      <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="..\class-source\CGP-Tutorial-3DModelRendering-Src\colorshaderclass.h">
-      <Filter>소스 파일</Filter>
+    <ClInclude Include="..\class-source\Tutorial Instancing-20220502\CGP-Tutorial-Instancing-Src\D3DClass.h">
+      <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="..\class-source\CGP-Tutorial-3DModelRendering-Src\d3dclass.h">
-      <Filter>소스 파일</Filter>
+    <ClInclude Include="..\class-source\Tutorial Instancing-20220502\CGP-Tutorial-Instancing-Src\DxDefine.h">
+      <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="..\class-source\CGP-Tutorial-3DModelRendering-Src\DDSTextureLoader.h">
-      <Filter>소스 파일</Filter>
+    <ClInclude Include="..\class-source\Tutorial Instancing-20220502\CGP-Tutorial-Instancing-Src\DDSTextureLoader.h">
+      <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="..\class-source\CGP-Tutorial-3DModelRendering-Src\graphicsclass.h">
-      <Filter>소스 파일</Filter>
+    <ClInclude Include="..\class-source\Tutorial Instancing-20220502\CGP-Tutorial-Instancing-Src\GraphicsClass.h">
+      <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="..\class-source\CGP-Tutorial-3DModelRendering-Src\inputclass.h">
-      <Filter>소스 파일</Filter>
+    <ClInclude Include="..\class-source\Tutorial Instancing-20220502\CGP-Tutorial-Instancing-Src\InputClass.h">
+      <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="..\class-source\CGP-Tutorial-3DModelRendering-Src\modelclass.h">
-      <Filter>소스 파일</Filter>
+    <ClInclude Include="..\class-source\Tutorial Instancing-20220502\CGP-Tutorial-Instancing-Src\ModelClass.h">
+      <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="..\class-source\CGP-Tutorial-3DModelRendering-Src\systemclass.h">
-      <Filter>소스 파일</Filter>
+    <ClInclude Include="..\class-source\Tutorial Instancing-20220502\CGP-Tutorial-Instancing-Src\stdafx.h">
+      <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="..\class-source\CGP-Tutorial-3DModelRendering-Src\textureclass.h">
-      <Filter>소스 파일</Filter>
+    <ClInclude Include="..\class-source\Tutorial Instancing-20220502\CGP-Tutorial-Instancing-Src\targetver.h">
+      <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="..\class-source\CGP-Tutorial-3DModelRendering-Src\textureshaderclass.h">
-      <Filter>소스 파일</Filter>
+    <ClInclude Include="..\class-source\Tutorial Instancing-20220502\CGP-Tutorial-Instancing-Src\SystemClass.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="..\class-source\Tutorial Instancing-20220502\CGP-Tutorial-Instancing-Src\TextureClass.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="..\class-source\Tutorial Instancing-20220502\CGP-Tutorial-Instancing-Src\TextureShaderClass.h">
+      <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\class-source\CGP-Tutorial-3DModelRendering-Src\cameraclass.cpp">
+    <ClCompile Include="..\class-source\Tutorial Instancing-20220502\CGP-Tutorial-Instancing-Src\CameraClass.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="..\class-source\CGP-Tutorial-3DModelRendering-Src\colorshaderclass.cpp">
+    <ClCompile Include="..\class-source\Tutorial Instancing-20220502\CGP-Tutorial-Instancing-Src\D3DClass.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="..\class-source\CGP-Tutorial-3DModelRendering-Src\d3dclass.cpp">
+    <ClCompile Include="..\class-source\Tutorial Instancing-20220502\CGP-Tutorial-Instancing-Src\DDSTextureLoader.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="..\class-source\CGP-Tutorial-3DModelRendering-Src\DDSTextureLoader.cpp">
+    <ClCompile Include="..\class-source\Tutorial Instancing-20220502\CGP-Tutorial-Instancing-Src\GraphicsClass.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="..\class-source\CGP-Tutorial-3DModelRendering-Src\graphicsclass.cpp">
+    <ClCompile Include="..\class-source\Tutorial Instancing-20220502\CGP-Tutorial-Instancing-Src\InputClass.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="..\class-source\CGP-Tutorial-3DModelRendering-Src\inputclass.cpp">
+    <ClCompile Include="..\class-source\Tutorial Instancing-20220502\CGP-Tutorial-Instancing-Src\main.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="..\class-source\CGP-Tutorial-3DModelRendering-Src\main.cpp">
+    <ClCompile Include="..\class-source\Tutorial Instancing-20220502\CGP-Tutorial-Instancing-Src\ModelClass.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="..\class-source\CGP-Tutorial-3DModelRendering-Src\modelclass.cpp">
+    <ClCompile Include="..\class-source\Tutorial Instancing-20220502\CGP-Tutorial-Instancing-Src\stdafx.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="..\class-source\CGP-Tutorial-3DModelRendering-Src\systemclass.cpp">
+    <ClCompile Include="..\class-source\Tutorial Instancing-20220502\CGP-Tutorial-Instancing-Src\SystemClass.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="..\class-source\CGP-Tutorial-3DModelRendering-Src\textureclass.cpp">
+    <ClCompile Include="..\class-source\Tutorial Instancing-20220502\CGP-Tutorial-Instancing-Src\TextureClass.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="..\class-source\CGP-Tutorial-3DModelRendering-Src\textureshaderclass.cpp">
+    <ClCompile Include="..\class-source\Tutorial Instancing-20220502\CGP-Tutorial-Instancing-Src\TextureShaderClass.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="data\color.ps">
+    <Image Include="data\seafloor.dds">
       <Filter>리소스 파일</Filter>
-    </None>
-    <None Include="data\color.vs">
-      <Filter>리소스 파일</Filter>
-    </None>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
     <None Include="data\texture.ps">
       <Filter>리소스 파일</Filter>
     </None>
     <None Include="data\texture.vs">
       <Filter>리소스 파일</Filter>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="data\seafloor.dds">
-      <Filter>리소스 파일</Filter>
-    </Image>
   </ItemGroup>
 </Project>
