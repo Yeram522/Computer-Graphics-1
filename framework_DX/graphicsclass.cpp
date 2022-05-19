@@ -65,9 +65,9 @@ bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hwnd)
 	// Create the model object.
 	// Initialize the model object.
 	m_Model.push_back(new ModelClass(m_D3D->GetDevice(), L"./data/UFO_Empty.obj", L"./data/UFO_color.dds"));
-	m_Model.push_back(new ModelClass(m_D3D->GetDevice(), L"./data/Asteroid.obj", L"./data/Asteroid.dds"));
+	m_Model.push_back(new ModelClass(m_D3D->GetDevice(), L"./data/grass.obj", L"./data/grass.dds"));
 	m_Model.push_back(new ModelClass(m_D3D->GetDevice(), L"./data/AmongUs_Red.obj", L"./data/AmongUs_Purple.dds"));
-	m_Model.push_back(new ModelClass(m_D3D->GetDevice(), L"./data/plane.obj", L"./data/tile.dds"));
+
 
 	if(!result)
 	{
@@ -187,9 +187,8 @@ bool GraphicsClass::Render(float rotation)
 
 	// Rotate the world matrix by the rotation value so that the triangle will spin.
 	m_Model[0]->cbuffer.worldMatrix = XMMatrixScaling(0.8f, 0.8f, 0.8f) * XMMatrixRotationY(rotation) * XMMatrixTranslation(0.0f, -5.0f, -5.0f) * worldMatrix;
-	m_Model[1]->cbuffer.worldMatrix = XMMatrixScaling(0.05f, 0.05f, 0.05f)*XMMatrixRotationY(rotation) * XMMatrixTranslation(4.0f, -5.0f, -5.0f) * worldMatrix;
+	m_Model[1]->cbuffer.worldMatrix = XMMatrixScaling(0.05f, 0.05f, 0.05f)*XMMatrixTranslation(0.0f, -10.0f, 0.0f) * worldMatrix;
 	m_Model[2]->cbuffer.worldMatrix = XMMatrixScaling(2.0f, 2.0f, 2.0f) * XMMatrixRotationY(rotation) * XMMatrixTranslation(-4.0f, -5.0f, -5.0f) * worldMatrix;
-	m_Model[3]->cbuffer.worldMatrix = XMMatrixScaling(150.0f, 150.0f, 150.0f) * XMMatrixTranslation(0.0f, -50.0f, 120.0f) * worldMatrix;
 	
 	// Put the model vertex and index buffers on the graphics pipeline to prepare them for drawing.
 	for (auto& model : m_Model)
