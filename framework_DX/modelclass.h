@@ -53,6 +53,11 @@ private:
 		float nx, ny, nz;
 	};
 
+	struct InstanceType //1. 구조체 안에 위치 말고도 색상, 크기, 회전등 바꿀 수 있다!
+	{
+		XMFLOAT3 position;
+	};
+
 public:
 	ModelClass(ID3D11Device* device,const WCHAR* modelFilename, const WCHAR* textureFilename);
 	ModelClass(const ModelClass&);

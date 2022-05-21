@@ -64,7 +64,7 @@ bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hwnd)
 
 	// Create the model object.
 	// Initialize the model object.
-	m_Model.push_back(new ModelClass(m_D3D->GetDevice(), L"./data/UFO_Empty.obj", L"./data/UFO_color.dds"));
+	m_Model.push_back(new ModelClass(m_D3D->GetDevice(), L"./data/icecream.obj", L"./data/icecream.dds"));
 	m_Model.push_back(new ModelClass(m_D3D->GetDevice(), L"./data/grass.obj", L"./data/grass.dds"));
 	m_Model.push_back(new ModelClass(m_D3D->GetDevice(), L"./data/AmongUs_Red.obj", L"./data/AmongUs_Purple.dds"));
 
