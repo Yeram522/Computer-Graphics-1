@@ -39,7 +39,7 @@ private:
 
 private:
 	ID3D11Buffer* m_vertexBuffer = nullptr;
-	ID3D11Buffer* m_instanceBuffer = nullptr;
+	ID3D11Buffer* m_instanceBuffer = nullptr;//index Buffer가 instance Buffer로 바뀌였다.
 	int m_vertexCount = 0;
 	int m_instanceCount = 0;
 	TextureClass* m_Texture = nullptr;
