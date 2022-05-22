@@ -15,59 +15,48 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <None Include="data\color.ps">
+    <None Include="C:\Users\user\Desktop\framework_DX\data\color.ps">
       <Filter>리소스 파일</Filter>
     </None>
-    <None Include="data\color.vs">
+    <None Include="C:\Users\user\Desktop\framework_DX\data\color.vs">
       <Filter>리소스 파일</Filter>
     </None>
-    <None Include="data\texture.ps">
+    <None Include="C:\Users\user\Desktop\framework_DX\data\texture.ps">
       <Filter>리소스 파일</Filter>
     </None>
-    <None Include="data\texture.vs">
+    <None Include="C:\Users\user\Desktop\framework_DX\data\texture.vs">
       <Filter>리소스 파일</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="data\seafloor.dds">
-      <Filter>리소스 파일</Filter>
-    </Image>
-    <Image Include="data\UFO_color.dds">
-      <Filter>리소스 파일</Filter>
-    </Image>
-    <Image Include="data\Asteroid.dds">
-      <Filter>리소스 파일</Filter>
-    </Image>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="textureclass.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="textureshaderclass.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="systemclass.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="modelclass.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="inputclass.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="graphicsclass.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="DDSTextureLoader.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="d3dclass.h">
+    <ClInclude Include="cameraclass.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="colorshaderclass.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="cameraclass.h">
+    <ClInclude Include="d3dclass.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="DDSTextureLoader.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="graphicsclass.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="inputclass.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="modelclass.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="systemclass.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="textureclass.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="textureshaderclass.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="AlignedAllocationPolicy.h">
@@ -76,37 +65,37 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="colorshaderclass.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>헤더 파일</Filter>
     </ClCompile>
     <ClCompile Include="d3dclass.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>헤더 파일</Filter>
     </ClCompile>
     <ClCompile Include="DDSTextureLoader.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>헤더 파일</Filter>
     </ClCompile>
     <ClCompile Include="graphicsclass.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>헤더 파일</Filter>
     </ClCompile>
     <ClCompile Include="inputclass.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>헤더 파일</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>헤더 파일</Filter>
     </ClCompile>
     <ClCompile Include="modelclass.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>헤더 파일</Filter>
     </ClCompile>
     <ClCompile Include="systemclass.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>헤더 파일</Filter>
     </ClCompile>
     <ClCompile Include="textureclass.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>헤더 파일</Filter>
     </ClCompile>
     <ClCompile Include="textureshaderclass.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>헤더 파일</Filter>
     </ClCompile>
     <ClCompile Include="cameraclass.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>헤더 파일</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

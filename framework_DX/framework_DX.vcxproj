@@ -19,15 +19,10 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <None Include="data\color.ps" />
-    <None Include="data\color.vs" />
-    <None Include="data\texture.ps" />
-    <None Include="data\texture.vs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="data\Asteroid.dds" />
-    <Image Include="data\seafloor.dds" />
-    <Image Include="data\UFO_color.dds" />
+    <None Include="C:\Users\user\Desktop\framework_DX\data\color.ps" />
+    <None Include="C:\Users\user\Desktop\framework_DX\data\color.vs" />
+    <None Include="C:\Users\user\Desktop\framework_DX\data\texture.ps" />
+    <None Include="C:\Users\user\Desktop\framework_DX\data\texture.vs" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AlignedAllocationPolicy.h" />
