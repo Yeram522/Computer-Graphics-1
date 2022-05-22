@@ -19,39 +19,46 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\class-source\Tutorial Instancing-20220502\CGP-Tutorial-Instancing-Src\AlignedAllocationPolicy.h" />
-    <ClInclude Include="..\class-source\Tutorial Instancing-20220502\CGP-Tutorial-Instancing-Src\CameraClass.h" />
-    <ClInclude Include="..\class-source\Tutorial Instancing-20220502\CGP-Tutorial-Instancing-Src\D3DClass.h" />
-    <ClInclude Include="..\class-source\Tutorial Instancing-20220502\CGP-Tutorial-Instancing-Src\DDSTextureLoader.h" />
-    <ClInclude Include="..\class-source\Tutorial Instancing-20220502\CGP-Tutorial-Instancing-Src\DxDefine.h" />
-    <ClInclude Include="..\class-source\Tutorial Instancing-20220502\CGP-Tutorial-Instancing-Src\GraphicsClass.h" />
-    <ClInclude Include="..\class-source\Tutorial Instancing-20220502\CGP-Tutorial-Instancing-Src\InputClass.h" />
-    <ClInclude Include="..\class-source\Tutorial Instancing-20220502\CGP-Tutorial-Instancing-Src\ModelClass.h" />
-    <ClInclude Include="..\class-source\Tutorial Instancing-20220502\CGP-Tutorial-Instancing-Src\stdafx.h" />
-    <ClInclude Include="..\class-source\Tutorial Instancing-20220502\CGP-Tutorial-Instancing-Src\SystemClass.h" />
-    <ClInclude Include="..\class-source\Tutorial Instancing-20220502\CGP-Tutorial-Instancing-Src\targetver.h" />
-    <ClInclude Include="..\class-source\Tutorial Instancing-20220502\CGP-Tutorial-Instancing-Src\TextureClass.h" />
-    <ClInclude Include="..\class-source\Tutorial Instancing-20220502\CGP-Tutorial-Instancing-Src\TextureShaderClass.h" />
+    <ClInclude Include="AlignedAllocationPolicy.h" />
+    <ClInclude Include="cameraclass.h" />
+    <ClInclude Include="colorshaderclass.h" />
+    <ClInclude Include="d3dclass.h" />
+    <ClInclude Include="DDSTextureLoader.h" />
+    <ClInclude Include="graphicsclass.h" />
+    <ClInclude Include="inputclass.h" />
+    <ClInclude Include="lightclass.h" />
+    <ClInclude Include="lightshaderclass.h" />
+    <ClInclude Include="modelclass.h" />
+    <ClInclude Include="systemclass.h" />
+    <ClInclude Include="textureclass.h" />
+    <ClInclude Include="textureshaderclass.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\class-source\Tutorial Instancing-20220502\CGP-Tutorial-Instancing-Src\CameraClass.cpp" />
-    <ClCompile Include="..\class-source\Tutorial Instancing-20220502\CGP-Tutorial-Instancing-Src\D3DClass.cpp" />
-    <ClCompile Include="..\class-source\Tutorial Instancing-20220502\CGP-Tutorial-Instancing-Src\DDSTextureLoader.cpp" />
-    <ClCompile Include="..\class-source\Tutorial Instancing-20220502\CGP-Tutorial-Instancing-Src\GraphicsClass.cpp" />
-    <ClCompile Include="..\class-source\Tutorial Instancing-20220502\CGP-Tutorial-Instancing-Src\InputClass.cpp" />
-    <ClCompile Include="..\class-source\Tutorial Instancing-20220502\CGP-Tutorial-Instancing-Src\main.cpp" />
-    <ClCompile Include="..\class-source\Tutorial Instancing-20220502\CGP-Tutorial-Instancing-Src\ModelClass.cpp" />
-    <ClCompile Include="..\class-source\Tutorial Instancing-20220502\CGP-Tutorial-Instancing-Src\stdafx.cpp" />
-    <ClCompile Include="..\class-source\Tutorial Instancing-20220502\CGP-Tutorial-Instancing-Src\SystemClass.cpp" />
-    <ClCompile Include="..\class-source\Tutorial Instancing-20220502\CGP-Tutorial-Instancing-Src\TextureClass.cpp" />
-    <ClCompile Include="..\class-source\Tutorial Instancing-20220502\CGP-Tutorial-Instancing-Src\TextureShaderClass.cpp" />
+    <ClCompile Include="cameraclass.cpp" />
+    <ClCompile Include="colorshaderclass.cpp" />
+    <ClCompile Include="d3dclass.cpp" />
+    <ClCompile Include="DDSTextureLoader.cpp" />
+    <ClCompile Include="graphicsclass.cpp" />
+    <ClCompile Include="inputclass.cpp" />
+    <ClCompile Include="lightclass.cpp" />
+    <ClCompile Include="lightshaderclass.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="modelclass.cpp" />
+    <ClCompile Include="systemclass.cpp" />
+    <ClCompile Include="textureclass.cpp" />
+    <ClCompile Include="textureshaderclass.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="data\seafloor.dds" />
-  </ItemGroup>
-  <ItemGroup>
+    <None Include="data\color.ps" />
+    <None Include="data\color.vs" />
+    <None Include="data\light.ps" />
+    <None Include="data\light.vs" />
     <None Include="data\texture.ps" />
     <None Include="data\texture.vs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="data\chair_d.dds" />
+    <Image Include="data\seafloor.dds" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

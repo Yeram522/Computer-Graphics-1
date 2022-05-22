@@ -1,5 +1,7 @@
 ////////////////////////////////////////////////////////////////////////////////
-// Filename: texture_vs.hlsl
+// Filename: texture.vs
+// The texture vertex shader is similar to the previous color shader except that 
+// there have been some changes to accommodate texturing.
 ////////////////////////////////////////////////////////////////////////////////
 
 
@@ -16,12 +18,17 @@ cbuffer MatrixBuffer
 
 //////////////
 // TYPEDEFS //
+// We are no longer using color in our vertex type and have instead moved to using 
+// texture coordinates. Since texture coordinates take a U and V float coordinate, 
+// we use float2 as its type. The semantic for texture coordinates is TEXCOORD0 for 
+// vertex shaders and pixel shaders. 
+// You can change the zero to any number to indicate which set of coordinates you 
+// are working with as multiple texture coordinates are allowed.
 //////////////
 struct VertexInputType
 {
     float4 position : POSITION;
     float2 tex : TEXCOORD0;
-	float3 instancePosition : TEXCOORD1; //다음채널을 갖고와서 쓰고 있따.instance 용 sementic이 존재하지않아서 color sementic을 빌려씀
 };
 
 struct PixelInputType
@@ -39,21 +46,16 @@ PixelInputType TextureVertexShader(VertexInputType input)
     PixelInputType output;
     
 
-	// 적절한 행렬 계산을 위해 위치 벡터를 4 단위로 변경합니다.
+	// Change the position vector to be 4 units for proper matrix calculations.
     input.position.w = 1.0f;
 
-	// 이 특정 인스턴스에 대한 데이터를 기반으로 정점의 위치를 ​​변경 합니다.
-    input.position.x += input.instancePosition.x;
-    input.position.y += input.instancePosition.y;
-    input.position.z += input.instancePosition.z;
-    
-	// 월드, 뷰 및 투영 행렬에 대한 정점의 위치를 ​​계산합니다.
+	// Calculate the position of the vertex against the world, view, and projection matrices.
     output.position = mul(input.position, worldMatrix);
     output.position = mul(output.position, viewMatrix);
     output.position = mul(output.position, projectionMatrix);
     
-	// 픽셀 쉐이더의 텍스처 좌표를 저장한다.
-    output.tex = input.tex;
+	// Store the texture coordinates for the pixel shader.
+	output.tex = input.tex;
     
     return output;
 }
