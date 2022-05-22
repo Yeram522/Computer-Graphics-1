@@ -95,7 +95,7 @@ private:
 	int m_vertexCount, m_instanceCount, m_textureCount, m_normalCount, m_faceCount;
 	TextureClass* m_Texture;
 
-
+	InstanceType* instances;//instance position
 	ModelType* m_model;
 	
 

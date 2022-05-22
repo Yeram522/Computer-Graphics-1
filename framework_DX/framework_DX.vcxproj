@@ -26,6 +26,7 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="data\Asteroid.dds" />
+    <Image Include="data\icecream.dds" />
     <Image Include="data\seafloor.dds" />
     <Image Include="data\UFO_color.dds" />
   </ItemGroup>

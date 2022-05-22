@@ -188,7 +188,7 @@ bool GraphicsClass::Render(float rotation)
 
 	// Rotate the world matrix by the rotation value so that the triangle will spin.
 	m_Model[0]->cbuffer.worldMatrix =  worldMatrix;
-	m_Model[1]->cbuffer.worldMatrix = XMMatrixTranslation(0.0f, 0.0f, 0.0f) * worldMatrix;
+	//m_Model[1]->cbuffer.worldMatrix = XMMatrixTranslation(0.0f, 0.0f, 0.0f) * worldMatrix;
 	//m_Model[2]->cbuffer.worldMatrix = XMMatrixScaling(2.0f, 2.0f, 2.0f) * XMMatrixTranslation(-4.0f, -5.0f, -5.0f) * worldMatrix;
 	
 	// Put the model vertex and index buffers on the graphics pipeline to prepare them for drawing.

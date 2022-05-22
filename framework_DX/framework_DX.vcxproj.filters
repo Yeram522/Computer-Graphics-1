@@ -38,6 +38,9 @@
     <Image Include="data\Asteroid.dds">
       <Filter>리소스 파일</Filter>
     </Image>
+    <Image Include="data\icecream.dds">
+      <Filter>리소스 파일</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="textureclass.h">

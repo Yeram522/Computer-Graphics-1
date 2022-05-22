@@ -15,6 +15,15 @@ ModelClass::ModelClass(ID3D11Device* device,const WCHAR* modelFilename, const WC
 	m_normalCount = 0;
 	m_faceCount = 0;
 
+	// 인스턴스 수를 설정한다.
+	m_instanceCount = 2;
+
+	//인스턴스 배열을 생성한다.
+	instances = new InstanceType[m_instanceCount];
+
+	
+	instances[0].position = XMFLOAT3(2.0f, 0.0f, 0.0f);
+	instances[1].position = XMFLOAT3(0.0f, 0.0f, 0.0f);
 
 	Initialize(device, modelFilename, textureFilename);
 }
@@ -103,7 +112,7 @@ ID3D11ShaderResourceView* ModelClass::GetTexture()
 bool ModelClass::InitializeBuffers(ID3D11Device* device)
 {
 	VertexType* vertices;
-	InstanceType* instances;//instance position
+	
 	unsigned long* indices;
 	D3D11_BUFFER_DESC vertexBufferDesc, instanceBufferDesc;
     D3D11_SUBRESOURCE_DATA vertexData, instanceData;
@@ -158,19 +167,7 @@ bool ModelClass::InitializeBuffers(ID3D11Device* device)
 	vertices = 0;
 
 
-	// 인스턴스 수를 설정한다.
-	m_instanceCount = 2;
 
-	//인스턴스 배열을 생성한다.
-	instances = new InstanceType[m_instanceCount];
-
-	if (!instances)
-	{
-		return false;
-	}
-
-	instances[0].position = XMFLOAT3(2.0f, 0.0f, 0.0f);
-	instances[1].position = XMFLOAT3(0.0f, 0.0f, 0.0f);
 
 	// Set up the description of the static instance buffer.
     instanceBufferDesc.Usage = D3D11_USAGE_DEFAULT;
