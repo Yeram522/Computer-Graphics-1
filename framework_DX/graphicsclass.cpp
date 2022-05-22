@@ -60,13 +60,15 @@ bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hwnd)
 	}
 
 	// Set the initial position of the camera.
-	m_Camera->SetPosition(0.0f, 0.0f, -15.0f);	// for cube model
+	m_Camera->SetRotation(10.0f, 0.0f, 0.0f);	// for cube model
+	m_Camera->SetPosition(0.0f, 1.0f, -5.0f);	// for cube model
 
 	// Create the model object.
 	// Initialize the model object.
+
 	m_Model.push_back(new ModelClass(m_D3D->GetDevice(), L"./data/icecream.obj", L"./data/icecream.dds"));
-	m_Model.push_back(new ModelClass(m_D3D->GetDevice(), L"./data/grass.obj", L"./data/grass.dds"));
-	m_Model.push_back(new ModelClass(m_D3D->GetDevice(), L"./data/AmongUs_Red.obj", L"./data/AmongUs_Purple.dds"));
+	//m_Model.push_back(new ModelClass(m_D3D->GetDevice(), L"./data/plane.obj", L"./data/grass.dds"));
+	//m_Model.push_back(new ModelClass(m_D3D->GetDevice(), L"./data/AmongUs_Red.obj", L"./data/AmongUs_Purple.dds"));
 
 
 	if(!result)
@@ -171,7 +173,6 @@ bool GraphicsClass::Render(float rotation)
 	m_D3D->BeginScene(0.0f, 0.0f, 0.0f, 1.0f);
 
 	// Generate the view matrix based on the camera's position.
-	m_Camera->SetRotation(28.0f, 0.0f, 0.0f);
 	m_Camera->Render();
 
 	// Get the world, view, and projection matrices from the camera and d3d objects.
@@ -186,9 +187,9 @@ bool GraphicsClass::Render(float rotation)
 	}
 
 	// Rotate the world matrix by the rotation value so that the triangle will spin.
-	m_Model[0]->cbuffer.worldMatrix = XMMatrixScaling(0.8f, 0.8f, 0.8f) * XMMatrixRotationY(rotation) * XMMatrixTranslation(0.0f, -5.0f, -5.0f) * worldMatrix;
-	m_Model[1]->cbuffer.worldMatrix = XMMatrixScaling(0.05f, 0.05f, 0.05f)*XMMatrixTranslation(0.0f, -10.0f, 0.0f) * worldMatrix;
-	m_Model[2]->cbuffer.worldMatrix = XMMatrixScaling(2.0f, 2.0f, 2.0f) * XMMatrixRotationY(rotation) * XMMatrixTranslation(-4.0f, -5.0f, -5.0f) * worldMatrix;
+	m_Model[0]->cbuffer.worldMatrix =  worldMatrix;
+	m_Model[1]->cbuffer.worldMatrix = XMMatrixTranslation(0.0f, 0.0f, 0.0f) * worldMatrix;
+	//m_Model[2]->cbuffer.worldMatrix = XMMatrixScaling(2.0f, 2.0f, 2.0f) * XMMatrixTranslation(-4.0f, -5.0f, -5.0f) * worldMatrix;
 	
 	// Put the model vertex and index buffers on the graphics pipeline to prepare them for drawing.
 	for (auto& model : m_Model)
@@ -196,8 +197,8 @@ bool GraphicsClass::Render(float rotation)
 		model->Render(m_D3D->GetDeviceContext());
 
 		// Render the model using the texture shader.
-		result = m_TextureShader->Render(m_D3D->GetDeviceContext(), model->GetIndexCount(),
-			model->cbuffer.worldMatrix, model->cbuffer.viewMatrix, model->cbuffer.projectionMatrix, model->GetTexture());
+		result = m_TextureShader->Render(m_D3D->GetDeviceContext(), model->GetVertexCount(), model->GetInstanceCount(),
+			model->cbuffer.worldMatrix, viewMatrix,projectionMatrix, model->GetTexture());
 
 		if (!result)
 		{

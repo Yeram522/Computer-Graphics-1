@@ -19,6 +19,7 @@ using namespace DirectX;
 #include "textureclass.h"
 
 #include <fstream>
+
 using namespace std;
 
 struct CBUFFER
@@ -67,7 +68,9 @@ public:
 	void Shutdown();
 	void Render(ID3D11DeviceContext*);
 
-	int GetIndexCount();
+	//Instancing
+	int GetInstanceCount();
+	int GetVertexCount();
 	ID3D11ShaderResourceView* GetTexture();
 
 	bool LoadModel(const WCHAR*);
@@ -77,6 +80,8 @@ public:
 	bool LoadDataStructures(const WCHAR*, int, int, int, int);
 
 	CBUFFER cbuffer;
+
+
 private:
 	bool InitializeBuffers(ID3D11Device*);
 	void ShutdownBuffers();
@@ -86,9 +91,10 @@ private:
 	void ReleaseTexture();
 
 private:
-	ID3D11Buffer *m_vertexBuffer, *m_indexBuffer;
-	int m_vertexCount, m_indexCount, m_textureCount, m_normalCount, m_faceCount;
+	ID3D11Buffer *m_vertexBuffer, *m_instanceBuffer;
+	int m_vertexCount, m_instanceCount, m_textureCount, m_normalCount, m_faceCount;
 	TextureClass* m_Texture;
+
 
 	ModelType* m_model;
 	
