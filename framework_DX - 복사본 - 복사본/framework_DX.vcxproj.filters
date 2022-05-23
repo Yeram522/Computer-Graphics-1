@@ -39,19 +39,13 @@
     <ClInclude Include="systemclass.h">
       <Filter>소스 파일</Filter>
     </ClInclude>
-    <ClInclude Include="textureclass.h">
-      <Filter>소스 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="textureshaderclass.h">
-      <Filter>소스 파일</Filter>
-    </ClInclude>
     <ClInclude Include="AlignedAllocationPolicy.h">
       <Filter>소스 파일</Filter>
     </ClInclude>
     <ClInclude Include="cameraclass.h">
       <Filter>소스 파일</Filter>
     </ClInclude>
-    <ClInclude Include="colorshaderclass.h">
+    <ClInclude Include="textureclass.h">
       <Filter>소스 파일</Filter>
     </ClInclude>
   </ItemGroup>
@@ -80,19 +74,13 @@
     <ClCompile Include="systemclass.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="textureclass.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="textureshaderclass.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="cameraclass.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="colorshaderclass.cpp">
+    <ClCompile Include="d3dclass.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="d3dclass.cpp">
+    <ClCompile Include="textureclass.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

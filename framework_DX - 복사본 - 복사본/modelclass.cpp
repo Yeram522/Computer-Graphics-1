@@ -7,7 +7,7 @@
 ModelClass::ModelClass()
 {
 	m_vertexBuffer = 0;
-	m_indexBuffer = 0;
+	m_instanceBuffer = 0;
 	m_Texture = 0;
 	m_model = 0;
 
@@ -79,10 +79,14 @@ void ModelClass::Render(ID3D11DeviceContext* deviceContext)
 	return;
 }
 
-
-int ModelClass::GetIndexCount()
+int ModelClass::GetVertexCount()
 {
-	return m_indexCount;
+	return m_vertexCount;
+}
+
+int ModelClass::GetInstanceCount()
+{
+	return m_instanceCount;
 }
 
 
@@ -95,9 +99,10 @@ ID3D11ShaderResourceView* ModelClass::GetTexture()
 bool ModelClass::InitializeBuffers(ID3D11Device* device)
 {
 	VertexType* vertices;
+	InstanceType* instances;
 	unsigned long* indices;
-	D3D11_BUFFER_DESC vertexBufferDesc, indexBufferDesc;
-    D3D11_SUBRESOURCE_DATA vertexData, indexData;
+	D3D11_BUFFER_DESC vertexBufferDesc, instanceBufferDesc;
+	D3D11_SUBRESOURCE_DATA vertexData, instanceData;
 	HRESULT result;
 	int i;
 
@@ -109,7 +114,7 @@ bool ModelClass::InitializeBuffers(ID3D11Device* device)
 	}
 
 	// Create the index array.
-	indices = new unsigned long[m_indexCount];
+	indices = new unsigned long[m_instanceCount];
 	if(!indices)
 	{
 		return false;
@@ -145,31 +150,52 @@ bool ModelClass::InitializeBuffers(ID3D11Device* device)
 		return false;
 	}
 
-	// Set up the description of the static index buffer.
-    indexBufferDesc.Usage = D3D11_USAGE_DEFAULT;
-    indexBufferDesc.ByteWidth = sizeof(unsigned long) * m_indexCount;
-    indexBufferDesc.BindFlags = D3D11_BIND_INDEX_BUFFER;
-    indexBufferDesc.CPUAccessFlags = 0;
-    indexBufferDesc.MiscFlags = 0;
-	indexBufferDesc.StructureByteStride = 0;
+	// Release the arrays now that the vertex and index buffers have been created and loaded.
+	delete[] vertices;
+	vertices = 0;
 
-	// Give the subresource structure a pointer to the index data.
-    indexData.pSysMem = indices;
-	indexData.SysMemPitch = 0;
-	indexData.SysMemSlicePitch = 0;
+	// 인스턴스 수를 설정한다.
+	m_instanceCount = 2;
 
-	// Create the index buffer.
-	result = device->CreateBuffer(&indexBufferDesc, &indexData, &m_indexBuffer);
-	if(FAILED(result))
+	//인스턴스 배열을 생성한다.
+	instances = new InstanceType[m_instanceCount];
+
+	if (!instances)
 	{
 		return false;
 	}
 
-	// Release the arrays now that the vertex and index buffers have been created and loaded.
-	delete [] vertices;
-	vertices = 0;
+	instances[0].position = XMFLOAT3(2.0f, 0.0f, 0.0f);
+	instances[1].position = XMFLOAT3(0.0f, 0.0f, 0.0f);
 
-	delete [] indices;
+	// Set up the description of the static instance buffer.
+	instanceBufferDesc.Usage = D3D11_USAGE_DEFAULT;
+	instanceBufferDesc.ByteWidth = sizeof(InstanceType) * m_instanceCount;
+	instanceBufferDesc.BindFlags = D3D11_BIND_VERTEX_BUFFER;
+	instanceBufferDesc.CPUAccessFlags = 0;
+	instanceBufferDesc.MiscFlags = 0;
+	instanceBufferDesc.StructureByteStride = 0;
+
+	// Give the subresource structure a pointer to the index data.
+	instanceData.pSysMem = instances;
+	instanceData.SysMemPitch = 0;
+	instanceData.SysMemSlicePitch = 0;
+
+	// Create the index buffer.
+	result = device->CreateBuffer(&instanceBufferDesc, &instanceData, &m_instanceBuffer);
+	if (FAILED(result))
+	{
+		return false;
+	}
+
+
+	// Release the arrays now that the vertex and index buffers have been created and loaded.
+	delete[] instances;
+	instances = 0;
+
+
+
+	delete[] indices;
 	indices = 0;
 
 	return true;
@@ -179,10 +205,10 @@ bool ModelClass::InitializeBuffers(ID3D11Device* device)
 void ModelClass::ShutdownBuffers()
 {
 	// Release the index buffer.
-	if(m_indexBuffer)
+	if(m_instanceBuffer)
 	{
-		m_indexBuffer->Release();
-		m_indexBuffer = 0;
+		m_instanceBuffer->Release();
+		m_instanceBuffer = 0;
 	}
 
 	// Release the vertex buffer.
@@ -198,21 +224,30 @@ void ModelClass::ShutdownBuffers()
 
 void ModelClass::RenderBuffers(ID3D11DeviceContext* deviceContext)
 {
-	unsigned int stride;
-	unsigned int offset;
+	//인스턴스 버퍼는 단지 다른 정보를 담고 있는 두 번째 정점 버퍼이기 때문에 정점버퍼가 세팅되는 
+	//시점에 같이 세팅된다.
+	//따라서 배열로 만들어보낸다.
+	unsigned int strides[2];
+	unsigned int offsets[2];
+	ID3D11Buffer* bufferPointers[2];
 
 
 	// Set vertex buffer stride and offset.
-	stride = sizeof(VertexType); 
-	offset = 0;
-    
+	strides[0] = sizeof(VertexType);
+	strides[1] = sizeof(InstanceType);
+
+	offsets[0] = 0;
+	offsets[1] = 0;
+
+	//정점 버퍼와 인스턴스 버퍼의 포인터를 담고 있는 배열을 하나 만든다.
+	bufferPointers[0] = m_vertexBuffer;
+	bufferPointers[1] = m_instanceBuffer;
+
 	// Set the vertex buffer to active in the input assembler so it can be rendered.
-	deviceContext->IASetVertexBuffers(0, 1, &m_vertexBuffer, &stride, &offset);
+	deviceContext->IASetVertexBuffers(0, 2, bufferPointers, strides, offsets);
 
-    // Set the index buffer to active in the input assembler so it can be rendered.
-	deviceContext->IASetIndexBuffer(m_indexBuffer, DXGI_FORMAT_R32_UINT, 0);
 
-    // Set the type of primitive that should be rendered from this vertex buffer, in this case triangles.
+	// Set the type of primitive that should be rendered from this vertex buffer, in this case triangles.
 	deviceContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
 	return;
@@ -459,7 +494,7 @@ bool ModelClass::LoadDataStructures(const WCHAR* filename, int vertexCount, int 
 	m_vertexCount = faceCount * 3;
 
 	// Set the number of indices to be the same as the vertex count.
-	m_indexCount = m_vertexCount;
+	m_instanceCount = m_vertexCount;
 
 	// Create the model using the vertex count that was read in.
 	m_model = new ModelType[m_vertexCount];

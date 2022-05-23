@@ -49,7 +49,7 @@ void ColorShaderClass::Shutdown()
 
 // This first sets the parameters inside the shader, and then draws the triangle 
 // using the HLSL shader.
-bool ColorShaderClass::Render(ID3D11DeviceContext* deviceContext, int indexCount, 
+bool ColorShaderClass::Render(ID3D11DeviceContext* deviceContext, int vertexCount, int instanceCount,
 	XMMATRIX worldMatrix, XMMATRIX viewMatrix, XMMATRIX projectionMatrix)
 {
 	bool result;
@@ -63,7 +63,7 @@ bool ColorShaderClass::Render(ID3D11DeviceContext* deviceContext, int indexCount
 	}
 
 	// Now render the prepared buffers with the shader.
-	RenderShader(deviceContext, indexCount);
+	RenderShader(deviceContext, vertexCount, instanceCount);
 
 	return true;
 }
@@ -319,7 +319,7 @@ bool ColorShaderClass::SetShaderParameters(ID3D11DeviceContext* deviceContext,
 // the format of the data in the vertex buffer. 
 // Second, this sets the vertex and pixel shaders to render the vertex buffer by calling the 
 // DrawIndexed DirectX 11 function using the D3D device context.
-void ColorShaderClass::RenderShader(ID3D11DeviceContext* deviceContext, int indexCount)
+void ColorShaderClass::RenderShader(ID3D11DeviceContext* deviceContext, int vertexCount, int instanceCount)
 {
 	// Set the vertex input layout.
 	deviceContext->IASetInputLayout(m_layout);
@@ -328,8 +328,9 @@ void ColorShaderClass::RenderShader(ID3D11DeviceContext* deviceContext, int inde
     deviceContext->VSSetShader(m_vertexShader, NULL, 0);
     deviceContext->PSSetShader(m_pixelShader, NULL, 0);
 
+
 	// Render the triangle.
-	deviceContext->DrawIndexed(indexCount, 0, 0);
+	deviceContext->DrawInstanced(vertexCount, instanceCount, 0, 0);
 
 	return;
 }

@@ -34,6 +34,11 @@ private:
 		XMFLOAT3 normal;
 	};
 
+	struct InstanceType //1. 구조체 안에 위치 말고도 색상, 크기, 회전등 바꿀 수 있다!
+	{
+		XMFLOAT3 position;
+	};
+
 	struct FaceType
 	{
 		int vIndex1, vIndex2, vIndex3;
@@ -57,7 +62,8 @@ public:
 	void Shutdown();
 	void Render(ID3D11DeviceContext*);
 
-	int GetIndexCount();
+	int GetVertexCount();
+	int GetInstanceCount();
 	ID3D11ShaderResourceView* GetTexture();
 
 	bool LoadModel(const WCHAR*);
@@ -76,8 +82,8 @@ private:
 	bool LoadDataStructures(const WCHAR*, int, int, int, int);
 
 private:
-	ID3D11Buffer *m_vertexBuffer, *m_indexBuffer;
-	int m_vertexCount, m_indexCount, m_textureCount, m_normalCount, m_faceCount;
+	ID3D11Buffer *m_vertexBuffer, *m_instanceBuffer;
+	int m_vertexCount, m_instanceCount, m_textureCount, m_normalCount, m_faceCount;
 	TextureClass* m_Texture;
 
 	ModelType* m_model;
