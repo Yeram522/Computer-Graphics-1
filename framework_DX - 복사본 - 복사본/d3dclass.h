@@ -19,7 +19,7 @@
 #include <d3dcommon.h>
 #include <d3d11.h>
 #include <directxmath.h>
-
+#include <vector>
 #include "AlignedAllocationPolicy.h"
 
 using namespace DirectX;

@@ -44,7 +44,7 @@ private:
 private:
 	D3DClass* m_D3D;
 	CameraClass* m_Camera;
-	ModelClass* m_Model;
+	vector<ModelClass*> m_Model; //¸ðµ¨Å¬·¡½º
 
 	LightShaderClass* m_LightShader;
 	LightClass* m_Light;

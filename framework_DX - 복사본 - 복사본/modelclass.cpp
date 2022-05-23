@@ -4,7 +4,7 @@
 #include "modelclass.h"
 
 
-ModelClass::ModelClass()
+ModelClass::ModelClass(ID3D11Device* device, const WCHAR* modelFilename, const WCHAR* textureFilename)
 {
 	m_vertexBuffer = 0;
 	m_instanceBuffer = 0;
@@ -14,6 +14,8 @@ ModelClass::ModelClass()
 	m_textureCount = 0;
 	m_normalCount = 0;
 	m_faceCount = 0;
+
+	Initialize(device, modelFilename, textureFilename);
 }
 
 

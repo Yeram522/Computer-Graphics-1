@@ -8,7 +8,10 @@ GraphicsClass::GraphicsClass()
 {
 	m_D3D = 0;
 	m_Camera = 0;
-	m_Model = 0;
+	for (auto& model : m_Model)
+	{
+		model = 0;
+	}
 	m_LightShader = 0;
 	m_Light = 0;
 }
@@ -56,15 +59,8 @@ bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hwnd)
 //	m_Camera->SetPosition(0.0f, 0.5f, -3.0f);	// for chair
 		
 	// Create the model object.
-	m_Model = new ModelClass;
-	if(!m_Model)
-	{
-		return false;
-	}
-
 	// Initialize the model object.
-	result = m_Model->Initialize(m_D3D->GetDevice(), L"./data/icecream.obj", L"./data/icecream.dds");
-//	result = m_Model->Initialize(m_D3D->GetDevice(), L"./data/chair.obj", L"./data/chair_d.dds");
+	m_Model.push_back(new ModelClass(m_D3D->GetDevice(), L"./data/icecream.obj", L"./data/icecream.dds"));
 	if(!result)
 	{
 		MessageBox(hwnd, L"Could not initialize the model object.", L"Error", MB_OK);
@@ -111,11 +107,14 @@ bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hwnd)
 void GraphicsClass::Shutdown()
 {
 	// Release the model object.
-	if(m_Model)
+	for (auto& model : m_Model)
 	{
-		m_Model->Shutdown();
-		delete m_Model;
-		m_Model = 0;
+		if (model)
+		{
+			model->Shutdown();
+			delete model;
+			model = 0;
+		}
 	}
 
 	// Release the camera object.
@@ -195,18 +194,19 @@ bool GraphicsClass::Render(float rotation)
 	worldMatrix = XMMatrixRotationY(rotation);
 
 	// Put the model vertex and index buffers on the graphics pipeline to prepare them for drawing.
-	m_Model->Render(m_D3D->GetDeviceContext());
-
-	// Render the model using the light shader.
-	result = m_LightShader->Render(m_D3D->GetDeviceContext(), m_Model->GetVertexCount(), m_Model->GetInstanceCount(),
-		worldMatrix, viewMatrix, projectionMatrix,
-		m_Model->GetTexture(), 
-		m_Light->GetDirection(), m_Light->GetAmbientColor(), m_Light->GetDiffuseColor(),
-		m_Camera->GetPosition(), m_Light->GetSpecularColor(), m_Light->GetSpecularPower());//라이팅 type 변수값주는거: lighttype
-	
-	if(!result)
+	for (auto& model : m_Model)
 	{
-		return false;
+		model->Render(m_D3D->GetDeviceContext());
+
+		// Render the model using the texture shader.
+		result = m_LightShader->Render(m_D3D->GetDeviceContext(), model->GetVertexCount(), model->GetInstanceCount(),
+			worldMatrix, viewMatrix, projectionMatrix, model->GetTexture(),m_Light->GetDirection(), m_Light->GetAmbientColor(), m_Light->GetDiffuseColor(),
+			m_Camera->GetPosition(), m_Light->GetSpecularColor(), m_Light->GetSpecularPower());
+
+		if (!result)
+		{
+			return false;
+		}
 	}
 
 	// Present the rendered scene to the screen.

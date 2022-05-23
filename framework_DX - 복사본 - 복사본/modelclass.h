@@ -54,7 +54,7 @@ private:
 	};
 
 public:
-	ModelClass();
+	ModelClass(ID3D11Device* device, const WCHAR* modelFilename, const WCHAR* textureFilename);
 	ModelClass(const ModelClass&);
 	~ModelClass();
 
