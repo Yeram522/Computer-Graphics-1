@@ -426,8 +426,14 @@ bool LightShaderClass::SetShaderParameters(ID3D11DeviceContext* deviceContext,
 	dataPtr2->lightDirection = lightDirection;
 	dataPtr2->specularColor = specularColor;
 	dataPtr2->specularPower = specularPower;
+
+	// specular
 	//dataPtr2->type = XMFLOAT4(1.0f,0.0f,0.0f,0.0f);
+	
+	//ambidient
 	//dataPtr2->type = XMFLOAT4(0.0f,1.0f,0.0f,0.0f);
+	
+	//diffuse?
 	dataPtr2->type = XMFLOAT4(0.0f,0.0f,1.0f,0.0f);
 
 	// Unlock the constant buffer.

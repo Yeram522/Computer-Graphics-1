@@ -10,7 +10,7 @@
 //////////////
 #include <d3d11.h>
 #include <directxmath.h>
-
+#include <vector>
 using namespace DirectX;
 
 ///////////////////////
@@ -54,7 +54,7 @@ private:
 	};
 
 public:
-	ModelClass(ID3D11Device* device, const WCHAR* modelFilename, const WCHAR* textureFilename);
+	ModelClass(vector<XMFLOAT3> instancepos,ID3D11Device* device, const WCHAR* modelFilename, const WCHAR* textureFilename);
 	ModelClass(const ModelClass&);
 	~ModelClass();
 
@@ -85,7 +85,7 @@ private:
 	ID3D11Buffer *m_vertexBuffer, *m_instanceBuffer;
 	int m_vertexCount, m_instanceCount, m_textureCount, m_normalCount, m_faceCount;
 	TextureClass* m_Texture;
-
+	vector<XMFLOAT3> m_instancepos;
 	ModelType* m_model;
 };
 

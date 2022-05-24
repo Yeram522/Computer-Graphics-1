@@ -60,7 +60,7 @@ bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hwnd)
 		
 	// Create the model object.
 	// Initialize the model object.
-	m_Model.push_back(new ModelClass(m_D3D->GetDevice(), L"./data/icecream.obj", L"./data/icecream.dds"));
+	m_Model.push_back(new ModelClass({XMFLOAT3(0.0f, 0.0f, 0.0f) },m_D3D->GetDevice(), L"./data/cube.obj", L"./data/seafloor.dds"));
 	if(!result)
 	{
 		MessageBox(hwnd, L"Could not initialize the model object.", L"Error", MB_OK);
