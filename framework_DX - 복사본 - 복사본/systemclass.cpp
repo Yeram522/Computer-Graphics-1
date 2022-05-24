@@ -137,6 +137,18 @@ bool SystemClass::Frame()
 	{
 		return false;
 	}
+	if (m_Input->IsKeyDown(0x36))
+	{
+		m_Graphics->ChangeLightShaderMode(1);
+	}
+	if (m_Input->IsKeyDown(0x37))
+	{
+		m_Graphics->ChangeLightShaderMode(2);
+	}
+	if (m_Input->IsKeyDown(0x38))
+	{
+		m_Graphics->ChangeLightShaderMode(3);
+	}
 
 	// Do the frame processing for the graphics object.
 	result = m_Graphics->Frame();

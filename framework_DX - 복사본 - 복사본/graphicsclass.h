@@ -38,6 +38,7 @@ public:
 	void Shutdown();
 	bool Frame();
 
+	void ChangeLightShaderMode(int);
 private:
 	bool Render(float);
 

@@ -12,6 +12,8 @@ LightShaderClass::LightShaderClass()
 	m_sampleState = 0;
 	m_matrixBuffer = 0;
 	m_lightBuffer = 0;
+
+	m_lightmode = XMFLOAT4(1.0f, 0.0f, 0.0f, 0.0f);
 }
 
 
@@ -427,6 +429,7 @@ bool LightShaderClass::SetShaderParameters(ID3D11DeviceContext* deviceContext,
 	dataPtr2->specularColor = specularColor;
 	dataPtr2->specularPower = specularPower;
 
+	
 	// specular
 	//dataPtr2->type = XMFLOAT4(1.0f,0.0f,0.0f,0.0f);
 	
@@ -434,7 +437,8 @@ bool LightShaderClass::SetShaderParameters(ID3D11DeviceContext* deviceContext,
 	//dataPtr2->type = XMFLOAT4(0.0f,1.0f,0.0f,0.0f);
 	
 	//diffuse?
-	dataPtr2->type = XMFLOAT4(0.0f,0.0f,1.0f,0.0f);
+	//dataPtr2->type = XMFLOAT4(0.0f,0.0f,1.0f,0.0f);
+	dataPtr2->type = m_lightmode;
 
 	// Unlock the constant buffer.
 	deviceContext->Unmap(m_lightBuffer, 0);

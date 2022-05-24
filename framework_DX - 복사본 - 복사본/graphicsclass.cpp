@@ -96,7 +96,7 @@ bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hwnd)
 //	m_Light->SetDiffuseColor(0.0f, 0.0f, 0.0f, 1.0f);
 //	m_Light->SetDirection(0.0f, 0.0f, 1.0f);
 //	m_Light->SetDirection(1.0f, 0.0f, 0.0f);
-	m_Light->SetDirection(1.0f, 0.0f, 1.0f);
+	m_Light->SetDirection(1.0f, 1.0f, 1.0f);
 	m_Light->SetSpecularColor(1.0f, 1.0f, 1.0f, 1.0f);
 	m_Light->SetSpecularPower(32.0f);
 
@@ -174,13 +174,51 @@ bool GraphicsClass::Frame()
 	return true;
 }
 
+void GraphicsClass::ChangeLightShaderMode(int mode)
+{
+	switch (mode)
+	{
+	case 1:
+		if (m_LightShader->m_lightmode.x == 1.0f)
+		{
+			m_LightShader->m_lightmode.x = 0.0f;
+		}
+		else
+		{
+			m_LightShader->m_lightmode.x = 1.0f;
+		}
+		break;
+	case 2:
+		if (m_LightShader->m_lightmode.y == 1.0f)
+		{
+			m_LightShader->m_lightmode.y = 0.0f;
+		}
+		else
+		{
+			m_LightShader->m_lightmode.y = 1.0f;
+		}
+		break;
+	case 3:
+		if (m_LightShader->m_lightmode.z == 1.0f)
+		{
+			m_LightShader->m_lightmode.z = 0.0f;
+		}
+		else
+		{
+			m_LightShader->m_lightmode.z = 1.0f;
+		}
+		break;
+	default:
+		break;
+	}
+}
 bool GraphicsClass::Render(float rotation)
 {
 	XMMATRIX worldMatrix, viewMatrix, projectionMatrix;
 	bool result;
 	
 	// Clear the buffers to begin the scene.
-	m_D3D->BeginScene(0.0f, 0.0f, 0.0f, 1.0f);
+	m_D3D->BeginScene(1.0f, 1.0f, 1.0f, 1.0f);
 
 	// Generate the view matrix based on the camera's position.
 	m_Camera->Render();
@@ -192,7 +230,6 @@ bool GraphicsClass::Render(float rotation)
 
 	// Rotate the world matrix by the rotation value so that the triangle will spin.
 	worldMatrix = XMMatrixRotationY(rotation);
-
 	// Put the model vertex and index buffers on the graphics pipeline to prepare them for drawing.
 	for (auto& model : m_Model)
 	{
