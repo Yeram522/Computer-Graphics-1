@@ -63,18 +63,24 @@ float4 LightPixelShader(PixelInputType input) : SV_TARGET
 	{
 	   color = ambientColor;	    
 	}
-	if(type.g == 1.0f)
-	{
-	  if(lightIntensity > 0.0f)
-       {
-           // Determine the final diffuse color based on the diffuse color and the amount of light intensity.
-           color += (diffuseColor * lightIntensity);
-       }
+	if(lightIntensity > 0.0f)
+    {
+	    if(type.g == 1.0f)
+    	{
+          // Determine the final diffuse color based on the diffuse color and the amount of light intensity.
+          color += (diffuseColor * lightIntensity);
+        }
+	    // Saturate the ambient and diffuse color.
+		color = saturate(color);
 
-       // Saturate the final light color.
+        // Calculate the reflection vector based on the light intensity, normal vector, and light direction.
+        reflection = normalize(2 * lightIntensity * input.normal - lightDir); 
 
-       color = saturate(color);
-	}
+		// Determine the amount of specular light based on the reflection vector, viewing direction, and specular power.
+        specular = pow(saturate(dot(reflection, input.viewDirection)), specularPower);
+
+
+    }
 
     // Multiply the texture pixel and the final diffuse color to get the final pixel color result.
     
@@ -82,25 +88,7 @@ float4 LightPixelShader(PixelInputType input) : SV_TARGET
 
 	if(type.b==1.0f)
 	{
-	   if(lightIntensity > 0.0f)
-       {
-           // Determine the final diffuse color based on the diffuse color and the amount of light intensity.
-           color += (diffuseColor * lightIntensity);
-
-	       // Saturate the ambient and diffuse color.
-		   color = saturate(color);
-
-		   // Calculate the reflection vector based on the light intensity, normal vector, and light direction.
-           reflection = normalize(2 * lightIntensity * input.normal - lightDir); 
-
-		   // Determine the amount of specular light based on the reflection vector, viewing direction, and specular power.
-           specular = pow(saturate(dot(reflection, input.viewDirection)), specularPower);
-       }
-
-	  // color = color * textureColor;
-	   // Add the specular component last to the output color.
-       color = saturate(color + specular);
-
+	     color = saturate(color + specular);
 	}
 	
 	return color;

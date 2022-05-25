@@ -14,6 +14,11 @@ GraphicsClass::GraphicsClass()
 	}
 	m_LightShader = 0;
 	m_Light = 0;
+
+
+	m_Eye = XMVectorSet(0.0f, 5.0f, -30.0f, 1.0f);
+	m_At = XMVectorSet(0.0f, 0.0f, 0.0f, 1.0f);
+	m_Up = XMVectorSet(0.0f, 1.0f, 0.0f, 1.0f);
 }
 
 
@@ -30,8 +35,8 @@ GraphicsClass::~GraphicsClass()
 bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hwnd)
 {
 	bool result;
-
-
+	m_screenWidth = screenWidth;
+	m_screenHeight = screenHeight;
 	// Create the Direct3D object.
 	m_D3D = new D3DClass;
 	if(!m_D3D)
@@ -153,8 +158,8 @@ void GraphicsClass::Shutdown()
 bool GraphicsClass::Frame()
 {
 	bool result;
-
-	static float rotation = 0.0f;
+	bool isClip = true;
+	static float rotation = 0.1f;
 
 
 	// Update the rotation variable each frame.
@@ -164,13 +169,110 @@ bool GraphicsClass::Frame()
 		rotation -= 360.0f;
 	}
 
+	DWORD dwCurTime = GetTickCount();
+	static DWORD dwOldTime = GetTickCount();
+	DWORD m_dwElapsedTime = dwCurTime - dwOldTime;
+	dwOldTime = dwCurTime;
+
+	float rotSpeed = 0.08f;
+	float moveSpeed = 0.02f;
+
+	if (GetAsyncKeyState(0x57))
+	{
+		XMVECTOR Direction;
+		Direction = XMVector3Normalize(m_At - m_Eye);
+		m_Eye += m_dwElapsedTime * Direction * moveSpeed;
+		m_At += m_dwElapsedTime * Direction * moveSpeed;
+	}
+
+	if (GetAsyncKeyState(0x53))
+	{
+		XMVECTOR Direction;
+		Direction = XMVector3Normalize(m_At - m_Eye);
+		m_Eye -= m_dwElapsedTime * Direction * moveSpeed;
+		m_At -= m_dwElapsedTime * Direction * moveSpeed;
+	}
+
+	if (GetAsyncKeyState(0x41))
+	{
+		XMVECTOR UpNormal, ForwardNormal, Direction;
+		UpNormal = XMVector3Normalize(m_Up);
+		ForwardNormal = XMVector3Normalize(m_At - m_Eye);
+		Direction = XMVector3Cross(ForwardNormal, UpNormal);
+		Direction = XMVector3Normalize(Direction);
+		m_Eye += m_dwElapsedTime * Direction * moveSpeed;
+		m_At += m_dwElapsedTime * Direction * moveSpeed;
+	}
+
+	if (GetAsyncKeyState(0x44))
+	{
+		XMVECTOR UpNormal, ForwardNormal, Direction;
+		UpNormal = XMVector3Normalize(m_Up);
+		ForwardNormal = XMVector3Normalize(m_At - m_Eye);
+		Direction = XMVector3Cross(ForwardNormal, UpNormal);
+		Direction = XMVector3Normalize(Direction);
+		m_Eye -= m_dwElapsedTime * Direction * moveSpeed;
+		m_At -= m_dwElapsedTime * Direction * moveSpeed;
+	}
+
+	POINT curPt;
+	GetCursorPos(&curPt);
+	DWORD _CurTime = GetTickCount();
+	static DWORD _OldTime = GetTickCount();
+	if (_CurTime - _OldTime > 500.f)
+	{
+		if (GetAsyncKeyState(VK_ESCAPE))
+		{
+			if (isClip)
+				isClip = false;
+			else
+				isClip = true;
+			_OldTime = _CurTime;
+		}
+	}
+	if (isClip) {
+		SetCursorPos(m_screenWidth / 2, m_screenHeight / 2);
+		if (curPt.y < m_screenHeight / 2)
+		{
+			XMVECTOR UpNormal;
+			UpNormal = XMVector3Normalize(m_Up);
+			m_At += m_dwElapsedTime * UpNormal * rotSpeed;
+		}
+
+		if (curPt.y > m_screenHeight / 2)
+		{
+			XMVECTOR UpNormal;
+			UpNormal = XMVector3Normalize(m_Up);
+			m_At -= m_dwElapsedTime * UpNormal * rotSpeed;
+		}
+
+		if (curPt.x < m_screenWidth / 2)
+		{
+			XMVECTOR UpNormal, ForwardNormal, Left;
+			UpNormal = XMVector3Normalize(m_Up);
+			ForwardNormal = XMVector3Normalize(m_At - m_Eye);
+			Left = XMVector3Cross(ForwardNormal, UpNormal);
+			Left = XMVector3Normalize(Left);
+			m_At += m_dwElapsedTime * Left * rotSpeed;
+		}
+
+		if (curPt.x > m_screenWidth / 2)
+		{
+			XMVECTOR UpNormal, ForwardNormal, Right;
+			UpNormal = XMVector3Normalize(m_Up);
+			ForwardNormal = XMVector3Normalize(m_At - m_Eye);
+			Right = XMVector3Cross(ForwardNormal, UpNormal);
+			Right = XMVector3Normalize(Right);
+			m_At -= m_dwElapsedTime * Right * rotSpeed;
+		}
+	}
+
 	// Render the graphics scene.
 	result = Render(rotation);
-	if(!result)
+	if (!result)
 	{
 		return false;
 	}
-
 	return true;
 }
 
@@ -228,6 +330,7 @@ bool GraphicsClass::Render(float rotation)
 	m_D3D->GetWorldMatrix(worldMatrix);
 	m_D3D->GetProjectionMatrix(projectionMatrix);
 
+	viewMatrix *= XMMatrixTranslation(0.0f, 0.0f, 10.0f) * XMMatrixLookAtLH(m_Eye, m_At, m_Up);
 	// Rotate the world matrix by the rotation value so that the triangle will spin.
 	worldMatrix = XMMatrixRotationY(rotation);
 	// Put the model vertex and index buffers on the graphics pipeline to prepare them for drawing.

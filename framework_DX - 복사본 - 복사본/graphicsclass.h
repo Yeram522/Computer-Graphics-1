@@ -14,6 +14,7 @@
 #include "lightshaderclass.h"
 #include "lightclass.h"
 
+using namespace DirectX;
 
 /////////////
 // GLOBALS //
@@ -49,6 +50,12 @@ private:
 
 	LightShaderClass* m_LightShader;
 	LightClass* m_Light;
+
+	XMVECTOR   m_Eye;           
+	XMVECTOR   m_At;                
+	XMVECTOR   m_Up;
+
+	int m_screenWidth, m_screenHeight;
 };
 
 #endif

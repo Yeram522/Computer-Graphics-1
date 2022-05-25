@@ -87,6 +87,7 @@ void CameraClass::Render()
 	// Finally create the view matrix from the three updated vectors.
 	m_viewMatrix = XMMatrixLookAtLH(position, lookAt, up);
 
+
 	return;
 }
 
