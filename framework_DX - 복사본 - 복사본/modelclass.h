@@ -71,7 +71,7 @@ public:
 	bool LoadModel(const WCHAR*);
 	void ReleaseModel();
 
-
+	vector<InstanceType> m_instancedes; //private으로 바꾸기
 private:
 	bool InitializeBuffers(ID3D11Device*);
 	void ShutdownBuffers();
@@ -87,7 +87,7 @@ private:
 	ID3D11Buffer *m_vertexBuffer, *m_instanceBuffer;
 	int m_vertexCount, m_instanceCount, m_textureCount, m_normalCount, m_faceCount;
 	TextureClass* m_Texture;
-	vector<InstanceType> m_instancedes;
+	
 	ModelType* m_model;
 };
 

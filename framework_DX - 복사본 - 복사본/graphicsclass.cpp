@@ -66,17 +66,20 @@ bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hwnd)
 	// Create the model object.
 	// Initialize the model object.
 
-	struct InstanceType //1. 구조체 안에 위치 말고도 색상, 크기, 회전등 바꿀 수 있다!
-	{
-		XMFLOAT3 position;
-		XMFLOAT3 rotation;
-		XMFLOAT3 scale;
-	};
 
 	//{XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(1.0f, 1.0f, 1.0f)},
 	//{ XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(1.0f, 1.0f, 1.0f) };
 	m_Model.push_back(new ModelClass({ {XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(1.0f, 1.0f, 1.0f)},
-	{ XMFLOAT3(0.0f, -5.0f, 0.0f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(1.0f, 1.0f, 1.0f) } }, m_D3D->GetDevice(), L"./data/cube.obj", L"./data/seafloor.dds"));
+	{ XMFLOAT3(-2.0f, 0.0f, 0.0f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(1.0f, 1.0f, 1.0f) }, 
+		{ XMFLOAT3(-4.0f, 0.0f, 0.0f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(1.0f, 1.0f, 1.0f) } ,
+		{ XMFLOAT3(-6.0f, 0.0f, 0.0f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(1.0f, 1.0f, 1.0f) } ,
+		{ XMFLOAT3(-8.0f, 0.0f, 0.0f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(1.0f, 1.0f, 1.0f) } ,
+		{ XMFLOAT3(2.0f, 0.0f, 0.0f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(1.0f, 1.0f, 1.0f) } ,
+		{ XMFLOAT3(4.0f, 0.0f, 0.0f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(1.0f, 1.0f, 1.0f) } ,
+		{ XMFLOAT3(6.0f, 0.0f, 0.0f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(1.0f, 1.0f, 1.0f) } ,
+		{ XMFLOAT3(7.0f, 0.0f, 0.0f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(1.0f, 1.0f, 1.0f) } ,
+		{ XMFLOAT3(8.0f, 0.0f, 0.0f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(1.0f, 1.0f, 1.0f) } }, m_D3D->GetDevice(), L"./data/cake.obj", L"./data/cake.dds"));
+	m_Model.push_back(new ModelClass({ { XMFLOAT3(0.0f, -0.05f, 0.0f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(50.0f, 50.0f, 50.0f) } }, m_D3D->GetDevice(), L"./data/plane.obj", L"./data/seafloor.dds"));
 	//m_Model.push_back(new ModelClass({XMFLOAT3(0.0f, -1.0f, 0.0f) },m_D3D->GetDevice(), L"./data/plane.obj", L"./data/seafloor.dds"));
 
 	if(!result)
@@ -114,7 +117,7 @@ bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hwnd)
 //	m_Light->SetDiffuseColor(0.0f, 0.0f, 0.0f, 1.0f);
 //	m_Light->SetDirection(0.0f, 0.0f, 1.0f);
 //	m_Light->SetDirection(1.0f, 0.0f, 0.0f);
-	m_Light->SetDirection(1.0f, 1.0f, 1.0f);
+	m_Light->SetDirection(0.5f, -1.0f, 0.5f);
 	m_Light->SetSpecularColor(1.0f, 1.0f, 1.0f, 1.0f);
 	m_Light->SetSpecularPower(32.0f);
 
@@ -345,15 +348,17 @@ bool GraphicsClass::Render(float rotation)
 
 	viewMatrix *= XMMatrixTranslation(0.0f, 0.0f, 10.0f) * XMMatrixLookAtLH(m_Eye, m_At, m_Up);
 	// Rotate the world matrix by the rotation value so that the triangle will spin.
-	
+	//worldMatrix *= XMMatrixScaling(12.0f, 12.0f,12.0f);
 	// Put the model vertex and index buffers on the graphics pipeline to prepare them for drawing.
 	for (auto& model : m_Model)
 	{
+		XMMATRIX t_worldMatrix = worldMatrix;
 		model->Render(m_D3D->GetDeviceContext());
-		
+		t_worldMatrix *=
+			XMMatrixScaling(model->m_instancedes[0].scale.x, model->m_instancedes[0].scale.y, model->m_instancedes[0].scale.z);
 		// Render the model using the texture shader.
 		result = m_LightShader->Render(m_D3D->GetDeviceContext(), model->GetVertexCount(), model->GetInstanceCount(),
-			worldMatrix, viewMatrix, projectionMatrix, model->GetTexture(),m_Light->GetDirection(), m_Light->GetAmbientColor(), m_Light->GetDiffuseColor(),
+			t_worldMatrix, viewMatrix, projectionMatrix, model->GetTexture(),m_Light->GetDirection(), m_Light->GetAmbientColor(), m_Light->GetDiffuseColor(),
 			m_Camera->GetPosition(), m_Light->GetSpecularColor(), m_Light->GetSpecularPower());
 
 		if (!result)
