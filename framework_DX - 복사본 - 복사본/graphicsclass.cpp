@@ -65,7 +65,20 @@ bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hwnd)
 		
 	// Create the model object.
 	// Initialize the model object.
-	m_Model.push_back(new ModelClass({XMFLOAT3(0.0f, 0.0f, 0.0f) },m_D3D->GetDevice(), L"./data/cube.obj", L"./data/seafloor.dds"));
+
+	struct InstanceType //1. 구조체 안에 위치 말고도 색상, 크기, 회전등 바꿀 수 있다!
+	{
+		XMFLOAT3 position;
+		XMFLOAT3 rotation;
+		XMFLOAT3 scale;
+	};
+
+	//{XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(1.0f, 1.0f, 1.0f)},
+	//{ XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(1.0f, 1.0f, 1.0f) };
+	m_Model.push_back(new ModelClass({ {XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(1.0f, 1.0f, 1.0f)},
+	{ XMFLOAT3(0.0f, -5.0f, 0.0f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(1.0f, 1.0f, 1.0f) } }, m_D3D->GetDevice(), L"./data/cube.obj", L"./data/seafloor.dds"));
+	//m_Model.push_back(new ModelClass({XMFLOAT3(0.0f, -1.0f, 0.0f) },m_D3D->GetDevice(), L"./data/plane.obj", L"./data/seafloor.dds"));
+
 	if(!result)
 	{
 		MessageBox(hwnd, L"Could not initialize the model object.", L"Error", MB_OK);
@@ -332,12 +345,12 @@ bool GraphicsClass::Render(float rotation)
 
 	viewMatrix *= XMMatrixTranslation(0.0f, 0.0f, 10.0f) * XMMatrixLookAtLH(m_Eye, m_At, m_Up);
 	// Rotate the world matrix by the rotation value so that the triangle will spin.
-	worldMatrix = XMMatrixRotationY(rotation);
+	
 	// Put the model vertex and index buffers on the graphics pipeline to prepare them for drawing.
 	for (auto& model : m_Model)
 	{
 		model->Render(m_D3D->GetDeviceContext());
-
+		
 		// Render the model using the texture shader.
 		result = m_LightShader->Render(m_D3D->GetDeviceContext(), model->GetVertexCount(), model->GetInstanceCount(),
 			worldMatrix, viewMatrix, projectionMatrix, model->GetTexture(),m_Light->GetDirection(), m_Light->GetAmbientColor(), m_Light->GetDiffuseColor(),

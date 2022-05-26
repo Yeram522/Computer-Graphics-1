@@ -37,6 +37,8 @@ private:
 	struct InstanceType //1. 구조체 안에 위치 말고도 색상, 크기, 회전등 바꿀 수 있다!
 	{
 		XMFLOAT3 position;
+		XMFLOAT3 rotation;
+		XMFLOAT3 scale;
 	};
 
 	struct FaceType
@@ -54,7 +56,7 @@ private:
 	};
 
 public:
-	ModelClass(vector<XMFLOAT3> instancepos,ID3D11Device* device, const WCHAR* modelFilename, const WCHAR* textureFilename);
+	ModelClass(vector<InstanceType> instancedes,ID3D11Device* device, const WCHAR* modelFilename, const WCHAR* textureFilename);
 	ModelClass(const ModelClass&);
 	~ModelClass();
 
@@ -85,7 +87,7 @@ private:
 	ID3D11Buffer *m_vertexBuffer, *m_instanceBuffer;
 	int m_vertexCount, m_instanceCount, m_textureCount, m_normalCount, m_faceCount;
 	TextureClass* m_Texture;
-	vector<XMFLOAT3> m_instancepos;
+	vector<InstanceType> m_instancedes;
 	ModelType* m_model;
 };
 

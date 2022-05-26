@@ -4,7 +4,7 @@
 #include "modelclass.h"
 
 
-ModelClass::ModelClass(vector<XMFLOAT3> instancepos,ID3D11Device* device, const WCHAR* modelFilename, const WCHAR* textureFilename)
+ModelClass::ModelClass(vector<InstanceType> instancedes,ID3D11Device* device, const WCHAR* modelFilename, const WCHAR* textureFilename)
 {
 	m_vertexBuffer = 0;
 	m_instanceBuffer = 0;
@@ -14,7 +14,9 @@ ModelClass::ModelClass(vector<XMFLOAT3> instancepos,ID3D11Device* device, const 
 	m_textureCount = 0;
 	m_normalCount = 0;
 	m_faceCount = 0;
-	m_instancepos = instancepos;
+
+	m_instancedes = instancedes;
+
 	Initialize(device, modelFilename, textureFilename);
 }
 
@@ -157,7 +159,7 @@ bool ModelClass::InitializeBuffers(ID3D11Device* device)
 	vertices = 0;
 
 	// 인스턴스 수를 설정한다.
-	m_instanceCount = m_instancepos.size();
+	m_instanceCount = m_instancedes.size();
 	//인스턴스 배열을 생성한다.
 	instances = new InstanceType[m_instanceCount];
 
@@ -168,7 +170,9 @@ bool ModelClass::InitializeBuffers(ID3D11Device* device)
 
 	for (int i = 0; i< m_instanceCount;i++)
 	{
-		instances[i].position = m_instancepos[i];
+		instances[i].position = m_instancedes[i].position;
+		instances[i].rotation = m_instancedes[i].rotation;
+		instances[i].scale = m_instancedes[i].scale;
 	}
 	
 

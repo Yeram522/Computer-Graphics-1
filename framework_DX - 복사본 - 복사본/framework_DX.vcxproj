@@ -45,12 +45,8 @@
     <ClCompile Include="textureclass.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="data\color.ps" />
-    <None Include="data\color.vs" />
     <None Include="data\light.ps" />
     <None Include="data\light.vs" />
-    <None Include="data\texture.ps" />
-    <None Include="data\texture.vs" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
