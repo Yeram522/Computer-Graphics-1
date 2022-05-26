@@ -67,20 +67,26 @@ bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hwnd)
 	// Initialize the model object.
 
 
-	//{XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(1.0f, 1.0f, 1.0f)},
-	//{ XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(1.0f, 1.0f, 1.0f) };
-	m_Model.push_back(new ModelClass({ {XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(1.0f, 1.0f, 1.0f)},
-	{ XMFLOAT3(-2.0f, 0.0f, 0.0f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(1.0f, 1.0f, 1.0f) }, 
-		{ XMFLOAT3(-4.0f, 0.0f, 0.0f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(1.0f, 1.0f, 1.0f) } ,
-		{ XMFLOAT3(-6.0f, 0.0f, 0.0f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(1.0f, 1.0f, 1.0f) } ,
-		{ XMFLOAT3(-8.0f, 0.0f, 0.0f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(1.0f, 1.0f, 1.0f) } ,
-		{ XMFLOAT3(2.0f, 0.0f, 0.0f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(1.0f, 1.0f, 1.0f) } ,
-		{ XMFLOAT3(4.0f, 0.0f, 0.0f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(1.0f, 1.0f, 1.0f) } ,
-		{ XMFLOAT3(6.0f, 0.0f, 0.0f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(1.0f, 1.0f, 1.0f) } ,
-		{ XMFLOAT3(7.0f, 0.0f, 0.0f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(1.0f, 1.0f, 1.0f) } ,
-		{ XMFLOAT3(8.0f, 0.0f, 0.0f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(1.0f, 1.0f, 1.0f) } }, m_D3D->GetDevice(), L"./data/cake.obj", L"./data/cake.dds"));
-	m_Model.push_back(new ModelClass({ { XMFLOAT3(0.0f, -0.05f, 0.0f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(50.0f, 50.0f, 50.0f) } }, m_D3D->GetDevice(), L"./data/plane.obj", L"./data/seafloor.dds"));
-	//m_Model.push_back(new ModelClass({XMFLOAT3(0.0f, -1.0f, 0.0f) },m_D3D->GetDevice(), L"./data/plane.obj", L"./data/seafloor.dds"));
+	//house
+	m_Model.push_back(new ModelClass({ {XMFLOAT3(0.0f, -0.03f, 0.0f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(10.0f, 10.0f, 10.0f)},}, m_D3D->GetDevice(), L"./data/house.obj", L"./data/house.dds"));
+
+	//skeleton
+	m_Model.push_back(new ModelClass({ {XMFLOAT3(0.0f, -0.03f, -3.0f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(10.0f, 10.0f, 10.0f)},}, m_D3D->GetDevice(), L"./data/skeleton.obj", L"./data/skeleton.dds"));
+
+	//plane
+	m_Model.push_back(new ModelClass({ { XMFLOAT3(0.0f, -0.01f, 0.0f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(50.0f, 50.0f, 50.0f) } }, m_D3D->GetDevice(), L"./data/plane.obj", L"./data/grass.dds"));
+	
+	//grave
+	m_Model.push_back(new ModelClass({ { XMFLOAT3(0.0f, -0.2f, -3.0f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(5.0f, 5.0f, 5.0f) },
+		{ XMFLOAT3(0.5f, -0.2f, -3.0f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(5.0f, 5.0f, 5.0f) } ,
+		{ XMFLOAT3(1.0f, -0.2f, -3.0f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(5.0f, 5.0f, 5.0f) } ,
+		{ XMFLOAT3(-0.5f, -0.2f, -3.0f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(5.0f, 5.0f, 5.0f) } ,
+		{ XMFLOAT3(-1.0f, -0.2f, -3.0f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(5.0f, 5.0f, 5.0f) } ,
+		{ XMFLOAT3(0.0f, -0.2f, -4.0f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(5.0f, 5.0f, 5.0f) },
+		{ XMFLOAT3(0.5f, -0.2f, -4.0f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(5.0f, 5.0f, 5.0f) } ,
+		{ XMFLOAT3(1.0f, -0.2f, -4.0f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(5.0f, 5.0f, 5.0f) } ,
+		{ XMFLOAT3(-0.5f, -0.2f, -4.0f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(5.0f, 5.0f, 5.0f) } ,
+		{ XMFLOAT3(-1.0f, -0.2f, -4.0f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(5.0f, 5.0f, 5.0f) } }, m_D3D->GetDevice(), L"./data/grave.obj", L"./data/grave.dds"));
 
 	if(!result)
 	{
