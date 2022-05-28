@@ -19,6 +19,12 @@ cbuffer CameraBuffer
 	float padding;
 };
 
+cbuffer FogBuffer
+{
+   float fogStart;
+   float fogEnd;
+}
+
 
 //////////////
 // TYPEDEFS //
@@ -37,6 +43,7 @@ struct PixelInputType
     float2 tex : TEXCOORD0;
 	float3 normal : NORMAL;
 	float3 viewDirection : TEXCOORD1;
+    float fogFactor : FOG;
 };
 
 
@@ -47,7 +54,9 @@ PixelInputType LightVertexShader(VertexInputType input)
 {
     PixelInputType output;
 	float4 worldPosition;
-
+    
+    //Calculate linear fog
+    output.fogFactor = saturate((fogEnd - cameraPosition.z)/ (fogEnd - fogStart));
 
 	// Change the position vector to be 4 units for proper matrix calculations.
     input.position.w = 1.0f;
