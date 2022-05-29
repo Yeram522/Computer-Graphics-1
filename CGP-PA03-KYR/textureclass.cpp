@@ -8,7 +8,8 @@ using namespace DirectX;
 
 TextureClass::TextureClass()
 {
-	m_texture = 0;
+	m_textures[0] = 0;
+	m_textures[1] = 0;
 }
 
 
@@ -22,17 +23,23 @@ TextureClass::~TextureClass()
 }
 
 
-bool TextureClass::Initialize(ID3D11Device* device, const WCHAR* filename)
+bool TextureClass::Initialize(ID3D11Device* device, const WCHAR* filename, const WCHAR* filename2)
 {
 	HRESULT result;
 
 	// Load texture data from a file by using DDS texture loader.
-	result = CreateDDSTextureFromFile(device, filename, nullptr, &m_texture);
+	result = CreateDDSTextureFromFile(device, filename, nullptr, &m_textures[0]);
 	if (FAILED(result))
 	{
 		return false;
 	}
 
+	//Load the second tecture in
+	result = CreateDDSTextureFromFile(device, filename2, nullptr, &m_textures[1]);
+	if (FAILED(result))
+	{
+		return false;
+	}
 	return true;
 }
 
@@ -40,17 +47,23 @@ bool TextureClass::Initialize(ID3D11Device* device, const WCHAR* filename)
 void TextureClass::Shutdown()
 {
 	// Release the texture resource.
-	if(m_texture)
+	if(m_textures[0])
 	{
-		m_texture->Release();
-		m_texture = 0;
+		m_textures[0]->Release();
+		m_textures[0] = 0;
+	}
+
+	if (m_textures[1])
+	{
+		m_textures[1]->Release();
+		m_textures[1] = 0;
 	}
 
 	return;
 }
 
 
-ID3D11ShaderResourceView* TextureClass::GetTexture()
+ID3D11ShaderResourceView** TextureClass::GetTextureArray()
 {
-	return m_texture;
+	return m_textures;
 }

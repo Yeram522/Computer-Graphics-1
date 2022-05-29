@@ -68,16 +68,16 @@ bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hwnd)
 
 
 	//house
-	m_Model.push_back(new ModelClass({ {XMFLOAT3(0.0f, -0.03f, 0.0f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(10.0f, 10.0f, 10.0f)},}, m_D3D->GetDevice(), L"./data/house.obj", L"./data/house.dds"));
+	//m_Model.push_back(new ModelClass({ {XMFLOAT3(0.0f, -0.03f, 0.0f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(10.0f, 10.0f, 10.0f)},}, m_D3D->GetDevice(), L"./data/house.obj", L"./data/house.dds"));
 
 	//skeleton
-	m_Model.push_back(new ModelClass({ {XMFLOAT3(0.0f, -0.03f, -3.0f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(10.0f, 10.0f, 10.0f)},}, m_D3D->GetDevice(), L"./data/skeleton.obj", L"./data/skeleton.dds"));
+	//m_Model.push_back(new ModelClass({ {XMFLOAT3(0.0f, -0.03f, -3.0f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(10.0f, 10.0f, 10.0f)},}, m_D3D->GetDevice(), L"./data/skeleton.obj", L"./data/skeleton.dds"));
 
 	//plane
-	m_Model.push_back(new ModelClass({ { XMFLOAT3(0.0f, -0.01f, 0.0f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(50.0f, 50.0f, 50.0f) } }, m_D3D->GetDevice(), L"./data/plane.obj", L"./data/grass.dds"));
+	m_Model.push_back(new ModelClass({ { XMFLOAT3(0.0f, -0.01f, 0.0f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(50.0f, 50.0f, 50.0f) } }, m_D3D->GetDevice(), L"./data/plane.obj", L"./data/grass.dds", L"./data/block.dds"));
 	
 	//grave
-	m_Model.push_back(new ModelClass({ { XMFLOAT3(0.0f, -0.2f, -3.0f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(5.0f, 5.0f, 5.0f) },
+	/*m_Model.push_back(new ModelClass({{XMFLOAT3(0.0f, -0.2f, -3.0f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(5.0f, 5.0f, 5.0f)},
 		{ XMFLOAT3(0.5f, -0.2f, -3.0f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(5.0f, 5.0f, 5.0f) } ,
 		{ XMFLOAT3(1.0f, -0.2f, -3.0f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(5.0f, 5.0f, 5.0f) } ,
 		{ XMFLOAT3(-0.5f, -0.2f, -3.0f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(5.0f, 5.0f, 5.0f) } ,
@@ -86,7 +86,7 @@ bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hwnd)
 		{ XMFLOAT3(0.5f, -0.2f, -4.0f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(5.0f, 5.0f, 5.0f) } ,
 		{ XMFLOAT3(1.0f, -0.2f, -4.0f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(5.0f, 5.0f, 5.0f) } ,
 		{ XMFLOAT3(-0.5f, -0.2f, -4.0f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(5.0f, 5.0f, 5.0f) } ,
-		{ XMFLOAT3(-1.0f, -0.2f, -4.0f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(5.0f, 5.0f, 5.0f) } }, m_D3D->GetDevice(), L"./data/grave.obj", L"./data/grave.dds"));
+		{ XMFLOAT3(-1.0f, -0.2f, -4.0f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(5.0f, 5.0f, 5.0f) } }, m_D3D->GetDevice(), L"./data/grave.obj", L"./data/grave.dds"));*/
 
 	if(!result)
 	{
@@ -364,7 +364,7 @@ bool GraphicsClass::Render(float rotation)
 			XMMatrixScaling(model->m_instancedes[0].scale.x, model->m_instancedes[0].scale.y, model->m_instancedes[0].scale.z);
 		// Render the model using the texture shader.
 		result = m_LightShader->Render(m_D3D->GetDeviceContext(), model->GetVertexCount(), model->GetInstanceCount(),
-			t_worldMatrix, viewMatrix, projectionMatrix, model->GetTexture(),m_Light->GetDirection(), m_Light->GetAmbientColor(), m_Light->GetDiffuseColor(),
+			t_worldMatrix, viewMatrix, projectionMatrix, model->GetTextureArray(),m_Light->GetDirection(), m_Light->GetAmbientColor(), m_Light->GetDiffuseColor(),
 			m_Camera->GetPosition(), m_Light->GetSpecularColor(), m_Light->GetSpecularPower());
 
 		if (!result)
