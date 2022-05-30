@@ -8,7 +8,8 @@ using namespace DirectX;
 
 TextureClass::TextureClass()
 {
-	
+	m_textures[0] = 0;
+	m_textures[1] = 0;
 }
 
 
@@ -25,10 +26,9 @@ TextureClass::~TextureClass()
 bool TextureClass::Initialize(ID3D11Device* device,  vector<const WCHAR*> filenames)
 {
 	HRESULT result;
-	m_texCount = filenames.size();
-	m_textures = new ID3D11ShaderResourceView*[m_texCount];// 동적배열 크기 할당
+
 	//texture file 순서: ambidient, diffuse, normal, specular
-	for (int i = 0; i < m_texCount; i++)
+	for (int i = 0; i < filenames.size(); i++)
 	{
 		result = CreateDDSTextureFromFile(device, filenames[i], nullptr, &m_textures[i]);
 		if (FAILED(result))
@@ -41,12 +41,17 @@ bool TextureClass::Initialize(ID3D11Device* device,  vector<const WCHAR*> filena
 
 void TextureClass::Shutdown()
 {
-
-	//texture file 순서: ambidient, diffuse, normal, specular
-	for (int i = 0; i < m_texCount; i++)
+	// Release the texture resource.
+	if(m_textures[0])
 	{
-		m_textures[i]->Release();
-		m_textures[i] = 0;
+		m_textures[0]->Release();
+		m_textures[0] = 0;
+	}
+
+	if (m_textures[1])
+	{
+		m_textures[1]->Release();
+		m_textures[1] = 0;
 	}
 
 	return;
