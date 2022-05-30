@@ -10,14 +10,14 @@
 //////////////
 #include <d3d11.h>
 #include <directxmath.h>
-#include <vector>
+
 using namespace DirectX;
 
 ///////////////////////
 // MY CLASS INCLUDES //
 ///////////////////////
 #include "textureclass.h"
-
+#include <vector>
 #include <fstream>
 using namespace std;
 
@@ -56,11 +56,11 @@ private:
 	};
 
 public:
-	ModelClass(vector<InstanceType> instancedes,ID3D11Device* device, const WCHAR* modelFilename, const WCHAR* textureFilename1, const WCHAR* textureFilename2);
+	ModelClass(vector<InstanceType> instancedes,ID3D11Device* device, const WCHAR* modelFilename,  vector<const WCHAR*> textureFilenames);
 	ModelClass(const ModelClass&);
 	~ModelClass();
 
-	bool Initialize(ID3D11Device*, const WCHAR*, const WCHAR*, const WCHAR*);
+	bool Initialize(ID3D11Device*, const WCHAR*, vector<const WCHAR*>);
 	void Shutdown();
 	void Render(ID3D11DeviceContext*);
 
@@ -77,7 +77,7 @@ private:
 	void ShutdownBuffers();
 	void RenderBuffers(ID3D11DeviceContext*);
 
-	bool LoadTexture(ID3D11Device*, const WCHAR*, const WCHAR*);
+	bool LoadTexture(ID3D11Device*,  vector< const WCHAR*>);
 	void ReleaseTexture();
 
 	bool ReadFileCounts(const WCHAR*);

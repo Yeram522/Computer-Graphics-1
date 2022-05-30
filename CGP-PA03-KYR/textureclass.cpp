@@ -23,24 +23,19 @@ TextureClass::~TextureClass()
 }
 
 
-bool TextureClass::Initialize(ID3D11Device* device, const WCHAR* filename, const WCHAR* filename2)
+bool TextureClass::Initialize(ID3D11Device* device,  vector<const WCHAR*> filenames)
 {
 	HRESULT result;
 
-	// Load texture data from a file by using DDS texture loader.
-	result = CreateDDSTextureFromFile(device, filename, nullptr, &m_textures[0]);
-	if (FAILED(result))
+	//texture file ¼ø¼­: ambidient, diffuse, normal, specular
+	for (int i = 0; i < filenames.size(); i++)
 	{
-		return false;
+		result = CreateDDSTextureFromFile(device, filenames[i], nullptr, &m_textures[i]);
+		if (FAILED(result))
+		{
+			return false;
+		}
 	}
-
-	//Load the second tecture in
-	result = CreateDDSTextureFromFile(device, filename2, nullptr, &m_textures[1]);
-	if (FAILED(result))
-	{
-		return false;
-	}
-	return true;
 }
 
 

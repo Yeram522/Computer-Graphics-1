@@ -9,7 +9,9 @@
 // INCLUDES //
 //////////////
 #include <d3d11.h>
+#include <vector>
 
+using namespace std;
 ////////////////////////////////////////////////////////////////////////////////
 // Class name: TextureClass
 ////////////////////////////////////////////////////////////////////////////////
@@ -20,7 +22,7 @@ public:
 	TextureClass(const TextureClass&);
 	~TextureClass();
 
-	bool Initialize(ID3D11Device*, const WCHAR*, const WCHAR*);
+	bool Initialize(ID3D11Device*, vector<const  WCHAR*> filenames);
 	void Shutdown();
 
 	ID3D11ShaderResourceView** GetTextureArray();
