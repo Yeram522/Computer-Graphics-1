@@ -13,7 +13,7 @@ LightShaderClass::LightShaderClass()
 	m_matrixBuffer = 0;
 	m_lightBuffer = 0;
 
-	m_lightmode = XMFLOAT4(1.0f, 0.0f, 0.0f, 0.0f);
+	m_lightmode = XMFLOAT4(1.0f, 1.0f, 1.0f, 0.0f);
 }
 
 
