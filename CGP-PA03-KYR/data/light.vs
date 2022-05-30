@@ -28,7 +28,11 @@ struct VertexInputType
     float4 position : POSITION;
     float2 tex : TEXCOORD0;
 	float3 normal : NORMAL;
-    float3 instancePosition : TEXCOORD1;
+    float3 instancePosition : TEXCOORD1; //instancing
+
+    //Bump Texture mapping
+    float3 tangent : TANGENT; // 법선
+    float3 binormal : BINORMAL; //종법선_ normal과 Tangent를 외적
 };
 
 struct PixelInputType
@@ -37,6 +41,10 @@ struct PixelInputType
     float2 tex : TEXCOORD0;
 	float3 normal : NORMAL;
 	float3 viewDirection : TEXCOORD1;
+
+    //Bump Texture mapping
+    float3 tangent : TANGENT; // 법선
+    float3 binormal : BINORMAL; //종법선_ normal과 Tangent를 외적
 };
 
 
@@ -56,6 +64,14 @@ PixelInputType LightVertexShader(VertexInputType input)
     input.position.x += input.instancePosition.x;
     input.position.y += input.instancePosition.y;
     input.position.z += input.instancePosition.z;
+
+    // Calculate the tangent vector against the world matrix only adn then normalize the final value.
+    output.tangent = mul(input.tangent, (float3x3)worldMatrix);
+    output.tangent = normalize(output.tangent);
+
+    // Calculate the binormal vector against the world matirx only and then normalize the final value.
+    output.binormal = mul(input.binormal, (float3x3)worldMatrix);
+    output.binormal = normalize(output.binormal);
 
 	// Calculate the position of the vertex against the world, view, and projection matrices.
     output.position = mul(input.position, worldMatrix);

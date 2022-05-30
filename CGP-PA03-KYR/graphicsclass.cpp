@@ -68,28 +68,28 @@ bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hwnd)
 
 
 	//atlas
-	m_Model.push_back(new ModelClass({ {XMFLOAT3(0.0f, -0.28f, 0.0f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(5.0f, 5.0f, 5.0f)}, }, m_D3D->GetDevice(), L"./data/atlas.obj", { L"./data/Altar_diffuse.dds", L"./data/Altar_ao.dds",L"./data/Altar_ao.dds",0 }));
+	m_Model.push_back(new ModelClass({ {XMFLOAT3(0.0f, -0.28f, 0.0f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(5.0f, 5.0f, 5.0f)}, }, m_D3D->GetDevice(), L"./data/atlas.obj", { L"./data/Altar_diffuse.dds", L"./data/Altar_ao.dds",L"./data/Altar_normal.dds",0 }));
 
 	//flag
-	m_Model.push_back(new ModelClass({ {XMFLOAT3(-1.8f, 0.0f, 0.0f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(5.0f, 5.0f, 5.0f)}, }, m_D3D->GetDevice(), L"./data/flag.obj", { L"./data/flag_specular.dds", L"./data/flag_diffuse.dds",L"./data/flag_diffuse.dds",0 }));
+	m_Model.push_back(new ModelClass({ {XMFLOAT3(-1.8f, 0.0f, 0.0f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(5.0f, 5.0f, 5.0f)}, }, m_D3D->GetDevice(), L"./data/flag.obj", { L"./data/flag_specular.dds", L"./data/flag_diffuse.dds",L"./data/flag_normal.dds",0 }));
 
 	//platform
-	m_Model.push_back(new ModelClass({ {XMFLOAT3(0.0f, -0.3f, 0.0f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(5.0f, 5.0f, 5.0f)}, }, m_D3D->GetDevice(), L"./data/platform.obj", { L"./data/Platform_diffuse.dds", L"./data/Platform_ao.dds" ,L"./data/Platform_ao.dds",0 }));
+	m_Model.push_back(new ModelClass({ {XMFLOAT3(0.0f, -0.3f, 0.0f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(5.0f, 5.0f, 5.0f)}, }, m_D3D->GetDevice(), L"./data/platform.obj", { L"./data/Platform_diffuse.dds", L"./data/Platform_ao.dds" ,L"./data/Platform_normal.dds",0 }));
 
 	//entrance
-	m_Model.push_back(new ModelClass({ {XMFLOAT3(0.0f, -0.3f, 0.0f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(5.0f, 5.0f, 5.0f)}, }, m_D3D->GetDevice(), L"./data/entrance.obj", { L"./data/entrance_diffuse.dds", L"./data/entrance_ao.dds" , L"./data/entrance_ao.dds",0 }));
+	m_Model.push_back(new ModelClass({ {XMFLOAT3(0.0f, -0.3f, 0.0f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(5.0f, 5.0f, 5.0f)}, }, m_D3D->GetDevice(), L"./data/entrance.obj", { L"./data/entrance_diffuse.dds", L"./data/entrance_ao.dds" , L"./data/entrance_normal.dds",0 }));
 
 	//arches
-	m_Model.push_back(new ModelClass({ {XMFLOAT3(0.0f, -0.3f, 0.0f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(5.0f, 5.0f, 5.0f)}, }, m_D3D->GetDevice(), L"./data/arches.obj", { L"./data/arches_diffuse.dds", L"./data/arches_ao.dds",L"./data/arches_ao.dds",0 }));
+	m_Model.push_back(new ModelClass({ {XMFLOAT3(0.0f, -0.3f, 0.0f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(5.0f, 5.0f, 5.0f)}, }, m_D3D->GetDevice(), L"./data/arches.obj", { L"./data/arches_diffuse.dds", L"./data/arches_ao.dds",L"./data/arches_normal.dds",0 }));
 
 	//tree
-	m_Model.push_back(new ModelClass({ {XMFLOAT3(-10.8f, 1.2f, 11.0f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(3.0f,3.0f, 3.0f)}, }, m_D3D->GetDevice(), L"./data/tree.obj", { L"./data/tree_diffuse.dds", L"./data/tree_ao.dds",L"./data/tree_ao.dds",0 }));
+	m_Model.push_back(new ModelClass({ {XMFLOAT3(-10.8f, 1.2f, 11.0f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(3.0f,3.0f, 3.0f)}, }, m_D3D->GetDevice(), L"./data/tree.obj", { L"./data/tree_diffuse.dds", L"./data/tree_ao.dds",L"./data/tree_normal.dds",0 }));
 
 	//skeleton
 	//m_Model.push_back(new ModelClass({ {XMFLOAT3(0.0f, -0.03f, -3.0f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(10.0f, 10.0f, 10.0f)},}, m_D3D->GetDevice(), L"./data/skeleton.obj", L"./data/skeleton.dds"));
 
 	//plane
-	m_Model.push_back(new ModelClass({ { XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(100.0f, 100.0f, 100.0f) } }, m_D3D->GetDevice(), L"./data/plane.obj", { L"./data/Ground_Albedo.dds", L"./data/block.dds", L"./data/block.dds" ,0}));
+	m_Model.push_back(new ModelClass({ { XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(100.0f, 100.0f, 100.0f) } }, m_D3D->GetDevice(), L"./data/plane.obj", { L"./data/Ground_Albedo.dds", L"./data/block.dds", 0 ,0}));
 	
 	//grave
 	/*m_Model.push_back(new ModelClass({{XMFLOAT3(0.0f, -0.2f, -3.0f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(5.0f, 5.0f, 5.0f)},

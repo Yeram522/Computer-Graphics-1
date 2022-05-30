@@ -12,7 +12,7 @@ SamplerState SampleType;
 cbuffer LightBuffer
 {
 	float4 ambientColor;
-	float4 diffuseColor;
+	float4 diffuseColor; 
     float3 lightDirection;
     float specularPower;
     float4 specularColor;
@@ -29,6 +29,11 @@ struct PixelInputType
     float2 tex : TEXCOORD0;
 	float3 normal : NORMAL;
 	float3 viewDirection : TEXCOORD1;
+
+	
+	 //Bump Texture mapping
+    float3 tangent : TANGENT; // 법선
+    float3 binormal : BINORMAL; //종법선_ normal과 Tangent를 외적
 };
 
 
@@ -41,12 +46,14 @@ float4 LightPixelShader(PixelInputType input) : SV_TARGET
     float4 textureColor;
 
 	float4 color1; //ambient texture
-	float4 color2; //diffuse texture
+	float4 color2; //diffuse texture 색상
 	float4 color3; //normal texture
 	float4 color4; //specular texture
 	float4 blendColor;
 
-	float4 spec_color = float4(1.0f, 0.976f, 0.321f,0.0f);
+	
+	float4 bumpMap;
+	float3 bumpNormal;
 
 	//Get the pixel color from the first texture
 	color1 = shaderTextures[0].Sample(SampleType, input.tex);
@@ -54,13 +61,23 @@ float4 LightPixelShader(PixelInputType input) : SV_TARGET
 	//Get the pixel color from the second texture
 	color2 = shaderTextures[1].Sample(SampleType, input.tex);
 
-
+	color3 =  shaderTextures[2].Sample(SampleType, input.tex);
 	//Blend the two pixels together and multiply by the gamma value.
 	blendColor = color1 * color2 * 2.0 ;
 
 	//Saturate the final color.
 	//textureColor = saturate(blendColor);
 	textureColor = blendColor;
+
+	//범프맵 적용
+	bumpMap = color3;
+	//Expend the range of the normal value from (0,+1) to (-1,+1)
+	//샘플링 된 값이 0~1사이인데 범프맵 연산을 위한 범위의 반쪽밖에 안되서 -1~+1 되게 하는 것임!!
+	bumpMap = (blendColor * 2.0f) - 1.0f;
+	//Calculate the normal from the data in the bump map
+
+	bumpNormal = input.normal + bumpMap.x * input.tangent + bumpMap.y*input.binormal;
+	bumpNormal = normalize(bumpNormal);
 
 	//Light
 	float3 lightDir;
@@ -82,7 +99,10 @@ float4 LightPixelShader(PixelInputType input) : SV_TARGET
     lightDir = -lightDirection;
 
     // Calculate the amount of light on this pixel.
-    lightIntensity = saturate(dot(input.normal, lightDir));
+	float4 tmp =float4(0.0f, 0.0f, 0.0f, 0.0f);
+	if(color3.r == 0.0f &&color3.g == 0.0f&&color3.b == 0.0f&&color3.a == 0.0f)  lightIntensity = saturate(dot(input.normal, lightDir));
+	else  lightIntensity = saturate(dot(bumpNormal, lightDir));
+   
 	
 	if(type.r==1.0f)
 	{
