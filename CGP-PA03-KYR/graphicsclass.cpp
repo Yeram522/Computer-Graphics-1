@@ -76,6 +76,8 @@ bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hwnd)
 	//platform
 	m_Model.push_back(new ModelClass({ {XMFLOAT3(0.0f, -0.3f, 0.0f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(5.0f, 5.0f, 5.0f)},}, m_D3D->GetDevice(), L"./data/platform.obj", L"./data/Platform_diffuse.dds", L"./data/Platform_ao.dds"));
 
+	//entrance
+	m_Model.push_back(new ModelClass({ {XMFLOAT3(0.0f, -0.3f, 0.0f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(5.0f, 5.0f, 5.0f)}, }, m_D3D->GetDevice(), L"./data/entrance.obj", L"./data/entrance_diffuse.dds", L"./data/entrance_ao.dds"));
 
 	//arches
 	m_Model.push_back(new ModelClass({ {XMFLOAT3(0.0f, -0.3f, 0.0f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(5.0f, 5.0f, 5.0f)},}, m_D3D->GetDevice(), L"./data/arches.obj", L"./data/arches_diffuse.dds", L"./data/arches_ao.dds"));
