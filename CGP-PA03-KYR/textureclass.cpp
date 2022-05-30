@@ -10,6 +10,8 @@ TextureClass::TextureClass()
 {
 	m_textures[0] = 0;
 	m_textures[1] = 0;
+	m_textures[2] = 0;
+	m_textures[3] = 0;
 }
 
 
@@ -42,16 +44,13 @@ bool TextureClass::Initialize(ID3D11Device* device,  vector<const WCHAR*> filena
 void TextureClass::Shutdown()
 {
 	// Release the texture resource.
-	if(m_textures[0])
+	for (int i = 0; i < 4; i++)
 	{
-		m_textures[0]->Release();
-		m_textures[0] = 0;
-	}
-
-	if (m_textures[1])
-	{
-		m_textures[1]->Release();
-		m_textures[1] = 0;
+		if (m_textures[i])
+		{
+			m_textures[i]->Release();
+			m_textures[i] = 0;
+		}
 	}
 
 	return;

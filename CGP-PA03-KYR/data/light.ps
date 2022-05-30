@@ -6,7 +6,7 @@
 /////////////
 // GLOBALS //
 /////////////
-Texture2D shaderTextures[2];
+Texture2D shaderTextures[4];
 SamplerState SampleType;
 
 cbuffer LightBuffer
@@ -40,8 +40,10 @@ float4 LightPixelShader(PixelInputType input) : SV_TARGET
     //Texture
     float4 textureColor;
 
-	float4 color1;
-	float4 color2;
+	float4 color1; //ambient texture
+	float4 color2; //diffuse texture
+	float4 color3; //normal texture
+	float4 color4; //specular texture
 	float4 blendColor;
 
 	float4 spec_color = float4(1.0f, 0.976f, 0.321f,0.0f);
@@ -51,6 +53,7 @@ float4 LightPixelShader(PixelInputType input) : SV_TARGET
 
 	//Get the pixel color from the second texture
 	color2 = shaderTextures[1].Sample(SampleType, input.tex);
+
 
 	//Blend the two pixels together and multiply by the gamma value.
 	blendColor = color1 * color2 * 2.0 ;
