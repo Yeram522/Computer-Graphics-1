@@ -1,7 +1,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 // Filename: light.ps
 ////////////////////////////////////////////////////////////////////////////////
-
+#define NUM_LIGHTS 4
 
 /////////////
 // GLOBALS //
@@ -19,6 +19,11 @@ cbuffer LightBuffer
 	float4 type : TEXCOORD2;
 };
 
+//점조명의 색상을 저장하는 용도
+cbuffer LightColorBuffer
+{
+	float4 diffuseColors[NUM_LIGHTS];
+};
 
 //////////////
 // TYPEDEFS //
@@ -34,6 +39,12 @@ struct PixelInputType
 	 //Bump Texture mapping
     float3 tangent : TANGENT; // 법선
     float3 binormal : BINORMAL; //종법선_ normal과 Tangent를 외적
+
+	//Currentposition of point Light
+    float3 lightPos1 : TEXCOORD2;
+    float3 lightPos2 : TEXCOORD3;
+    float3 lightPos3 : TEXCOORD4;
+    float3 lightPos4 : TEXCOORD5;
 };
 
 
@@ -138,9 +149,23 @@ float4 LightPixelShader(PixelInputType input) : SV_TARGET
 			
     }
 
+	// Calculate the different amounts of light on this pixel based on the position of the light
+	float P_lightIntensity1,P_lightIntensity2,P_lightIntensity3,P_lightIntensity4;
+	float4 P_color1,P_color2,P_color3,P_color4;
+
+	P_lightIntensity1 = saturate(dot(input.normal, input.lightPos1));
+	P_lightIntensity2 = saturate(dot(input.normal, input.lightPos2));
+	P_lightIntensity3 = saturate(dot(input.normal, input.lightPos3));
+	P_lightIntensity4 = saturate(dot(input.normal, input.lightPos4));
+
+	P_color1 = diffuseColors[0] * P_lightIntensity1*0.5f;
+	P_color2 = diffuseColors[1] * P_lightIntensity2 *0.5f;
+	P_color3 = diffuseColors[2] * P_lightIntensity3*0.5f;
+	P_color4 = diffuseColors[3] * P_lightIntensity4*0.5f;
+
     // Multiply the texture pixel and the final diffuse color to get the final pixel color result.
-    
-	color = color * textureColor;
+	//color =  color * textureColor;
+	color =   saturate(color + P_color1 + P_color2 + P_color3 + P_color4)* textureColor;
 
 	if(type.b==1.0f)
 	{

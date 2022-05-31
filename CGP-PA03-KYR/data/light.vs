@@ -1,7 +1,11 @@
 ////////////////////////////////////////////////////////////////////////////////
 // Filename: light.vs
 ////////////////////////////////////////////////////////////////////////////////
-
+/////////////
+// DEFINE //
+/////////////
+#define NUM_LIGHTS 4
+//HLSL은 define문으로 설정한 값으로 배열을 만드는 것이 가능하다.
 
 /////////////
 // GLOBALS //
@@ -19,7 +23,10 @@ cbuffer CameraBuffer
 	float padding;
 };
 
-
+cbuffer LightPositionBuffer
+{
+    float4 lightPosition[NUM_LIGHTS];
+};
 //////////////
 // TYPEDEFS //
 //////////////
@@ -45,6 +52,12 @@ struct PixelInputType
     //Bump Texture mapping
     float3 tangent : TANGENT; // 법선
     float3 binormal : BINORMAL; //종법선_ normal과 Tangent를 외적
+
+    //Currentposition of point Light
+    float3 lightPos1 : TEXCOORD2;
+    float3 lightPos2 : TEXCOORD3;
+    float3 lightPos3 : TEXCOORD4;
+    float3 lightPos4 : TEXCOORD5;
 };
 
 
@@ -95,6 +108,18 @@ PixelInputType LightVertexShader(VertexInputType input)
 	
     // Normalize the viewing direction vector.
     output.viewDirection = normalize(output.viewDirection);
+
+    // Determine the light positions based on the position of the lights and the position of the vertex in the world.
+    output.lightPos1.xyz = lightPosition[0].xyz - worldPosition.xyz;
+    output.lightPos2.xyz = lightPosition[1].xyz - worldPosition.xyz;
+    output.lightPos3.xyz = lightPosition[2].xyz - worldPosition.xyz;
+    output.lightPos4.xyz = lightPosition[3].xyz - worldPosition.xyz;
+
+    //Normalize the light position vectors.
+    output.lightPos1 = normalize(output.lightPos1);
+    output.lightPos2 = normalize(output.lightPos2);
+    output.lightPos3 = normalize(output.lightPos3);
+    output.lightPos4 = normalize(output.lightPos4);
 
     return output;
 }

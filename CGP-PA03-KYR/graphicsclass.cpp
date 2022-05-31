@@ -15,6 +15,11 @@ GraphicsClass::GraphicsClass()
 	m_LightShader = 0;
 	m_Light = 0;
 
+	m_Light1 = 0;
+	m_Light2 = 0;
+	m_Light3 = 0;
+	m_Light4 = 0;
+
 
 	m_Eye = XMVectorSet(0.0f, 5.0f, -30.0f, 1.0f);
 	m_At = XMVectorSet(0.0f, 0.0f, 0.0f, 1.0f);
@@ -71,7 +76,7 @@ bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hwnd)
 	m_Model.push_back(new ModelClass({ {XMFLOAT3(0.0f, -0.28f, 0.0f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(5.0f, 5.0f, 5.0f)}, }, m_D3D->GetDevice(), L"./data/atlas.obj", { L"./data/Altar_diffuse.dds", L"./data/Altar_ao.dds",L"./data/Altar_normal.dds",L"./data/altar_specular.dds" }));
 
 	//flag
-	m_Model.push_back(new ModelClass({ {XMFLOAT3(-1.8f, 0.0f, 0.0f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(5.0f, 5.0f, 5.0f)}, }, m_D3D->GetDevice(), L"./data/flag.obj", { L"./data/flag_diffuse.dds",0,L"./data/flag_normal.dds",L"./data/flag_specular.dds" }));
+	m_Model.push_back(new ModelClass({ {XMFLOAT3(-1.6f, -0.25f, -0.55f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(5.0f, 5.0f, 5.0f)}, }, m_D3D->GetDevice(), L"./data/flag.obj", { L"./data/flag_diffuse.dds",0,L"./data/flag_normal.dds",L"./data/flag_specular.dds" }));
 
 	//platform
 	m_Model.push_back(new ModelClass({ {XMFLOAT3(0.0f, -0.3f, 0.0f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(5.0f, 5.0f, 5.0f)}, }, m_D3D->GetDevice(), L"./data/platform.obj", { L"./data/Platform_diffuse.dds", L"./data/Platform_ao.dds" ,L"./data/Platform_normal.dds",L"./data/Platform_specular.dds" }));
@@ -87,8 +92,6 @@ bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hwnd)
 
 	//plane
 	m_Model.push_back(new ModelClass({ { XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(100.0f, 100.0f, 100.0f) } }, m_D3D->GetDevice(), L"./data/plane.obj", { L"./data/Ground_Albedo.dds", L"./data/block.dds", 0 ,L"./data/Platform_specular.dds" }));
-	
-
 	
 
 	if(!result)
@@ -121,15 +124,50 @@ bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hwnd)
 
 	// Initialize the light object.
 	m_Light->SetAmbientColor(0.15f, 0.15f, 0.15f, 1.0f);
-//	m_Light->SetAmbientColor(0.0f, 0.0f, 0.0f, 1.0f);
-	m_Light->SetDiffuseColor(1.0f, 1.0f, 1.0f, 1.0f);
-//	m_Light->SetDiffuseColor(0.0f, 0.0f, 0.0f, 1.0f);
+	//m_Light->SetAmbientColor(0.0f, 0.0f, 0.0f, 1.0f);
+	m_Light->SetDiffuseColor(0.08f, 0.08f, 0.08f, 1.0f);
+	//m_Light->SetDiffuseColor(0.0f, 0.0f, 0.0f, 1.0f);
 //	m_Light->SetDirection(0.0f, 0.0f, 1.0f);
 //	m_Light->SetDirection(1.0f, 0.0f, 0.0f);
 	m_Light->SetDirection(0.5f, -1.0f, 0.5f);
 	m_Light->SetSpecularColor(1.0f, 1.0f, 1.0f, 1.0f);
 	m_Light->SetSpecularPower(32.0f);
 
+	//첫번째 조명->하양 큰 spotLight
+	m_Light1 = new LightClass;
+	if (!m_Light1)
+	{
+		return false;
+	}
+	m_Light1->SetDiffuseColor(1.0f, 1.0f, 1.0f, 1.0f);
+	m_Light1->SetPosition(-2.0f, 50.0f, 1.0f);
+
+	//두번째 조명-> 빨강
+	m_Light2 = new LightClass;
+	if (!m_Light2)
+	{
+		return false;
+	}
+	m_Light2->SetDiffuseColor(1.0f, 0.0f, 0.0f, 1.0f);
+	m_Light2->SetPosition(10.0f, -0.5f, -10.0);
+
+	//세번째 조명-> 파랑
+	m_Light3 = new LightClass;
+	if (!m_Light3)
+	{
+		return false;
+	}
+	m_Light3->SetDiffuseColor(0.0f, 0.0f, 1.0f, 1.0f);
+	m_Light3->SetPosition(-10.0f, 0.5f, -10.0);
+
+	//네번째 조명
+	m_Light4 = new LightClass;
+	if (!m_Light4)
+	{
+		return false;
+	}
+	m_Light4->SetDiffuseColor(0.0f, 0.0f, 0.0f, 1.0f);
+	m_Light4->SetPosition(1.0f, 0.20f, -1.0f);
 	return true;
 }
 
@@ -169,6 +207,29 @@ void GraphicsClass::Shutdown()
 		m_Light = 0;
 	}
 
+	if (m_Light1)
+	{
+		delete m_Light1;
+		m_Light1 = 0;
+	}
+
+	if (m_Light2)
+	{
+		delete m_Light2;
+		m_Light2 = 0;
+	}
+
+	if (m_Light3)
+	{
+		delete m_Light3;
+		m_Light3 = 0;
+	}
+
+	if (m_Light4)
+	{
+		delete m_Light4;
+		m_Light4 = 0;
+	}
 	// Release the light shader object.
 	if (m_LightShader)
 	{
@@ -341,9 +402,23 @@ void GraphicsClass::ChangeLightShaderMode(int mode)
 }
 bool GraphicsClass::Render(float rotation)
 {
-	XMMATRIX worldMatrix, viewMatrix, projectionMatrix;
+	XMMATRIX worldMatrix, viewMatrix, projectionMatrix;	
+	XMFLOAT4 diffuseColors[4];
+	XMFLOAT4 lightPositions[4];
 	bool result;
-	
+
+	// Create the diffuse color array from the four light colors.
+	diffuseColors[0] = m_Light1->GetDiffuseColor();
+	diffuseColors[1] = m_Light2->GetDiffuseColor();
+	diffuseColors[2] = m_Light3->GetDiffuseColor();
+	diffuseColors[3] = m_Light4->GetDiffuseColor();
+
+	// Create the light position array from the four light positions.
+	lightPositions[0] = m_Light1->GetPosition();
+	lightPositions[1] = m_Light2->GetPosition();
+	lightPositions[2] = m_Light3->GetPosition();
+	lightPositions[3] = m_Light4->GetPosition();
+
 	// Clear the buffers to begin the scene.
 	m_D3D->BeginScene(0.925f, 0.694f, 0.513f, 1.0f);
 	//m_D3D->BeginScene(1.0f, 1.0f, 1.0f,1.0f);
@@ -369,7 +444,7 @@ bool GraphicsClass::Render(float rotation)
 		// Render the model using the texture shader.
 		result = m_LightShader->Render(m_D3D->GetDeviceContext(), model->GetVertexCount(), model->GetInstanceCount(),
 			t_worldMatrix, viewMatrix, projectionMatrix, model->GetTextureArray(),m_Light->GetDirection(), m_Light->GetAmbientColor(), m_Light->GetDiffuseColor(),
-			m_Camera->GetPosition(), m_Light->GetSpecularColor(), m_Light->GetSpecularPower());
+			m_Camera->GetPosition(), m_Light->GetSpecularColor(), m_Light->GetSpecularPower(), diffuseColors, lightPositions);
 
 		if (!result)
 		{

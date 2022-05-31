@@ -49,7 +49,7 @@ private:
 	vector<ModelClass*> m_Model; //¸ðµ¨Å¬·¡½º
 
 	LightShaderClass* m_LightShader;
-	LightClass* m_Light;
+	LightClass *m_Light, *m_Light1, *m_Light2, *m_Light3, *m_Light4;
 
 	XMVECTOR   m_Eye;           
 	XMVECTOR   m_At;                
