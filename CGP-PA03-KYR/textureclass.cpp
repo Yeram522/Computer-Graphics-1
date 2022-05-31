@@ -29,7 +29,7 @@ bool TextureClass::Initialize(ID3D11Device* device,  vector<const WCHAR*> filena
 {
 	HRESULT result;
 
-	//texture file 순서: ambidient, diffuse, normal, specular
+	//texture file 순서: diffuse,ambidient,normal, specular
 	for (int i = 0; i < filenames.size(); i++)
 	{
 		result = CreateDDSTextureFromFile(device, filenames[i], nullptr, &m_textures[i]);

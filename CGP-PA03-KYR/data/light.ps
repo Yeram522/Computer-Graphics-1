@@ -45,8 +45,8 @@ float4 LightPixelShader(PixelInputType input) : SV_TARGET
     //Texture
     float4 textureColor;
 
-	float4 color1; //ambient texture
-	float4 color2; //diffuse texture 색상
+	float4 color1; //diffuse texture
+	float4 color2; //ambidient texture 색상
 	float4 color3; //normal texture
 	float4 color4; //specular texture
 	float4 blendColor;
@@ -62,8 +62,12 @@ float4 LightPixelShader(PixelInputType input) : SV_TARGET
 	color2 = shaderTextures[1].Sample(SampleType, input.tex);
 
 	color3 =  shaderTextures[2].Sample(SampleType, input.tex);
+	color4 =  shaderTextures[3].Sample(SampleType, input.tex);
+
 	//Blend the two pixels together and multiply by the gamma value.
-	blendColor = color1 * color2 * 2.0 ;
+	if(color2.r == 0.0f &&color2.g == 0.0f&&color2.b == 0.0f&&color2.a == 0.0f) blendColor = color1;
+	else
+		blendColor = color1 * color2 * 2.0 ;
 
 	//Saturate the final color.
 	//textureColor = saturate(blendColor);
@@ -86,10 +90,7 @@ float4 LightPixelShader(PixelInputType input) : SV_TARGET
 	float3 reflection;
 	float4 specular;
 
-	//float4 result;
     // Sample the pixel color from the texture using the sampler at this texture coordinate location.
-	//textureColor = shaderTextures[1].Sample(SampleType, input.tex);
-
 	color = float4(0.0f, 0.0f, 0.0f, 0.0f);
 	
 	// Initialize the specular color.
@@ -99,10 +100,10 @@ float4 LightPixelShader(PixelInputType input) : SV_TARGET
     lightDir = -lightDirection;
 
     // Calculate the amount of light on this pixel.
-	float4 tmp =float4(0.0f, 0.0f, 0.0f, 0.0f);
 	if(color3.r == 0.0f &&color3.g == 0.0f&&color3.b == 0.0f&&color3.a == 0.0f)  lightIntensity = saturate(dot(input.normal, lightDir));
 	else  lightIntensity = saturate(dot(bumpNormal, lightDir));
    
+   //Sample the pixel
 	
 	if(type.r==1.0f)
 	{
@@ -118,13 +119,23 @@ float4 LightPixelShader(PixelInputType input) : SV_TARGET
 	    // Saturate the ambient and diffuse color.
 		color = saturate(color);
 
+		//Specular
+		float4 specularIntensity;
+
+		specularIntensity = color4;
+
         // Calculate the reflection vector based on the light intensity, normal vector, and light direction.
-        reflection = normalize(2 * lightIntensity * input.normal - lightDir); 
+		if(specularIntensity.r == 0.0f &&specularIntensity.g == 0.0f&&color3.b == 0.0f&&specularIntensity.a == 0.0f) reflection = normalize(2 * lightIntensity * input.normal - lightDir); 
+		else
+			reflection = normalize(2 * lightIntensity * bumpNormal - lightDir); 
+			
+        
 
 		// Determine the amount of specular light based on the reflection vector, viewing direction, and specular power.
-        specular = pow(saturate(dot(reflection, input.viewDirection)), specularPower);
-
-
+        
+		specular = pow(saturate(dot(reflection, input.viewDirection)), specularPower);
+		if(!(specularIntensity.r == 0.0f &&specularIntensity.g == 0.0f&&specularIntensity.b == 0.0f&&specularIntensity.a == 0.0f))  specular = specular * specularIntensity;
+			
     }
 
     // Multiply the texture pixel and the final diffuse color to get the final pixel color result.
