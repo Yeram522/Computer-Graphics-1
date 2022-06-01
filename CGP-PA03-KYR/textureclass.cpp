@@ -40,6 +40,17 @@ bool TextureClass::Initialize(ID3D11Device* device,  vector<const WCHAR*> filena
 	}
 }
 
+bool TextureClass::Initialize(ID3D11Device* device, const WCHAR* filenames)
+{
+	HRESULT result;
+
+	//texture file ¼ø¼­: diffuse,ambidient,normal, specular
+	result = CreateDDSTextureFromFile(device, filenames, nullptr, &m_textures[0]);
+	if (FAILED(result))
+	{
+		return false;
+	}
+}
 
 void TextureClass::Shutdown()
 {
@@ -60,4 +71,9 @@ void TextureClass::Shutdown()
 ID3D11ShaderResourceView** TextureClass::GetTextureArray()
 {
 	return m_textures;
+}
+
+ID3D11ShaderResourceView* TextureClass::GetTexture()
+{
+	return m_textures[0];
 }

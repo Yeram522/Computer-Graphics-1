@@ -8,9 +8,8 @@ GraphicsClass::GraphicsClass()
 {
 	m_D3D = 0;
 	m_Camera = 0;
-	m_Model = 0;
-	m_LightShader = 0;
-	m_Light = 0;
+	m_ParticleShader = 0;
+	m_ParticleSystem = 0;
 }
 
 
@@ -52,54 +51,36 @@ bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hwnd)
 	}
 
 	// Set the initial position of the camera.
-	m_Camera->SetPosition(0.0f, 0.0f, -5.0f);	// for cube
-//	m_Camera->SetPosition(0.0f, 0.5f, -3.0f);	// for chair
-		
-	// Create the model object.
-	m_Model = new ModelClass;
-	if(!m_Model)
+	m_Camera->SetPosition(0.0f, -2.0f, -10.0f);
+	
+	// Create the particle shader object.
+	m_ParticleShader = new ParticleShaderClass;
+	if(!m_ParticleShader)
 	{
 		return false;
 	}
 
-	// Initialize the model object.
-	result = m_Model->Initialize(m_D3D->GetDevice(), L"./data/cube.obj", L"./data/seafloor.dds");
-//	result = m_Model->Initialize(m_D3D->GetDevice(), L"./data/chair.obj", L"./data/chair_d.dds");
+	// Initialize the particle shader object.
+	result = m_ParticleShader->Initialize(m_D3D->GetDevice(), hwnd);
 	if(!result)
 	{
-		MessageBox(hwnd, L"Could not initialize the model object.", L"Error", MB_OK);
+		MessageBox(hwnd, L"Could not initialize the particle shader object.", L"Error", MB_OK);
 		return false;
 	}
 
-	// Create the light shader object.
-	m_LightShader = new LightShaderClass;
-	if (!m_LightShader)
+	// Create the particle system object.
+	m_ParticleSystem = new ParticleSystemClass;
+	if(!m_ParticleSystem)
 	{
 		return false;
 	}
 
-	// Initialize the light shader object.
-	result = m_LightShader->Initialize(m_D3D->GetDevice(), hwnd);
-	if (!result)
-	{
-		MessageBox(hwnd, L"Could not initialize the light shader object.", L"Error", MB_OK);
-		return false;
-	}
-
-	// Create the light object.
-	m_Light = new LightClass;
-	if (!m_Light)
+	// Initialize the particle system object.
+	result = m_ParticleSystem->Initialize(m_D3D->GetDevice(), L"./data/star.dds");
+	if(!result)
 	{
 		return false;
 	}
-
-	// Initialize the light object.
-	m_Light->SetAmbientColor(0.15f, 0.15f, 0.15f, 1.0f);
-//	m_Light->SetAmbientColor(0.0f, 0.0f, 0.0f, 1.0f);
-	m_Light->SetDiffuseColor(1.0f, 1.0f, 1.0f, 1.0f);
-//	m_Light->SetDiffuseColor(0.0f, 0.0f, 0.0f, 1.0f);
-//	m_Light->SetDirection(0.0f, 0.0f, 1.0f);
-	m_Light->SetDirection(1.0f, 0.0f, 0.0f);
 
 	return true;
 }
@@ -107,12 +88,20 @@ bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hwnd)
 
 void GraphicsClass::Shutdown()
 {
-	// Release the model object.
-	if(m_Model)
+	// Release the particle system object.
+	if(m_ParticleSystem)
 	{
-		m_Model->Shutdown();
-		delete m_Model;
-		m_Model = 0;
+		m_ParticleSystem->Shutdown();
+		delete m_ParticleSystem;
+		m_ParticleSystem = 0;
+	}
+
+	// Release the particle shader object.
+	if(m_ParticleShader)
+	{
+		m_ParticleShader->Shutdown();
+		delete m_ParticleShader;
+		m_ParticleShader = 0;
 	}
 
 	// Release the camera object.
@@ -130,40 +119,20 @@ void GraphicsClass::Shutdown()
 		m_D3D = 0;
 	}
 
-	// Release the light object.
-	if (m_Light)
-	{
-		delete m_Light;
-		m_Light = 0;
-	}
-
-	// Release the light shader object.
-	if (m_LightShader)
-	{
-		m_LightShader->Shutdown();
-		delete m_LightShader;
-		m_LightShader = 0;
-	}
-	
 	return;
 }
 
-bool GraphicsClass::Frame()
+
+bool GraphicsClass::Frame(float frameTime)
 {
 	bool result;
 
-	static float rotation = 0.0f;
 
-
-	// Update the rotation variable each frame.
-	rotation += XM_PI * 0.005f;
-	if (rotation > 360.0f)
-	{
-		rotation -= 360.0f;
-	}
+	// Run the frame processing for the particle system.
+	m_ParticleSystem->Frame(frameTime, m_D3D->GetDeviceContext());
 
 	// Render the graphics scene.
-	result = Render(rotation);
+	result = Render();
 	if(!result)
 	{
 		return false;
@@ -172,11 +141,13 @@ bool GraphicsClass::Frame()
 	return true;
 }
 
-bool GraphicsClass::Render(float rotation)
+
+bool GraphicsClass::Render()
 {
 	XMMATRIX worldMatrix, viewMatrix, projectionMatrix;
 	bool result;
-	
+
+
 	// Clear the buffers to begin the scene.
 	m_D3D->BeginScene(0.0f, 0.0f, 0.0f, 1.0f);
 
@@ -188,20 +159,22 @@ bool GraphicsClass::Render(float rotation)
 	m_D3D->GetWorldMatrix(worldMatrix);
 	m_D3D->GetProjectionMatrix(projectionMatrix);
 
-	// Rotate the world matrix by the rotation value so that the triangle will spin.
-	worldMatrix = XMMatrixRotationY(rotation);
+	// Turn on alpha blending.
+	m_D3D->EnableAlphaBlending();
 
-	// Put the model vertex and index buffers on the graphics pipeline to prepare them for drawing.
-	m_Model->Render(m_D3D->GetDeviceContext());
+	// Put the particle system vertex and index buffers on the graphics pipeline to prepare them for drawing.
+	m_ParticleSystem->Render(m_D3D->GetDeviceContext());
 
-	// Render the model using the light shader.
-	result = m_LightShader->Render(m_D3D->GetDeviceContext(), m_Model->GetIndexCount(), worldMatrix, viewMatrix, projectionMatrix,
-		m_Model->GetTexture(), m_Light->GetDirection(), m_Light->GetAmbientColor(), m_Light->GetDiffuseColor());
-	
+	// Render the model using the texture shader.
+	result = m_ParticleShader->Render(m_D3D->GetDeviceContext(), m_ParticleSystem->GetIndexCount(), worldMatrix, viewMatrix, projectionMatrix, 
+									  m_ParticleSystem->GetTexture());
 	if(!result)
 	{
 		return false;
 	}
+
+	// Turn off alpha blending.
+	m_D3D->DisableAlphaBlending();
 
 	// Present the rendered scene to the screen.
 	m_D3D->EndScene();

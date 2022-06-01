@@ -15,38 +15,47 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="d3dclass.h">
-      <Filter>소스 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="DDSTextureLoader.h">
-      <Filter>소스 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="graphicsclass.h">
-      <Filter>소스 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="inputclass.h">
-      <Filter>소스 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="lightclass.h">
-      <Filter>소스 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="lightshaderclass.h">
-      <Filter>소스 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="modelclass.h">
-      <Filter>소스 파일</Filter>
+    <ClInclude Include="textureclass.h">
+      <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="systemclass.h">
-      <Filter>소스 파일</Filter>
+      <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="AlignedAllocationPolicy.h">
-      <Filter>소스 파일</Filter>
+    <ClInclude Include="modelclass.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="lightshaderclass.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="lightclass.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="inputclass.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="graphicsclass.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="DDSTextureLoader.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="d3dclass.h">
+      <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="cameraclass.h">
-      <Filter>소스 파일</Filter>
+      <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="textureclass.h">
-      <Filter>소스 파일</Filter>
+    <ClInclude Include="AlignedAllocationPolicy.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="timerclass.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleSystemClass.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleShaderClass.h">
+      <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -83,12 +92,27 @@
     <ClCompile Include="textureclass.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="timerclass.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleSystemClass.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleShaderClass.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="data\light.ps">
       <Filter>리소스 파일</Filter>
     </None>
     <None Include="data\light.vs">
+      <Filter>리소스 파일</Filter>
+    </None>
+    <None Include="data\particle.ps">
+      <Filter>리소스 파일</Filter>
+    </None>
+    <None Include="data\particle.vs">
       <Filter>리소스 파일</Filter>
     </None>
   </ItemGroup>

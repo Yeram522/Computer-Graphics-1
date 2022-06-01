@@ -26,9 +26,10 @@ bool TextureClass::Initialize(ID3D11Device* device, const WCHAR* filename)
 {
 	HRESULT result;
 
-	// Load texture data from a file by using DDS texture loader.
+
+	// Load the texture in.
 	result = CreateDDSTextureFromFile(device, filename, nullptr, &m_texture);
-	if (FAILED(result))
+	if(FAILED(result))
 	{
 		return false;
 	}

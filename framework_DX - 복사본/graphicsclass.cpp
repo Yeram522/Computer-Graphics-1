@@ -76,7 +76,7 @@ bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hwnd)
 	}
 
 	// Initialize the particle system object.
-	result = m_ParticleSystem->Initialize(m_D3D->GetDevice(), L"../Engine/data/star.dds");
+	result = m_ParticleSystem->Initialize(m_D3D->GetDevice(), L"./data/star.dds");
 	if(!result)
 	{
 		return false;
@@ -144,7 +144,7 @@ bool GraphicsClass::Frame(float frameTime)
 
 bool GraphicsClass::Render()
 {
-	D3DXMATRIX worldMatrix, viewMatrix, projectionMatrix;
+	XMMATRIX worldMatrix, viewMatrix, projectionMatrix;
 	bool result;
 
 

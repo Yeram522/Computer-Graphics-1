@@ -45,6 +45,9 @@
     <ClCompile Include="timerclass.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="DDSTextureLoader.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cameraclass.h">
@@ -74,13 +77,16 @@
     <ClInclude Include="timerclass.h">
       <Filter>소스 파일</Filter>
     </ClInclude>
+    <ClInclude Include="DDSTextureLoader.h">
+      <Filter>소스 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="particle.ps">
-      <Filter>소스 파일</Filter>
+      <Filter>리소스 파일</Filter>
     </None>
     <None Include="particle.vs">
-      <Filter>소스 파일</Filter>
+      <Filter>리소스 파일</Filter>
     </None>
   </ItemGroup>
 </Project>

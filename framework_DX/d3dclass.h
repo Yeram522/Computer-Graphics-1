@@ -10,7 +10,8 @@
 /////////////
 #pragma comment(lib, "dxgi.lib")
 #pragma comment(lib, "d3d11.lib")
-#pragma comment(lib, "d3dcompiler.lib")
+
+
 
 //////////////
 // INCLUDES //
@@ -20,14 +21,11 @@
 #include <d3d11.h>
 #include <directxmath.h>
 
-#include "AlignedAllocationPolicy.h"
-
 using namespace DirectX;
-
 ////////////////////////////////////////////////////////////////////////////////
 // Class name: D3DClass
 ////////////////////////////////////////////////////////////////////////////////
-class D3DClass : public AlignedAllocationPolicy<16>
+class D3DClass
 {
 public:
 	D3DClass();
@@ -49,6 +47,9 @@ public:
 
 	void GetVideoCardInfo(char*, int&);
 
+	void EnableAlphaBlending();
+	void DisableAlphaBlending();
+
 private:
 	bool m_vsync_enabled;
 	int m_videoCardMemory;
@@ -64,6 +65,8 @@ private:
 	XMMATRIX m_projectionMatrix;
 	XMMATRIX m_worldMatrix;
 	XMMATRIX m_orthoMatrix;
+	ID3D11BlendState* m_alphaEnableBlendingState;
+	ID3D11BlendState* m_alphaDisableBlendingState;
 };
 
 #endif

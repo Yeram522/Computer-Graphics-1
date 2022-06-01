@@ -10,14 +10,11 @@
 //////////////
 #include <directxmath.h>
 
-#include "AlignedAllocationPolicy.h"
-
 using namespace DirectX;
-
 ////////////////////////////////////////////////////////////////////////////////
 // Class name: CameraClass
 ////////////////////////////////////////////////////////////////////////////////
-class CameraClass : public AlignedAllocationPolicy<16>
+class CameraClass
 {
 public:
 	CameraClass();
@@ -27,15 +24,15 @@ public:
 	void SetPosition(float, float, float);
 	void SetRotation(float, float, float);
 
-	XMFLOAT3 GetPosition();
-	XMFLOAT3 GetRotation();
+	XMVECTOR GetPosition();
+	XMVECTOR GetRotation();
 
 	void Render();
 	void GetViewMatrix(XMMATRIX&);
 
 private:
-	XMFLOAT3 m_position;
-	XMFLOAT3 m_rotation;
+	float m_positionX, m_positionY, m_positionZ;
+	float m_rotationX, m_rotationY, m_rotationZ;
 	XMMATRIX m_viewMatrix;
 };
 

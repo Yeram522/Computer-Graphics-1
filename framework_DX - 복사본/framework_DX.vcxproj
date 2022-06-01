@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClCompile Include="cameraclass.cpp" />
     <ClCompile Include="d3dclass.cpp" />
+    <ClCompile Include="DDSTextureLoader.cpp" />
     <ClCompile Include="graphicsclass.cpp" />
     <ClCompile Include="inputclass.cpp" />
     <ClCompile Include="main.cpp" />
@@ -33,6 +34,7 @@
   <ItemGroup>
     <ClInclude Include="cameraclass.h" />
     <ClInclude Include="d3dclass.h" />
+    <ClInclude Include="DDSTextureLoader.h" />
     <ClInclude Include="graphicsclass.h" />
     <ClInclude Include="inputclass.h" />
     <ClInclude Include="particleshaderclass.h" />
