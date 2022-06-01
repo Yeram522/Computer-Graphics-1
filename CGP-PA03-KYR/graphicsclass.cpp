@@ -75,6 +75,10 @@ bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hwnd)
 	//atlas
 	m_Model.push_back(new ModelClass({ {XMFLOAT3(0.0f, -0.28f, 0.0f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(5.0f, 5.0f, 5.0f)}, }, m_D3D->GetDevice(), L"./data/atlas.obj", { L"./data/Altar_diffuse.dds", L"./data/Altar_ao.dds",L"./data/Altar_normal.dds",L"./data/altar_specular.dds" }));
 
+
+	//mystic_rock
+	m_Model.push_back(new ModelClass({ {XMFLOAT3(0.5f, 2.0f, 9.5f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(1.0f, 1.0f, 1.0f)}, }, m_D3D->GetDevice(), L"./data/MysticRock.obj", { L"./data/MysticRock_BaseColor.dds", L"./data/MysticRock_Height.dds",L"./data/MysticRock_Normal.dds",L"./data/MysticRock_Emissive.dds" }));
+
 	//flag
 	m_Model.push_back(new ModelClass({ {XMFLOAT3(-1.6f, -0.25f, -0.55f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(5.0f, 5.0f, 5.0f)}, }, m_D3D->GetDevice(), L"./data/flag.obj", { L"./data/flag_diffuse.dds",0,L"./data/flag_normal.dds",L"./data/flag_specular.dds" }));
 
@@ -125,8 +129,8 @@ bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hwnd)
 	// Initialize the light object.
 	m_Light->SetAmbientColor(0.15f, 0.15f, 0.15f, 1.0f);
 	//m_Light->SetAmbientColor(0.0f, 0.0f, 0.0f, 1.0f);
-	m_Light->SetDiffuseColor(0.08f, 0.08f, 0.08f, 1.0f);
-	//m_Light->SetDiffuseColor(0.0f, 0.0f, 0.0f, 1.0f);
+	m_Light->SetDiffuseColor(0.6f, 0.6f, 0.6f, 1.0f);
+	//m_Light->SetDiffuseColor(1.0f, 1.0f, 1.0f, 1.0f);
 //	m_Light->SetDirection(0.0f, 0.0f, 1.0f);
 //	m_Light->SetDirection(1.0f, 0.0f, 0.0f);
 	m_Light->SetDirection(0.5f, -1.0f, 0.5f);
@@ -140,7 +144,7 @@ bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hwnd)
 		return false;
 	}
 	m_Light1->SetDiffuseColor(1.0f, 1.0f, 1.0f, 1.0f);
-	m_Light1->SetPosition(-2.0f, 50.0f, 1.0f);
+	m_Light1->SetPosition(0.0f, 2.0f, 10.0f);
 
 	//두번째 조명-> 빨강
 	m_Light2 = new LightClass;
@@ -148,8 +152,8 @@ bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hwnd)
 	{
 		return false;
 	}
-	m_Light2->SetDiffuseColor(1.0f, 0.0f, 0.0f, 1.0f);
-	m_Light2->SetPosition(10.0f, -0.5f, -10.0);
+	m_Light2->SetDiffuseColor(1.0f, 1.0f, 1.0f, 1.0f);
+	m_Light2->SetPosition(0.0f, 2.0f, -10.0);
 
 	//세번째 조명-> 파랑
 	m_Light3 = new LightClass;
@@ -158,7 +162,7 @@ bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hwnd)
 		return false;
 	}
 	m_Light3->SetDiffuseColor(0.0f, 0.0f, 1.0f, 1.0f);
-	m_Light3->SetPosition(-10.0f, 0.5f, -10.0);
+	m_Light3->SetPosition(0.0f, 3.0f, 0.0f);
 
 	//네번째 조명
 	m_Light4 = new LightClass;
@@ -166,8 +170,8 @@ bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hwnd)
 	{
 		return false;
 	}
-	m_Light4->SetDiffuseColor(0.0f, 0.0f, 0.0f, 1.0f);
-	m_Light4->SetPosition(1.0f, 0.20f, -1.0f);
+	m_Light4->SetDiffuseColor(1.0f, 1.0f, 1.0f, 1.0f);
+	m_Light4->SetPosition(0.0f, 2.0f, 10.0f);
 	return true;
 }
 
