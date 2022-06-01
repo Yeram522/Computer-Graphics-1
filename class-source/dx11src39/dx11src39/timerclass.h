@@ -1,34 +1,36 @@
 ////////////////////////////////////////////////////////////////////////////////
-// Filename: textureclass.h
+// Filename: timerclass.h
 ////////////////////////////////////////////////////////////////////////////////
-#ifndef _TEXTURECLASS_H_
-#define _TEXTURECLASS_H_
+#ifndef _TIMERCLASS_H_
+#define _TIMERCLASS_H_
 
 
 //////////////
 // INCLUDES //
 //////////////
-#include <d3d11.h>
-#include <d3dx11tex.h>
+#include <windows.h>
 
 
 ////////////////////////////////////////////////////////////////////////////////
-// Class name: TextureClass
+// Class name: TimerClass
 ////////////////////////////////////////////////////////////////////////////////
-class TextureClass
+class TimerClass
 {
 public:
-	TextureClass();
-	TextureClass(const TextureClass&);
-	~TextureClass();
+	TimerClass();
+	TimerClass(const TimerClass&);
+	~TimerClass();
 
-	bool Initialize(ID3D11Device*, WCHAR*);
-	void Shutdown();
+	bool Initialize();
+	void Frame();
 
-	ID3D11ShaderResourceView* GetTexture();
+	float GetTime();
 
 private:
-	ID3D11ShaderResourceView* m_texture;
+	INT64 m_frequency;
+	float m_ticksPerMs;
+	INT64 m_startTime;
+	float m_frameTime;
 };
 
 #endif

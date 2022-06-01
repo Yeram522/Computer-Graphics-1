@@ -20,45 +20,30 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="cameraclass.cpp" />
-    <ClCompile Include="colorshaderclass.cpp" />
     <ClCompile Include="d3dclass.cpp" />
-    <ClCompile Include="DDSTextureLoader.cpp" />
     <ClCompile Include="graphicsclass.cpp" />
     <ClCompile Include="inputclass.cpp" />
-    <ClCompile Include="lightclass.cpp" />
-    <ClCompile Include="lightshaderclass.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="modelclass.cpp" />
+    <ClCompile Include="particleshaderclass.cpp" />
+    <ClCompile Include="particlesystemclass.cpp" />
     <ClCompile Include="systemclass.cpp" />
     <ClCompile Include="textureclass.cpp" />
-    <ClCompile Include="textureshaderclass.cpp" />
+    <ClCompile Include="timerclass.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AlignedAllocationPolicy.h" />
     <ClInclude Include="cameraclass.h" />
-    <ClInclude Include="colorshaderclass.h" />
     <ClInclude Include="d3dclass.h" />
-    <ClInclude Include="DDSTextureLoader.h" />
     <ClInclude Include="graphicsclass.h" />
     <ClInclude Include="inputclass.h" />
-    <ClInclude Include="lightclass.h" />
-    <ClInclude Include="lightshaderclass.h" />
-    <ClInclude Include="modelclass.h" />
+    <ClInclude Include="particleshaderclass.h" />
+    <ClInclude Include="particlesystemclass.h" />
     <ClInclude Include="systemclass.h" />
     <ClInclude Include="textureclass.h" />
-    <ClInclude Include="textureshaderclass.h" />
+    <ClInclude Include="timerclass.h" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="data\chair_d.dds" />
-    <Image Include="data\seafloor.dds" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="data\color.ps" />
-    <None Include="data\color.vs" />
-    <None Include="data\light.ps" />
-    <None Include="data\light.vs" />
-    <None Include="data\texture.ps" />
-    <None Include="data\texture.vs" />
+    <None Include="particle.ps" />
+    <None Include="particle.vs" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
