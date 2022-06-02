@@ -45,12 +45,6 @@
     <ClInclude Include="modelclass.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="ParticleShaderClass.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="ParticleSystemClass.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="systemclass.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
@@ -58,15 +52,6 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="textureshaderclass.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="timerclass.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="WaterShaderClass.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="RefractionShaderclass.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
@@ -101,12 +86,6 @@
     <ClCompile Include="modelclass.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="ParticleShaderClass.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="ParticleSystemClass.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="systemclass.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
@@ -116,39 +95,12 @@
     <ClCompile Include="textureshaderclass.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="timerclass.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="WaterShaderClass.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="RefractionShaderclass.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="data\particle.ps">
-      <Filter>리소스 파일</Filter>
-    </None>
-    <None Include="data\particle.vs">
-      <Filter>리소스 파일</Filter>
-    </None>
     <None Include="data\light.ps">
       <Filter>리소스 파일</Filter>
     </None>
     <None Include="data\light.vs">
-      <Filter>리소스 파일</Filter>
-    </None>
-    <None Include="data\water.vs">
-      <Filter>리소스 파일</Filter>
-    </None>
-    <None Include="data\water.ps">
-      <Filter>리소스 파일</Filter>
-    </None>
-    <None Include="data\refraction.ps">
-      <Filter>리소스 파일</Filter>
-    </None>
-    <None Include="data\refraction.vs">
       <Filter>리소스 파일</Filter>
     </None>
   </ItemGroup>

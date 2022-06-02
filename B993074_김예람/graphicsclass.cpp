@@ -72,12 +72,12 @@ bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hwnd)
 
 
 	// Create the model object.
-	// Initialize the model object.
+	// Initialize the model object
 
-	//water cube
-	m_Model.push_back(new ModelClass({ {XMFLOAT3(0.0f, 3.0f, 0.0f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(5.0f, 5.0f, 5.0f)}, }, m_D3D->GetDevice(), L"./data/cube.obj", { L"./data/water01.dds",0,0,0 }));
+	//cloud
+	m_Jupiter = new ModelClass({ {XMFLOAT3(0.0f,0.4f, 2.0f), XMFLOAT3(0.0f, 180.0f, 0.0f), XMFLOAT3(200.0f, 200.0f, 200.0f)}, }, m_D3D->GetDevice(), L"./data/sphere.obj", { L"./data/jupiter.dds", 0,0,0 });
 
-	//atlas
+	
 	m_Model.push_back(new ModelClass({ {XMFLOAT3(0.0f, -0.28f, 0.0f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(5.0f, 5.0f, 5.0f)}, }, m_D3D->GetDevice(), L"./data/atlas.obj", { L"./data/Altar_diffuse.dds", L"./data/Altar_ao.dds",L"./data/Altar_normal.dds",L"./data/altar_specular.dds" }));
 	
 	//mystic_rock
@@ -177,21 +177,6 @@ bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hwnd)
 	m_Light4->SetDiffuseColor(1.0f, 1.0f, 1.0f, 1.0f);
 	m_Light4->SetPosition(0.0f, 2.0f, 10.0f);
 
-
-	//파티클 셰이더 객체를 생성한다.
-	/*m_ParticleSystem = new ParticleSystemClass;
-	if (!m_ParticleSystem)
-	{
-		return false;
-	}*/
-
-	////파티클 시스템 객체를 초기화한다.
-	/*result = m_ParticleSystem->Initialize(m_D3D->GetDevice(), L"./data/star.dds");
-	if (!result)
-	{
-		return false;
-	}*/
-
 	return true;
 }
 
@@ -262,19 +247,6 @@ void GraphicsClass::Shutdown()
 		m_LightShader = 0;
 	}
 	
-	/*if (m_ParticleSystem)
-	{
-		m_ParticleSystem->Shutdown();
-		delete m_ParticleSystem;
-		m_ParticleSystem = 0;
-	}
-
-	if (m_ParticleShader)
-	{
-		m_ParticleShader->Shutdown();
-		delete m_ParticleShader;
-		m_ParticleShader = 0;
-	}*/
 	return;
 }
 
@@ -286,7 +258,7 @@ bool GraphicsClass::Frame(float frameTime)
 
 
 	// Update the rotation variable each frame.
-	rotation += XM_PI * 0.005f;
+	rotation += XM_PI * 0.0003f;
 	if (rotation > 360.0f)
 	{
 		rotation -= 360.0f;
@@ -390,8 +362,6 @@ bool GraphicsClass::Frame(float frameTime)
 		}
 	}
 
-	//m_ParticleSystem->Frame(frameTime, m_D3D->GetDeviceContext());
-
 	// Render the graphics scene.
 	result = Render(rotation);
 	if (!result)
@@ -459,7 +429,7 @@ bool GraphicsClass::Render(float rotation)
 	lightPositions[3] = m_Light4->GetPosition();
 
 	// Clear the buffers to begin the scene.
-	m_D3D->BeginScene(0.854f, 0.960f, 0.964f, 1.0f);
+	m_D3D->BeginScene(0.0f, 0.0f, 0.0f, 1.0f);
 	//m_D3D->BeginScene(1.0f, 1.0f, 1.0f,1.0f);
 
 	// Generate the view matrix based on the camera's position.
@@ -472,18 +442,19 @@ bool GraphicsClass::Render(float rotation)
 
 	viewMatrix *= XMMatrixTranslation(0.0f, 0.0f, 10.0f) * XMMatrixLookAtLH(m_Eye, m_At, m_Up);
 
-	//m_D3D->EnableAlphaBlending();
+	
+	XMMATRIX t_worldMatrix = worldMatrix;
+	m_Jupiter->Render(m_D3D->GetDeviceContext());
+	t_worldMatrix =
+		XMMatrixScaling(m_Jupiter->m_instancedes[0].scale.x, m_Jupiter->m_instancedes[0].scale.y, m_Jupiter->m_instancedes[0].scale.z)* XMMatrixRotationX(-rotation) *worldMatrix;
+	result = m_LightShader->Render(m_D3D->GetDeviceContext(), m_Jupiter->GetVertexCount(), m_Jupiter->GetInstanceCount(),
+			t_worldMatrix, viewMatrix, projectionMatrix, m_Jupiter->GetTextureArray(), m_Light->GetDirection(), m_Light->GetAmbientColor(), m_Light->GetDiffuseColor(),
+			m_Camera->GetPosition(), m_Light->GetSpecularColor(), m_Light->GetSpecularPower(), diffuseColors, lightPositions);
 
-	/*m_ParticleSystem->Render(m_D3D->GetDeviceContext());
-
-	result = m_ParticleShader->Render(m_D3D->GetDeviceContext(), m_ParticleSystem->GetIndexCount(), worldMatrix, viewMatrix, projectionMatrix,
-		m_ParticleSystem->GetTexture());
 	if (!result)
 	{
 		return false;
-	}*/
-
-
+	}
 	// Rotate the world matrix by the rotation value so that the triangle will spin.
 	//worldMatrix *= XMMatrixScaling(12.0f, 12.0f,12.0f);
 	// Put the model vertex and index buffers on the graphics pipeline to prepare them for drawing.
@@ -503,8 +474,6 @@ bool GraphicsClass::Render(float rotation)
 			return false;
 		}
 	}
-
-	m_D3D->DisableAlphaBlending();
 
 	// Present the rendered scene to the screen.
 	m_D3D->EndScene();
