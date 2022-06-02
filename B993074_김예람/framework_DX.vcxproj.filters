@@ -66,6 +66,9 @@
     <ClInclude Include="WaterShaderClass.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="RefractionShaderclass.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="cameraclass.cpp">
@@ -119,6 +122,9 @@
     <ClCompile Include="WaterShaderClass.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="RefractionShaderclass.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="data\particle.ps">
@@ -137,6 +143,12 @@
       <Filter>리소스 파일</Filter>
     </None>
     <None Include="data\water.ps">
+      <Filter>리소스 파일</Filter>
+    </None>
+    <None Include="data\refraction.ps">
+      <Filter>리소스 파일</Filter>
+    </None>
+    <None Include="data\refraction.vs">
       <Filter>리소스 파일</Filter>
     </None>
   </ItemGroup>

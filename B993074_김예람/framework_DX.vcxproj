@@ -31,6 +31,7 @@
     <ClInclude Include="modelclass.h" />
     <ClInclude Include="ParticleShaderClass.h" />
     <ClInclude Include="ParticleSystemClass.h" />
+    <ClInclude Include="RefractionShaderclass.h" />
     <ClInclude Include="systemclass.h" />
     <ClInclude Include="textureclass.h" />
     <ClInclude Include="textureshaderclass.h" />
@@ -50,6 +51,7 @@
     <ClCompile Include="modelclass.cpp" />
     <ClCompile Include="ParticleShaderClass.cpp" />
     <ClCompile Include="ParticleSystemClass.cpp" />
+    <ClCompile Include="RefractionShaderclass.cpp" />
     <ClCompile Include="systemclass.cpp" />
     <ClCompile Include="textureclass.cpp" />
     <ClCompile Include="textureshaderclass.cpp" />
@@ -61,6 +63,8 @@
     <None Include="data\light.vs" />
     <None Include="data\particle.ps" />
     <None Include="data\particle.vs" />
+    <None Include="data\refraction.ps" />
+    <None Include="data\refraction.vs" />
     <None Include="data\water.ps" />
     <None Include="data\water.vs" />
   </ItemGroup>
