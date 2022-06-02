@@ -35,6 +35,7 @@
     <ClInclude Include="textureclass.h" />
     <ClInclude Include="textureshaderclass.h" />
     <ClInclude Include="timerclass.h" />
+    <ClInclude Include="WaterShaderClass.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="cameraclass.cpp" />
@@ -53,15 +54,15 @@
     <ClCompile Include="textureclass.cpp" />
     <ClCompile Include="textureshaderclass.cpp" />
     <ClCompile Include="timerclass.cpp" />
+    <ClCompile Include="WaterShaderClass.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="shader-error.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="data\color.ps" />
-    <None Include="data\color.vs" />
+    <None Include="data\light.ps" />
+    <None Include="data\light.vs" />
     <None Include="data\particle.ps" />
     <None Include="data\particle.vs" />
+    <None Include="data\water.ps" />
+    <None Include="data\water.vs" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

@@ -74,11 +74,12 @@ bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hwnd)
 	// Create the model object.
 	// Initialize the model object.
 
+	//water cube
+	m_Model.push_back(new ModelClass({ {XMFLOAT3(0.0f, 3.0f, 0.0f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(5.0f, 5.0f, 5.0f)}, }, m_D3D->GetDevice(), L"./data/cube.obj", { L"./data/water01.dds",0,0,0 }));
 
 	//atlas
 	m_Model.push_back(new ModelClass({ {XMFLOAT3(0.0f, -0.28f, 0.0f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(5.0f, 5.0f, 5.0f)}, }, m_D3D->GetDevice(), L"./data/atlas.obj", { L"./data/Altar_diffuse.dds", L"./data/Altar_ao.dds",L"./data/Altar_normal.dds",L"./data/altar_specular.dds" }));
-
-
+	
 	//mystic_rock
 	m_Model.push_back(new ModelClass({ {XMFLOAT3(0.5f, 2.0f, 9.5f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(1.0f, 1.0f, 1.0f)}, }, m_D3D->GetDevice(), L"./data/MysticRock.obj", { L"./data/MysticRock_BaseColor.dds", L"./data/MysticRock_Height.dds",L"./data/MysticRock_Normal.dds",L"./data/MysticRock_Emissive.dds" }));
 
