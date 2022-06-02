@@ -10,14 +10,15 @@
 ///////////////////////
 #include "d3dclass.h"
 #include "cameraclass.h"
-#include "particleshaderclass.h"
-#include "particlesystemclass.h"
+#include "modelclass.h"
+#include "lightshaderclass.h"
+#include "lightclass.h"
 
 
 /////////////
 // GLOBALS //
 /////////////
-const bool FULL_SCREEN = true;
+const bool FULL_SCREEN = false;
 const bool VSYNC_ENABLED = true;
 const float SCREEN_DEPTH = 1000.0f;
 const float SCREEN_NEAR = 0.1f;
@@ -35,16 +36,18 @@ public:
 
 	bool Initialize(int, int, HWND);
 	void Shutdown();
-	bool Frame(float);
+	bool Frame();
 
 private:
-	bool Render();
+	bool Render(float);
 
 private:
 	D3DClass* m_D3D;
 	CameraClass* m_Camera;
-	ParticleShaderClass* m_ParticleShader;
-	ParticleSystemClass* m_ParticleSystem;
+	ModelClass* m_Model;
+
+	LightShaderClass* m_LightShader;
+	LightClass* m_Light;
 };
 
 #endif

@@ -2,7 +2,9 @@
 // Filename: textureclass.cpp
 ////////////////////////////////////////////////////////////////////////////////
 #include "textureclass.h"
+#include "DDSTextureLoader.h"
 
+using namespace DirectX;
 
 TextureClass::TextureClass()
 {
@@ -20,14 +22,13 @@ TextureClass::~TextureClass()
 }
 
 
-bool TextureClass::Initialize(ID3D11Device* device, WCHAR* filename)
+bool TextureClass::Initialize(ID3D11Device* device, const WCHAR* filename)
 {
 	HRESULT result;
 
-
-	// Load the texture in.
-	result = D3DX11CreateShaderResourceViewFromFile(device, filename, NULL, NULL, &m_texture, NULL);
-	if(FAILED(result))
+	// Load texture data from a file by using DDS texture loader.
+	result = CreateDDSTextureFromFile(device, filename, nullptr, &m_texture);
+	if (FAILED(result))
 	{
 		return false;
 	}

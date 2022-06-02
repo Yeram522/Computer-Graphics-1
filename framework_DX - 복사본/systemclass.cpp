@@ -8,7 +8,6 @@ SystemClass::SystemClass()
 {
 	m_Input = 0;
 	m_Graphics = 0;
-	m_Timer = 0;
 }
 
 
@@ -59,34 +58,12 @@ bool SystemClass::Initialize()
 		return false;
 	}
 	
-	// Create the timer object.
-	m_Timer = new TimerClass;
-	if(!m_Timer)
-	{
-		return false;
-	}
-
-	// Initialize the timer object.
-	result = m_Timer->Initialize();
-	if(!result)
-	{
-		MessageBox(m_hwnd, L"Could not initialize the Timer object.", L"Error", MB_OK);
-		return false;
-	}
-
 	return true;
 }
 
 
 void SystemClass::Shutdown()
 {
-	// Release the timer object.
-	if(m_Timer)
-	{
-		delete m_Timer;
-		m_Timer = 0;
-	}
-
 	// Release the graphics object.
 	if(m_Graphics)
 	{
@@ -155,9 +132,6 @@ bool SystemClass::Frame()
 	bool result;
 
 
-	// Update the system stats.
-	m_Timer->Frame();
-
 	// Check if the user pressed escape and wants to exit the application.
 	if(m_Input->IsKeyDown(VK_ESCAPE))
 	{
@@ -165,7 +139,7 @@ bool SystemClass::Frame()
 	}
 
 	// Do the frame processing for the graphics object.
-	result = m_Graphics->Frame(m_Timer->GetTime());
+	result = m_Graphics->Frame();
 	if(!result)
 	{
 		return false;
@@ -271,7 +245,7 @@ void SystemClass::InitializeWindows(int& screenWidth, int& screenHeight)
 
 	// Create the window with the screen settings and get the handle to it.
 	m_hwnd = CreateWindowEx(WS_EX_APPWINDOW, m_applicationName, m_applicationName, 
-						    WS_POPUP,
+						    WS_CLIPSIBLINGS | WS_CLIPCHILDREN | WS_POPUP,
 						    posX, posY, screenWidth, screenHeight, NULL, NULL, m_hinstance, NULL);
 
 	// Bring the window up on the screen and set it as main focus.
