@@ -20,6 +20,8 @@ GraphicsClass::GraphicsClass()
 	m_Light3 = 0;
 	m_Light4 = 0;
 
+	m_SkyDome = 0;
+
 	m_ParticleShader = 0;
 	m_ParticleSystem = 0;
 
@@ -73,6 +75,8 @@ bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hwnd)
 
 	// Create the model object.
 	// Initialize the model object
+	//skydome
+	m_SkyDome = new ModelClass({ {XMFLOAT3(0.0f,0.0f, 0.0f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(1.0f, 1.0f, 1.0f) }, }, m_D3D->GetDevice(), L"./data/SkyDome.obj", { L"./data/jupiter.dds", 0,0,0 });
 
 	//cloud
 	m_Jupiter = new ModelClass({ {XMFLOAT3(0.0f,0.4f, 110.0f), XMFLOAT3(0.0f, 180.0f, 0.0f), XMFLOAT3(5.0f, 5.0f, 5.0f) },},m_D3D->GetDevice(), L"./data/Sphere.obj", { L"./data/jupiter.dds", 0,0,0 });
@@ -176,6 +180,7 @@ bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hwnd)
 	}
 	m_Light4->SetDiffuseColor(1.0f, 1.0f, 1.0f, 1.0f);
 	m_Light4->SetPosition(0.0f, 2.0f, 10.0f);
+
 
 	return true;
 }
@@ -414,6 +419,7 @@ bool GraphicsClass::Render(float rotation)
 	XMMATRIX worldMatrix, viewMatrix, projectionMatrix;	
 	XMFLOAT4 diffuseColors[4];
 	XMFLOAT4 lightPositions[4];
+	XMFLOAT3 cameraPosition;
 	bool result;
 
 	// Create the diffuse color array from the four light colors.
@@ -443,6 +449,7 @@ bool GraphicsClass::Render(float rotation)
 	viewMatrix *= XMMatrixTranslation(0.0f, 0.0f, 10.0f) * XMMatrixLookAtLH(m_Eye, m_At, m_Up);
 
 	
+	
 	XMMATRIX t_worldMatrix = worldMatrix;
 	m_Jupiter->Render(m_D3D->GetDeviceContext());
 	t_worldMatrix =
@@ -455,6 +462,8 @@ bool GraphicsClass::Render(float rotation)
 	{
 		return false;
 	}
+
+	
 	// Rotate the world matrix by the rotation value so that the triangle will spin.
 	//worldMatrix *= XMMatrixScaling(12.0f, 12.0f,12.0f);
 	// Put the model vertex and index buffers on the graphics pipeline to prepare them for drawing.
@@ -474,7 +483,25 @@ bool GraphicsClass::Render(float rotation)
 			return false;
 		}
 	}
+	//z카메라 위치얻고
+	cameraPosition = m_Camera->GetPosition();
+	worldMatrix = XMMatrixTranslation(cameraPosition.x, cameraPosition.y, cameraPosition.z);
 
+	// 컬링끄기
+	m_D3D->TurnOffCulling();
+	//m_SkyDome
+	m_SkyDome->Render(m_D3D->GetDeviceContext());
+	result = m_LightShader->Render(m_D3D->GetDeviceContext(), m_Jupiter->GetVertexCount(), m_Jupiter->GetInstanceCount(),
+		worldMatrix, viewMatrix, projectionMatrix, m_Jupiter->GetTextureArray(), m_Light->GetDirection(), m_Light->GetAmbientColor(), m_Light->GetDiffuseColor(),
+		m_Camera->GetPosition(), m_Light->GetSpecularColor(), m_Light->GetSpecularPower(), diffuseColors, lightPositions);
+
+	if (!result)
+	{
+		return false;
+	}
+
+	// 컬링끄기
+	m_D3D->TurnOnCulling();
 	// Present the rendered scene to the screen.
 	m_D3D->EndScene();
 

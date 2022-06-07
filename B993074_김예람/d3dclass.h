@@ -51,7 +51,8 @@ public:
 
 	void EnableAlphaBlending();
 	void DisableAlphaBlending();
-
+	void TurnOnCulling();
+	void TurnOffCulling();
 private:
 	bool m_vsync_enabled;
 	int m_videoCardMemory;
@@ -64,6 +65,7 @@ private:
 	ID3D11DepthStencilState* m_depthStencilState;
 	ID3D11DepthStencilView* m_depthStencilView;
 	ID3D11RasterizerState* m_rasterState;
+	ID3D11RasterizerState* m_rasterStateNoCulling;
 
 	ID3D11BlendState* m_alphaEnableBlendingState;
 	ID3D11BlendState* m_alphaDisableBlendingState;

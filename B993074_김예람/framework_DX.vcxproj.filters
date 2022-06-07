@@ -54,6 +54,12 @@
     <ClInclude Include="textureshaderclass.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="skydomeclass.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="skydomeshaderclass.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="cameraclass.cpp">
@@ -95,12 +101,24 @@
     <ClCompile Include="textureshaderclass.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="skydomeclass.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="skydomeshaderclass.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="data\light.ps">
       <Filter>리소스 파일</Filter>
     </None>
     <None Include="data\light.vs">
+      <Filter>리소스 파일</Filter>
+    </None>
+    <None Include="data\skydome.vs">
+      <Filter>리소스 파일</Filter>
+    </None>
+    <None Include="data\skydome.ps">
       <Filter>리소스 파일</Filter>
     </None>
   </ItemGroup>

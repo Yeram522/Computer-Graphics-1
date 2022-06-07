@@ -14,6 +14,7 @@ D3DClass::D3DClass()
 	m_depthStencilState = 0;
 	m_depthStencilView = 0;
 	m_rasterState = 0;
+	m_rasterStateNoCulling = 0;
 }
 
 
@@ -320,6 +321,16 @@ bool D3DClass::Initialize(int screenWidth, int screenHeight, bool vsync, HWND hw
 		return false;
 	}
 
+	// Setup a raster description which turns off back face culling.
+	rasterDesc.CullMode = D3D11_CULL_NONE;
+
+	// Create the no culling rasterizer state.
+	result = m_device->CreateRasterizerState(&rasterDesc, &m_rasterStateNoCulling);
+	if (FAILED(result))
+	{
+		return false;
+	}
+
 	// Now set the rasterizer state.
 	m_deviceContext->RSSetState(m_rasterState);
 	
@@ -393,6 +404,12 @@ void D3DClass::Shutdown()
 	{
 		m_rasterState->Release();
 		m_rasterState = 0;
+	}
+
+	if (m_rasterStateNoCulling)
+	{
+		m_rasterStateNoCulling->Release();
+		m_rasterStateNoCulling = 0;
 	}
 
 	if(m_depthStencilView)
@@ -553,4 +570,14 @@ void D3DClass::DisableAlphaBlending()
 	m_deviceContext->OMSetBlendState(m_alphaDisableBlendingState, blendFactor, 0xffffffff);
 
 	return;
+}
+
+void D3DClass::TurnOnCulling()
+{
+	m_deviceContext->RSSetState(m_rasterState);
+}
+
+void D3DClass::TurnOffCulling()
+{
+	m_deviceContext->RSSetState(m_rasterStateNoCulling);
 }

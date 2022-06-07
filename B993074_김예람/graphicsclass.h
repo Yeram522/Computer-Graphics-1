@@ -15,6 +15,8 @@
 #include "lightclass.h"
 #include "ParticleShaderClass.h"
 #include "ParticleSystemClass.h"
+#include "SkyDomeClass.h"
+#include "SkyDomeShaderClass.h"
 
 using namespace DirectX;
 
@@ -53,6 +55,10 @@ private:
 
 	LightShaderClass* m_LightShader;
 	LightClass *m_Light, *m_Light1, *m_Light2, *m_Light3, *m_Light4;
+
+	//SkyDome
+	ModelClass* m_SkyDome;
+
 
 	//파티클 시스템 관련 멤버 변수
 	ParticleShaderClass* m_ParticleShader;
