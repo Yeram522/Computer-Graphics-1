@@ -76,10 +76,10 @@ bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hwnd)
 	// Create the model object.
 	// Initialize the model object
 	//skydome
-	m_SkyDome = new ModelClass({ {XMFLOAT3(0.0f,0.0f, 0.0f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(1.0f, 1.0f, 1.0f) }, }, m_D3D->GetDevice(), L"./data/SkyDome.obj", { L"./data/jupiter.dds", 0,0,0 });
+	m_SkyDome = new ModelClass({ {XMFLOAT3(0.0f,0.0f, 0.0f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(1.0f, 1.0f, 1.0f) }, }, m_D3D->GetDevice(), L"./data/SkyDome.obj", { L"./data/skydome.dds", 0,0,0 });
 
 	//cloud
-	m_Jupiter = new ModelClass({ {XMFLOAT3(0.0f,0.4f, 110.0f), XMFLOAT3(0.0f, 180.0f, 0.0f), XMFLOAT3(5.0f, 5.0f, 5.0f) },},m_D3D->GetDevice(), L"./data/Sphere.obj", { L"./data/jupiter.dds", 0,0,0 });
+	m_Jupiter = new ModelClass({ {XMFLOAT3(0.0f,0.4f, 110.0f), XMFLOAT3(0.0f, 180.0f, 0.0f), XMFLOAT3(3.0f, 3.0f, 3.0f) },},m_D3D->GetDevice(), L"./data/Sphere.obj", { L"./data/jupiter.dds", 0,0,0 });
 
 	
 	m_Model.push_back(new ModelClass({ {XMFLOAT3(0.0f, -0.28f, 0.0f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(5.0f, 5.0f, 5.0f)}, }, m_D3D->GetDevice(), L"./data/atlas.obj", { L"./data/Altar_diffuse.dds", L"./data/Altar_ao.dds",L"./data/Altar_normal.dds",L"./data/altar_specular.dds" }));
@@ -170,7 +170,7 @@ bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hwnd)
 		return false;
 	}
 	m_Light3->SetDiffuseColor(0.0f, 0.0f, 1.0f, 1.0f);
-	m_Light3->SetPosition(0.0f, 3.0f, 0.0f);
+	m_Light3->SetPosition(0.0f, 5.0f, 3.0f);
 
 	//네번째 조명
 	m_Light4 = new LightClass;
@@ -486,13 +486,12 @@ bool GraphicsClass::Render(float rotation)
 	//z카메라 위치얻고
 	cameraPosition = m_Camera->GetPosition();
 	worldMatrix = XMMatrixTranslation(cameraPosition.x, cameraPosition.y, cameraPosition.z);
-
 	// 컬링끄기
 	m_D3D->TurnOffCulling();
 	//m_SkyDome
 	m_SkyDome->Render(m_D3D->GetDeviceContext());
-	result = m_LightShader->Render(m_D3D->GetDeviceContext(), m_Jupiter->GetVertexCount(), m_Jupiter->GetInstanceCount(),
-		worldMatrix, viewMatrix, projectionMatrix, m_Jupiter->GetTextureArray(), m_Light->GetDirection(), m_Light->GetAmbientColor(), m_Light->GetDiffuseColor(),
+	result = m_LightShader->Render(m_D3D->GetDeviceContext(), m_SkyDome->GetVertexCount(), m_SkyDome->GetInstanceCount(),
+		worldMatrix, viewMatrix, projectionMatrix, m_SkyDome->GetTextureArray(), m_Light->GetDirection(), m_Light->GetAmbientColor(), m_Light->GetDiffuseColor(),
 		m_Camera->GetPosition(), m_Light->GetSpecularColor(), m_Light->GetSpecularPower(), diffuseColors, lightPositions);
 
 	if (!result)
