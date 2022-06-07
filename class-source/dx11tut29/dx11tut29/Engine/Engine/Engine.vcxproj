@@ -10,6 +10,73 @@
       <Platform>Win32</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="C:\Users\user\Desktop\dx11ter07_src\dx11ter07_src\source\color.ps" />
+    <None Include="C:\Users\user\Desktop\dx11ter07_src\dx11ter07_src\source\color.vs" />
+    <None Include="C:\Users\user\Desktop\dx11ter07_src\dx11ter07_src\source\font.ps" />
+    <None Include="C:\Users\user\Desktop\dx11ter07_src\dx11ter07_src\source\font.vs" />
+    <None Include="C:\Users\user\Desktop\dx11ter07_src\dx11ter07_src\source\light.ps" />
+    <None Include="C:\Users\user\Desktop\dx11ter07_src\dx11ter07_src\source\light.vs" />
+    <None Include="C:\Users\user\Desktop\dx11ter07_src\dx11ter07_src\source\skydome.ps" />
+    <None Include="C:\Users\user\Desktop\dx11ter07_src\dx11ter07_src\source\skydome.vs" />
+    <None Include="C:\Users\user\Desktop\dx11ter07_src\dx11ter07_src\source\terrain.ps" />
+    <None Include="C:\Users\user\Desktop\dx11ter07_src\dx11ter07_src\source\terrain.vs" />
+    <None Include="C:\Users\user\Desktop\dx11ter07_src\dx11ter07_src\source\texture.ps" />
+    <None Include="C:\Users\user\Desktop\dx11ter07_src\dx11ter07_src\source\texture.vs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="C:\Users\user\Desktop\dx11ter07_src\dx11ter07_src\source\applicationclass.cpp" />
+    <ClCompile Include="C:\Users\user\Desktop\dx11ter07_src\dx11ter07_src\source\cameraclass.cpp" />
+    <ClCompile Include="C:\Users\user\Desktop\dx11ter07_src\dx11ter07_src\source\colorshaderclass.cpp" />
+    <ClCompile Include="C:\Users\user\Desktop\dx11ter07_src\dx11ter07_src\source\d3dclass.cpp" />
+    <ClCompile Include="C:\Users\user\Desktop\dx11ter07_src\dx11ter07_src\source\fontclass.cpp" />
+    <ClCompile Include="C:\Users\user\Desktop\dx11ter07_src\dx11ter07_src\source\fontshaderclass.cpp" />
+    <ClCompile Include="C:\Users\user\Desktop\dx11ter07_src\dx11ter07_src\source\fpsclass.cpp" />
+    <ClCompile Include="C:\Users\user\Desktop\dx11ter07_src\dx11ter07_src\source\inputclass.cpp" />
+    <ClCompile Include="C:\Users\user\Desktop\dx11ter07_src\dx11ter07_src\source\lightclass.cpp" />
+    <ClCompile Include="C:\Users\user\Desktop\dx11ter07_src\dx11ter07_src\source\lightshaderclass.cpp" />
+    <ClCompile Include="C:\Users\user\Desktop\dx11ter07_src\dx11ter07_src\source\main.cpp" />
+    <ClCompile Include="C:\Users\user\Desktop\dx11ter07_src\dx11ter07_src\source\positionclass.cpp" />
+    <ClCompile Include="C:\Users\user\Desktop\dx11ter07_src\dx11ter07_src\source\shadermanagerclass.cpp" />
+    <ClCompile Include="C:\Users\user\Desktop\dx11ter07_src\dx11ter07_src\source\skydomeclass.cpp" />
+    <ClCompile Include="C:\Users\user\Desktop\dx11ter07_src\dx11ter07_src\source\skydomeshaderclass.cpp" />
+    <ClCompile Include="C:\Users\user\Desktop\dx11ter07_src\dx11ter07_src\source\systemclass.cpp" />
+    <ClCompile Include="C:\Users\user\Desktop\dx11ter07_src\dx11ter07_src\source\terrainclass.cpp" />
+    <ClCompile Include="C:\Users\user\Desktop\dx11ter07_src\dx11ter07_src\source\terrainshaderclass.cpp" />
+    <ClCompile Include="C:\Users\user\Desktop\dx11ter07_src\dx11ter07_src\source\textclass.cpp" />
+    <ClCompile Include="C:\Users\user\Desktop\dx11ter07_src\dx11ter07_src\source\textureclass.cpp" />
+    <ClCompile Include="C:\Users\user\Desktop\dx11ter07_src\dx11ter07_src\source\texturemanagerclass.cpp" />
+    <ClCompile Include="C:\Users\user\Desktop\dx11ter07_src\dx11ter07_src\source\textureshaderclass.cpp" />
+    <ClCompile Include="C:\Users\user\Desktop\dx11ter07_src\dx11ter07_src\source\timerclass.cpp" />
+    <ClCompile Include="C:\Users\user\Desktop\dx11ter07_src\dx11ter07_src\source\userinterfaceclass.cpp" />
+    <ClCompile Include="C:\Users\user\Desktop\dx11ter07_src\dx11ter07_src\source\zoneclass.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="C:\Users\user\Desktop\dx11ter07_src\dx11ter07_src\source\applicationclass.h" />
+    <ClInclude Include="C:\Users\user\Desktop\dx11ter07_src\dx11ter07_src\source\cameraclass.h" />
+    <ClInclude Include="C:\Users\user\Desktop\dx11ter07_src\dx11ter07_src\source\colorshaderclass.h" />
+    <ClInclude Include="C:\Users\user\Desktop\dx11ter07_src\dx11ter07_src\source\d3dclass.h" />
+    <ClInclude Include="C:\Users\user\Desktop\dx11ter07_src\dx11ter07_src\source\fontclass.h" />
+    <ClInclude Include="C:\Users\user\Desktop\dx11ter07_src\dx11ter07_src\source\fontshaderclass.h" />
+    <ClInclude Include="C:\Users\user\Desktop\dx11ter07_src\dx11ter07_src\source\fpsclass.h" />
+    <ClInclude Include="C:\Users\user\Desktop\dx11ter07_src\dx11ter07_src\source\inputclass.h" />
+    <ClInclude Include="C:\Users\user\Desktop\dx11ter07_src\dx11ter07_src\source\lightclass.h" />
+    <ClInclude Include="C:\Users\user\Desktop\dx11ter07_src\dx11ter07_src\source\lightshaderclass.h" />
+    <ClInclude Include="C:\Users\user\Desktop\dx11ter07_src\dx11ter07_src\source\positionclass.h" />
+    <ClInclude Include="C:\Users\user\Desktop\dx11ter07_src\dx11ter07_src\source\shadermanagerclass.h" />
+    <ClInclude Include="C:\Users\user\Desktop\dx11ter07_src\dx11ter07_src\source\skydomeclass.h" />
+    <ClInclude Include="C:\Users\user\Desktop\dx11ter07_src\dx11ter07_src\source\skydomeshaderclass.h" />
+    <ClInclude Include="C:\Users\user\Desktop\dx11ter07_src\dx11ter07_src\source\systemclass.h" />
+    <ClInclude Include="C:\Users\user\Desktop\dx11ter07_src\dx11ter07_src\source\terrainclass.h" />
+    <ClInclude Include="C:\Users\user\Desktop\dx11ter07_src\dx11ter07_src\source\terrainshaderclass.h" />
+    <ClInclude Include="C:\Users\user\Desktop\dx11ter07_src\dx11ter07_src\source\textclass.h" />
+    <ClInclude Include="C:\Users\user\Desktop\dx11ter07_src\dx11ter07_src\source\textureclass.h" />
+    <ClInclude Include="C:\Users\user\Desktop\dx11ter07_src\dx11ter07_src\source\texturemanagerclass.h" />
+    <ClInclude Include="C:\Users\user\Desktop\dx11ter07_src\dx11ter07_src\source\textureshaderclass.h" />
+    <ClInclude Include="C:\Users\user\Desktop\dx11ter07_src\dx11ter07_src\source\timerclass.h" />
+    <ClInclude Include="C:\Users\user\Desktop\dx11ter07_src\dx11ter07_src\source\userinterfaceclass.h" />
+    <ClInclude Include="C:\Users\user\Desktop\dx11ter07_src\dx11ter07_src\source\zoneclass.h" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{AA79A09C-66C7-4939-8703-BBA6443D56E1}</ProjectGuid>
     <RootNamespace>Engine</RootNamespace>
@@ -86,43 +153,6 @@
       <TargetMachine>MachineX86</TargetMachine>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="cameraclass.cpp" />
-    <ClCompile Include="d3dclass.cpp" />
-    <ClCompile Include="graphicsclass.cpp" />
-    <ClCompile Include="inputclass.cpp" />
-    <ClCompile Include="lightclass.cpp" />
-    <ClCompile Include="lightshaderclass.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="modelclass.cpp" />
-    <ClCompile Include="refractionshaderclass.cpp" />
-    <ClCompile Include="rendertextureclass.cpp" />
-    <ClCompile Include="systemclass.cpp" />
-    <ClCompile Include="textureclass.cpp" />
-    <ClCompile Include="watershaderclass.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="cameraclass.h" />
-    <ClInclude Include="d3dclass.h" />
-    <ClInclude Include="graphicsclass.h" />
-    <ClInclude Include="inputclass.h" />
-    <ClInclude Include="lightclass.h" />
-    <ClInclude Include="lightshaderclass.h" />
-    <ClInclude Include="modelclass.h" />
-    <ClInclude Include="refractionshaderclass.h" />
-    <ClInclude Include="rendertextureclass.h" />
-    <ClInclude Include="systemclass.h" />
-    <ClInclude Include="textureclass.h" />
-    <ClInclude Include="watershaderclass.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="light.ps" />
-    <None Include="light.vs" />
-    <None Include="refraction.ps" />
-    <None Include="refraction.vs" />
-    <None Include="water.ps" />
-    <None Include="water.vs" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

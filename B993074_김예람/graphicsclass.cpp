@@ -78,7 +78,7 @@ bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hwnd)
 	//skydome
 	m_SkyDome = new ModelClass({ {XMFLOAT3(0.0f,0.0f, 0.0f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(1.0f, 1.0f, 1.0f) }, }, m_D3D->GetDevice(), L"./data/SkyDome.obj", { L"./data/skydome.dds", 0,0,0 });
 
-	//cloud
+	//planet
 	m_Jupiter = new ModelClass({ {XMFLOAT3(0.0f,0.4f, 110.0f), XMFLOAT3(0.0f, 180.0f, 0.0f), XMFLOAT3(3.0f, 3.0f, 3.0f) },},m_D3D->GetDevice(), L"./data/Sphere.obj", { L"./data/jupiter.dds", 0,0,0 });
 
 	
@@ -99,8 +99,14 @@ bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hwnd)
 	//arches
 	m_Model.push_back(new ModelClass({ {XMFLOAT3(0.0f, -0.3f, 0.0f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(5.0f, 5.0f, 5.0f)}, }, m_D3D->GetDevice(), L"./data/arches.obj", { L"./data/arches_diffuse.dds", L"./data/arches_ao.dds",L"./data/arches_normal.dds",L"./data/arches_specular.dds" }));
 
+	//mushroom
+	m_Model.push_back(new ModelClass({ {XMFLOAT3(-130.8f, 3.0f, 70.0f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(0.3f, 0.3f, 0.3f)}, }, m_D3D->GetDevice(), L"./data/mushroom1.obj", { L"./data/mushroom1_Albedo.dds", L"./data/mushroom1_AO.dds",L"./data/mushroom1_Normal.dds",0 }));
+
 	//tree
-	m_Model.push_back(new ModelClass({ {XMFLOAT3(-10.8f, 1.2f, 11.0f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(3.0f,3.0f, 3.0f)}, }, m_D3D->GetDevice(), L"./data/tree.obj", { L"./data/tree_diffuse.dds", L"./data/tree_ao.dds",L"./data/tree_normal.dds",L"./data/tree_specular.dds" }));
+	m_Model.push_back(new ModelClass({ {XMFLOAT3(-10.8f, 1.2f, 11.0f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(3.0f,3.0f, 3.0f)},
+		{XMFLOAT3(10.8f, 1.2f, 11.0f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(3.0f,3.0f, 3.0f)} ,
+		{XMFLOAT3(-10.8f, 1.2f, -15.0f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(3.0f,3.0f, 3.0f)} ,
+		{XMFLOAT3(10.8f, 1.2f, -13.0f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(3.0f,3.0f, 3.0f)} }, m_D3D->GetDevice(), L"./data/tree.obj", { L"./data/tree_diffuse.dds", L"./data/tree_ao.dds",L"./data/tree_normal.dds",L"./data/tree_specular.dds" }));
 
 	//plane
 	m_Model.push_back(new ModelClass({ { XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(100.0f, 100.0f, 100.0f) } }, m_D3D->GetDevice(), L"./data/plane.obj", { L"./data/Ground_Albedo.dds", L"./data/block.dds", 0 ,L"./data/Platform_specular.dds" }));
@@ -179,7 +185,7 @@ bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hwnd)
 		return false;
 	}
 	m_Light4->SetDiffuseColor(1.0f, 1.0f, 1.0f, 1.0f);
-	m_Light4->SetPosition(0.0f, 2.0f, 10.0f);
+	m_Light4->SetPosition(0.0f, 7.0f, -5.0f);
 
 
 	return true;
