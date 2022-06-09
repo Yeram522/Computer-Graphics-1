@@ -76,7 +76,7 @@ bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hwnd)
 	// Create the model object.
 	// Initialize the model object
 	//skydome
-	m_SkyDome = new ModelClass({ {XMFLOAT3(0.0f,0.0f, 0.0f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(1.0f, 1.0f, 1.0f) }, }, m_D3D->GetDevice(), L"./data/SkyDome.obj", { L"./data/skydome.dds", 0,0,0 });
+	m_SkyDome = new ModelClass({ {XMFLOAT3(0.0f,0.0f, 0.0f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(5.0f, 5.0f, 5.0f) }, }, m_D3D->GetDevice(), L"./data/SkyDome.obj", { L"./data/skydome.dds", 0,0,0 });
 
 	//planet
 	m_Jupiter = new ModelClass({ {XMFLOAT3(0.0f,0.4f, 110.0f), XMFLOAT3(0.0f, 180.0f, 0.0f), XMFLOAT3(3.0f, 3.0f, 3.0f) },},m_D3D->GetDevice(), L"./data/Sphere.obj", { L"./data/jupiter.dds", 0,0,0 });
@@ -100,7 +100,10 @@ bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hwnd)
 	m_Model.push_back(new ModelClass({ {XMFLOAT3(0.0f, -0.3f, 0.0f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(5.0f, 5.0f, 5.0f)}, }, m_D3D->GetDevice(), L"./data/arches.obj", { L"./data/arches_diffuse.dds", L"./data/arches_ao.dds",L"./data/arches_normal.dds",L"./data/arches_specular.dds" }));
 
 	//mushroom
-	m_Model.push_back(new ModelClass({ {XMFLOAT3(-130.8f, 3.0f, 70.0f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(0.3f, 0.3f, 0.3f)}, }, m_D3D->GetDevice(), L"./data/mushroom1.obj", { L"./data/mushroom1_Albedo.dds", L"./data/mushroom1_AO.dds",L"./data/mushroom1_Normal.dds",0 }));
+	m_Model.push_back(new ModelClass({ {XMFLOAT3(-130.8f, 2.0f, 100.0f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(0.3f, 0.3f, 0.3f)},
+		{XMFLOAT3(-130.8f, 2.0f, -150.0f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(0.3f, 0.3f, 0.3f)},
+		 {XMFLOAT3(-140.8f, -1.0f, 100.0f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(0.3f, 0.3f, 0.3f)}, 
+		{XMFLOAT3(130.8f, -2.0f, 110.0f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(0.3f, 0.3f, 0.3f)}}, m_D3D->GetDevice(), L"./data/mushroom1.obj", { L"./data/mushroom1_Albedo.dds", L"./data/mushroom1_AO.dds",L"./data/mushroom1_Normal.dds",0 }));
 
 	//tree
 	m_Model.push_back(new ModelClass({ {XMFLOAT3(-10.8f, 1.2f, 11.0f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(3.0f,3.0f, 3.0f)},
@@ -111,6 +114,8 @@ bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hwnd)
 	//plane
 	m_Model.push_back(new ModelClass({ { XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(100.0f, 100.0f, 100.0f) } }, m_D3D->GetDevice(), L"./data/plane.obj", { L"./data/Ground_Albedo.dds", L"./data/block.dds", 0 ,L"./data/Platform_specular.dds" }));
 	
+	//plane
+	m_Model.push_back(new ModelClass({ { XMFLOAT3(0.0f, 20.0f, -0.0f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(0.1f, 0.1f, 0.1f) } }, m_D3D->GetDevice(), L"./data/rock_1.obj", { L"./data/rock1_diffuse.dds",L"./data/rock1_ao.dds",L"./data/rock1_normal.dds" ,0 }));
 
 	if(!result)
 	{
