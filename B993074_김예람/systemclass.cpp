@@ -137,6 +137,22 @@ bool SystemClass::Frame()
 	{
 		return false;
 	}
+	if (m_Input->IsKeyDown(0x33))
+	{
+		m_Graphics->changeFilter(D3D11_FILTER_MIN_MAG_MIP_POINT);
+	}
+
+	//4
+	if (m_Input->IsKeyDown(0x34))
+	{
+		m_Graphics->changeFilter(D3D11_FILTER_MIN_MAG_MIP_LINEAR);
+	}
+
+	//5
+	if (m_Input->IsKeyDown(0x35))
+	{
+		m_Graphics->changeFilter(D3D11_FILTER_ANISOTROPIC);
+	}
 	if (m_Input->IsKeyDown(0x36))
 	{
 		m_Graphics->ChangeLightShaderMode(1);

@@ -71,7 +71,7 @@ public:
 	void Shutdown();
 	bool Render(ID3D11DeviceContext*, int, int, XMMATRIX, XMMATRIX, XMMATRIX, ID3D11ShaderResourceView**,
 		XMFLOAT3, XMFLOAT4, XMFLOAT4, XMFLOAT3, XMFLOAT4, float, XMFLOAT4[], XMFLOAT4[]);
-
+	void changeFilter(ID3D11Device* device, D3D11_FILTER filter);
 	XMFLOAT4 m_lightmode;
 private:
 	bool InitializeShader(ID3D11Device*, HWND, const WCHAR*, const WCHAR*);
@@ -81,7 +81,7 @@ private:
 	bool SetShaderParameters(ID3D11DeviceContext*, XMMATRIX, XMMATRIX, XMMATRIX, ID3D11ShaderResourceView**, 
 		XMFLOAT3, XMFLOAT4, XMFLOAT4, XMFLOAT3, XMFLOAT4, float, XMFLOAT4[], XMFLOAT4[]);
 	void RenderShader(ID3D11DeviceContext*, int, int);
-
+	D3D11_SAMPLER_DESC samplerDesc;
 private:
 	ID3D11VertexShader* m_vertexShader;
 	ID3D11PixelShader* m_pixelShader;

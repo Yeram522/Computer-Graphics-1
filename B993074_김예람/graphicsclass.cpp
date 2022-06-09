@@ -12,6 +12,11 @@ GraphicsClass::GraphicsClass()
 	{
 		model = 0;
 	}
+	for (auto& rock : m_Rocks)
+	{
+		rock = 0;
+	}
+	
 	m_LightShader = 0;
 	m_Light = 0;
 
@@ -40,6 +45,10 @@ GraphicsClass::~GraphicsClass()
 {
 }
 
+void GraphicsClass::changeFilter(D3D11_FILTER filter)
+{
+	m_LightShader->changeFilter(m_D3D->GetDevice(), filter);
+}
 
 bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hwnd)
 {
@@ -114,8 +123,29 @@ bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hwnd)
 	//plane
 	m_Model.push_back(new ModelClass({ { XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(100.0f, 100.0f, 100.0f) } }, m_D3D->GetDevice(), L"./data/plane.obj", { L"./data/Ground_Albedo.dds", L"./data/block.dds", 0 ,L"./data/Platform_specular.dds" }));
 	
-	//plane
-	m_Model.push_back(new ModelClass({ { XMFLOAT3(0.0f, 20.0f, -0.0f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(0.1f, 0.1f, 0.1f) } }, m_D3D->GetDevice(), L"./data/rock_1.obj", { L"./data/rock1_diffuse.dds",L"./data/rock1_ao.dds",L"./data/rock1_normal.dds" ,0 }));
+	//rock M SIZE
+	m_Rocks.push_back(new ModelClass({ { XMFLOAT3(3.0f, 1.5f, -2.5f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(5.0f, 5.0f, 5.0f) } }, m_D3D->GetDevice(), L"./data/rock_1.obj", { L"./data/rock1_diffuse.dds",L"./data/rock1_ao.dds",L"./data/rock1_normal.dds" ,0 }));
+	rockPos.push_back(1.5f);
+	rockspeed.push_back(0.01f);
+
+	m_Rocks.push_back(new ModelClass({ { XMFLOAT3(-2.3f, 1.0f, -2.5f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(5.0f, 5.0f, 5.0f) } }, m_D3D->GetDevice(), L"./data/rock_1.obj", { L"./data/rock1_diffuse.dds",L"./data/rock1_ao.dds",L"./data/rock1_normal.dds" ,0 }));
+	rockPos.push_back(1.0f);
+	rockspeed.push_back(0.01f);
+
+	//rock L SIZE
+	m_Rocks.push_back(new ModelClass({ { XMFLOAT3(4.1f, 1.0f, -1.0f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(5.0f, 5.0f, 5.0f) } }, m_D3D->GetDevice(), L"./data/rock_2.obj", { L"./data/rock2_diffuse.dds",L"./data/rock2_ao.dds",L"./data/rock2_normal.dds" ,0 }));
+	rockPos.push_back(1.0f);
+	rockspeed.push_back(0.05f);
+
+	//rock XL SIZE
+	m_Rocks.push_back(new ModelClass({ { XMFLOAT3(4.6f, 1.0f, 0.6f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(5.0f, 5.0f, 5.0f) } }, m_D3D->GetDevice(), L"./data/rock_3.obj", { L"./data/rock3_diffuse.dds",L"./data/rock3_ao.dds",L"./data/rock3_normal.dds" ,0 }));
+	rockPos.push_back(1.0f);
+	rockspeed.push_back(0.05f);
+
+	m_Rocks.push_back(new ModelClass({ { XMFLOAT3(-3.8f, 1.3f, 0.6f), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(5.0f, 5.0f, 5.0f) } }, m_D3D->GetDevice(), L"./data/rock_3.obj", { L"./data/rock3_diffuse.dds",L"./data/rock3_ao.dds",L"./data/rock3_normal.dds" ,0 }));
+	rockPos.push_back(1.3f);
+	rockspeed.push_back(0.05f);
+
 
 	if(!result)
 	{
@@ -270,7 +300,7 @@ bool GraphicsClass::Frame(float frameTime)
 {
 	bool result;
 	bool isClip = true;
-	static float rotation = 0.1f;
+	static float rotation = 0.001f;
 
 
 	// Update the rotation variable each frame.
@@ -493,6 +523,37 @@ bool GraphicsClass::Render(float rotation)
 		{
 			return false;
 		}
+	}
+
+	static bool mvUp = true;
+	int index = 0;
+	for (auto& model : m_Rocks)
+	{	
+		if (model->m_instancedes[0].position.y >= rockPos[index]+5.0f) mvUp = false;
+		else if(model->m_instancedes[0].position.y <= rockPos[index]) mvUp = true;
+		
+		if (mvUp)
+			model->m_instancedes[0].position.y += rockspeed[index];
+		else
+			model->m_instancedes[0].position.y -= rockspeed[index];
+
+			
+		XMMATRIX t_worldMatrix = worldMatrix;
+		model->Render(m_D3D->GetDeviceContext());
+		t_worldMatrix *=
+			XMMatrixScaling(model->m_instancedes[0].scale.x, model->m_instancedes[0].scale.y, model->m_instancedes[0].scale.z)
+			*XMMatrixTranslation(model->m_instancedes[0].position.x, model->m_instancedes[0].position.y, model->m_instancedes[0].position.z);
+		// Render the model using the texture shader.
+		result = m_LightShader->Render(m_D3D->GetDeviceContext(), model->GetVertexCount(), model->GetInstanceCount(),
+			t_worldMatrix, viewMatrix, projectionMatrix, model->GetTextureArray(), m_Light->GetDirection(), m_Light->GetAmbientColor(), m_Light->GetDiffuseColor(),
+			m_Camera->GetPosition(), m_Light->GetSpecularColor(), m_Light->GetSpecularPower(), diffuseColors, lightPositions);
+
+		if (!result)
+		{
+			return false;
+		}
+
+		index++;
 	}
 	//z카메라 위치얻고
 	cameraPosition = m_Camera->GetPosition();

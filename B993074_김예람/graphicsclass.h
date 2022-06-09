@@ -43,6 +43,7 @@ public:
 	void Shutdown();
 	bool Frame(float);
 
+	void changeFilter(D3D11_FILTER);
 	void ChangeLightShaderMode(int);
 private:
 	bool Render(float);
@@ -51,6 +52,9 @@ private:
 	D3DClass* m_D3D;
 	CameraClass* m_Camera;
 	vector<ModelClass*> m_Model; //¸ðµ¨Å¬·¡½º
+	vector<ModelClass*> m_Rocks; //¸ðµ¨Å¬·¡½º
+	vector<float> rockPos;
+	vector<float> rockspeed;
 	ModelClass* m_Jupiter; //¸ðµ¨Å¬·¡½º
 
 	LightShaderClass* m_LightShader;

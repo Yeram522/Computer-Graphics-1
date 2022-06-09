@@ -77,6 +77,19 @@ bool LightShaderClass::Render(ID3D11DeviceContext* deviceContext, int vertexCoun
 	return true;
 }
 
+void LightShaderClass::changeFilter(ID3D11Device* device, D3D11_FILTER filter)
+{
+	HRESULT result;
+
+	samplerDesc.Filter = filter;
+	samplerDesc.MaxAnisotropy = 8;
+
+
+	// Create the texture sampler state.
+	result = device->CreateSamplerState(&samplerDesc, &m_sampleState);
+
+
+}
 
 bool LightShaderClass::InitializeShader(ID3D11Device* device, HWND hwnd, const WCHAR* vsFilename, const WCHAR* psFilename)
 {
@@ -86,7 +99,7 @@ bool LightShaderClass::InitializeShader(ID3D11Device* device, HWND hwnd, const W
 	ID3D10Blob* pixelShaderBuffer;
 	D3D11_INPUT_ELEMENT_DESC polygonLayout[7];
 	unsigned int numElements;
-    D3D11_SAMPLER_DESC samplerDesc;
+    
 	D3D11_BUFFER_DESC matrixBufferDesc;
 	D3D11_BUFFER_DESC lightBufferDesc;
 	D3D11_BUFFER_DESC cameraBufferDesc;
